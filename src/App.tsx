@@ -1,8 +1,20 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { client } from './utils/sanity';
 
 function App() {
+  const [test, setTest] = useState<any>({});
+
+  useEffect(() => {
+    client
+    .fetch('*[_type == $type][0]', {type: 'avsnitt'})
+    .then((res:any) => {
+      setTest(res);
+      console.log(res);
+    })
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
