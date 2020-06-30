@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { client } from '../utils/sanity';
-import Card from '../components/card';
+import { client } from '../../utils/sanity';
+import Card from '../../components/card';
 const BlockContent = require('@sanity/block-content-to-react');
 
 function Overgangsstonad() {
