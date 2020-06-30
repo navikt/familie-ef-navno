@@ -6,6 +6,7 @@ import  Knapp  from 'nav-frontend-knapper';
 import Panel from 'nav-frontend-paneler';
 import { client, hentAvsnittQuery } from './utils/sanity';
 import Overgangsstonad from './sider/overgangsstonad/Overgangsstonad';
+import Tilpasningsboks from './components/Tilpasningsboks';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
         
@@ -44,20 +45,18 @@ function App() {
   };
     
    return (
-    <div className="App">
+    <div>
       <Helmet>
         <title>TODO: SETT TITTEL</title>
       </Helmet>
 
-      <BlockContent
-        className="typo-normal"
-        blocks={test.avsnitt_innhold}
-        serializers={{ types: { block: BlockRenderer } }}
-      />
       <Router>
         <Switch>
           <Route path={'/overgangsstønad'}>
             <Overgangsstonad />
+          </Route>
+          <Route path={'/komponent'}>
+            <Tilpasningsboks></Tilpasningsboks>
           </Route>
         </Switch>
       </Router>
