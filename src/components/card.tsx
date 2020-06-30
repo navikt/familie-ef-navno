@@ -1,7 +1,5 @@
 import React from 'react';
-import Tekstomrade from 'nav-frontend-tekstomrade';
 import { Systemtittel, Normaltekst } from 'nav-frontend-typografi';
-import { checkPropTypes } from 'prop-types';
 
 interface Props {
     tittel: any,
