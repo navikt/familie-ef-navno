@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import Overgangsstonad from './sider/overgangstodnad';
-import  Knapp  from 'nav-frontend-knapper';
-import Panel from 'nav-frontend-paneler';
+import Overgangsstonad from './sider/overgangsstonad/Overgangsstonad';
 import { client } from './utils/sanity';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
         
 const BlockContent = require('@sanity/block-content-to-react');
 
@@ -40,19 +40,22 @@ function App() {
     
    return (
     <div className="App">
-      <header className="App-header">
-        <p>Venter på respons fra Sanity.</p>
-        <Knapp>Normal</Knapp>
-        <Panel border>
-          Et helt vanlig panel med tekstinnhold.
-        </Panel>
-      </header>
+      <Helmet>
+        <title>TODO: SETT TITTEL</title>
+      </Helmet>
+
       <BlockContent
         className="typo-normal"
         blocks={test.avsnitt_innhold}
         serializers={{ types: { block: BlockRenderer } }}
       />
-      <Overgangsstonad />
+      <Router>
+        <Switch>
+          <Route path={'/overgangsstønad'}>
+            <Overgangsstonad />
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }
