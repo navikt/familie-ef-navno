@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { client } from '../../utils/sanity';
 import Informasjonspanel from '../../components/Informasjonspanel';
+import { Sidetittel } from 'nav-frontend-typografi';
 
 const BlockContent = require('@sanity/block-content-to-react');
 
@@ -37,14 +38,24 @@ function Overgangsstonad() {
 
     if (artikler !== undefined) {
         return (
-            <div>
-                <Informasjonspanel tittel={artikler.tittel}>
-                    <BlockContent
-                        className="typo-normal"
-                        blocks={artikler.avsnitt_innhold}
-                        serializers={{ types: { block: BlockRenderer } }}
-                    />
-                </Informasjonspanel>
+            <div className="overgangsstonad">
+                <div className="banner">
+                    <Sidetittel>Overgangsstønad for enslig mor og far</Sidetittel>
+                </div>
+                <div className="sideinfo">
+                    <div className="side">Fortell mer</div>
+                    <div className="side">Temaer</div>
+                </div>
+                <div className="hovedinfo">
+                    <Informasjonspanel tittel={artikler.tittel}>
+                        <BlockContent
+                            className="typo-normal"
+                            blocks={artikler.avsnitt_innhold}
+                            serializers={{ types: { block: BlockRenderer } }}
+                        />
+                    </Informasjonspanel>
+                </div>
+
             </div>
         );
     }
