@@ -1,51 +1,50 @@
 import React, { useEffect, useState } from 'react';
 import { client } from '../../utils/sanity';
-import Card from '../../components/card';
+import Informasjonspanel from '../../components/Informasjonspanel';
+
 const BlockContent = require('@sanity/block-content-to-react');
 
 function Overgangsstonad() {
     const [artikler, setArtikler] = useState<any>();
     useEffect(() => {
         client
-            .fetch('*[_type == $type]', { type: 'artikkel' })
+            .fetch('*[_type == $type][1]', { type: 'avsnitt' })
             .then((res: any) => {
                 setArtikler(res);
-                console.log(res);
+                console.log("test", res);
             })
     }, []);
 
     const BlockRenderer = (props: any) => {
         const { style = 'normal' } = props.node;
-    
+
         if (/^h\d/.test(style)) {
-          const level = style.replace(/[^\d]/g, '');
-          return React.createElement(
-            style,
-            { className: `heading-${level}` },
-            props.children
-          );
+            const level = style.replace(/[^\d]/g, '');
+            return React.createElement(
+                style,
+                { className: `heading-${level}` },
+                props.children
+            );
         }
-    
+
         if (style === 'blockquote') {
-          return <blockquote>- {props.children}</blockquote>;
+            return <blockquote>- {props.children}</blockquote>;
         }
-    
+
         // Fall back to default handling
         return BlockContent.defaultSerializers.types.block(props);
-      };
+    };
 
     if (artikler !== undefined) {
         return (
             <div>
-                {artikler.map((artikkel: any) => (
-                    <Card tittel={artikkel.tittel} ingress="{artikkel.ingress !== undefined ? artikkel.ingress : null}">
-                        <BlockContent
-                            className="typo-normal"
-                            blocks={artikkel.avsnitt_innhold}
-                            serializers={{ types: { block: BlockRenderer } }}
-                        />
-                    </Card>
-                ))}
+                <Informasjonspanel tittel={artikler.tittel}>
+                    <BlockContent
+                        className="typo-normal"
+                        blocks={artikler.avsnitt_innhold}
+                        serializers={{ types: { block: BlockRenderer } }}
+                    />
+                </Informasjonspanel>
             </div>
         );
     }

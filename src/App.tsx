@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import logo from './logo.svg';
+import './app.less';
+import Card from './components/card';
+import  Knapp  from 'nav-frontend-knapper';
+import Panel from 'nav-frontend-paneler';
+import { client, hentAvsnittQuery } from './utils/sanity';
 import Overgangsstonad from './sider/overgangsstonad/Overgangsstonad';
 import Tilpasningsboks from './components/Tilpasningsboks';
-import { client } from './utils/sanity';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
         
