@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { client } from '../../utils/sanity';
 import Informasjonspanel from '../../components/Informasjonspanel';
 import { Sidetittel } from 'nav-frontend-typografi';
+import Tilpasningsboks from '../../components/Tilpasningsboks';
 
 const BlockContent = require('@sanity/block-content-to-react');
 
@@ -43,8 +44,7 @@ function Overgangsstonad() {
                     <Sidetittel>Overgangsstønad for enslig mor og far</Sidetittel>
                 </div>
                 <div className="sideinfo">
-                    <div className="side">Fortell mer</div>
-                    <div className="side">Temaer</div>
+                    <Tilpasningsboks />
                 </div>
                 <div className="hovedinfo">
                     <Informasjonspanel tittel={artikler.tittel}>
