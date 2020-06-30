@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import logo from './logo.svg';
+import './app.less';
+import Card from './components/card';
 import Overgangsstonad from './sider/overgangstodnad';
 import  Knapp  from 'nav-frontend-knapper';
 import Panel from 'nav-frontend-paneler';
-import { client } from './utils/sanity';
+import { client, hentAvsnittQuery } from './utils/sanity';
         
 const BlockContent = require('@sanity/block-content-to-react');
 
