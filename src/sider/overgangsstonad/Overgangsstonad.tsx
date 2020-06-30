@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { client } from '../utils/sanity';
-import Informasjonspanel from '../components/Informasjonspanel';
+import { client } from '../../utils/sanity';
+import Informasjonspanel from '../../components/Informasjonspanel';
 
 const BlockContent = require('@sanity/block-content-to-react');
 
