@@ -1,4 +1,26 @@
-.infocard{
-    width: 50%;
-    background-color: blue;
+.overgangsstonad {
+    display: grid;
+    align-items: center;
+    margin-bottom: 4rem;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-areas: "banner banner banner banner banner banner" 
+        ". side hoved hoved hoved .";
+}
+
+.banner {
+    width: 100%;
+    height: 72px;
+    background-color: @navLillaLighten60;
+    text-align: center;
+    grid-area: banner;
+}
+
+.sideinfo{
+    grid-area: side;
+    width: 100%;
+}
+
+.hovedinfo{
+    grid-area: hoved;
+    width: 100%;
 }
