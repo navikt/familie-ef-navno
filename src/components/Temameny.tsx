@@ -10,8 +10,8 @@ const Temameny: React.FC<Props> = (props) => {
     return (
         <Panel className={"temapanel"} style={{width: "250px"}}>
           <Undertittel>Temaer</Undertittel>
-          {props.temaer.map(tema => (
-            <Normaltekst className={"temalinje"}>
+          {props.temaer.map((tema, index) => (
+            <Normaltekst className={"temalinje"} key={index}>
               <a href={'temameny'}>
                 {tema}
               </a>
