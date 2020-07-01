@@ -3,6 +3,7 @@ import { client } from '../../utils/sanity';
 import Informasjonspanel from '../../components/Informasjonspanel';
 import { Sidetittel } from 'nav-frontend-typografi';
 import Tilpasningsboks from '../../components/Tilpasningsboks';
+import { Helmet } from 'react-helmet';
 
 const BlockContent = require('@sanity/block-content-to-react');
 
@@ -39,7 +40,12 @@ function Overgangsstonad() {
 
     if (artikler !== undefined) {
         return (
+            
             <div className="overgangsstonad">
+                <Helmet>
+                    <title>Overgangsstønad</title>
+                </Helmet>
+
                 <div className="banner">
                     <Sidetittel>Overgangsstønad for enslig mor og far</Sidetittel>
                 </div>
