@@ -4,7 +4,7 @@ import './app.less';
 import Card from './components/card';
 import  Knapp  from 'nav-frontend-knapper';
 import Panel from 'nav-frontend-paneler';
-import { client, hentAvsnittQuery } from './utils/sanity';
+import { client } from './utils/sanity';
 import Overgangsstonad from './sider/overgangsstonad/Overgangsstonad';
 import Tilpasningsboks from './components/Tilpasningsboks';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';

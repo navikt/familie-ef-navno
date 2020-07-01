@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { client } from '../../utils/sanity';
+import { client, hentSideQuery } from '../../utils/sanity';
 import Informasjonspanel from '../../components/Informasjonspanel';
 import { Sidetittel } from 'nav-frontend-typografi';
 import Tilpasningsboks from '../../components/Tilpasningsboks';
@@ -7,12 +7,12 @@ import Tilpasningsboks from '../../components/Tilpasningsboks';
 const BlockContent = require('@sanity/block-content-to-react');
 
 function Overgangsstonad() {
-    const [artikler, setArtikler] = useState<any>();
+    const [side, setSide] = useState<any>({});
     useEffect(() => {
         client
-            .fetch('*[_type == $type][1]', { type: 'avsnitt' })
+            .fetch(hentSideQuery, { type: 'side' , side_id: 1})
             .then((res: any) => {
-                setArtikler(res);
+                setSide(res);
                 console.log("test", res);
             })
     }, []);
@@ -37,7 +37,7 @@ function Overgangsstonad() {
         return BlockContent.defaultSerializers.types.block(props);
     };
 
-    if (artikler !== undefined) {
+    if (side !== undefined) {
         return (
             <div className="overgangsstonad">
                 <div className="banner">
@@ -47,13 +47,20 @@ function Overgangsstonad() {
                     <Tilpasningsboks />
                 </div>
                 <div className="hovedinfo">
-                    <Informasjonspanel tittel={artikler.tittel}>
-                        <BlockContent
-                            className="typo-normal"
-                            blocks={artikler.avsnitt_innhold}
-                            serializers={{ types: { block: BlockRenderer } }}
-                        />
-                    </Informasjonspanel>
+                    {side?.artikler?.map((a: any) => (
+                        <Informasjonspanel tittel={a.tittel_i_panel}>
+                            {a?.avsnitt !== undefined ? a?.avsnitt.map((avsnitt: any) => (
+                                <div className="typo-normal">
+                                    <BlockContent
+                                    blocks={avsnitt.avsnitt_innhold}
+                                    serializers={{ types: { block: BlockRenderer } }}
+                                />
+                                </div>
+                                
+                            )) : null}
+
+                        </Informasjonspanel>
+                            ))}
                 </div>
 
             </div>
