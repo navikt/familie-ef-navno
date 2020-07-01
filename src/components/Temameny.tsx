@@ -12,7 +12,7 @@ const Temameny: React.FC<Props> = (props) => {
           <Undertittel>Temaer</Undertittel>
           {props.temaer.map(tema => (
             <Normaltekst className={"temalinje"}>
-              <a href={'#'}>
+              <a href={'temameny'}>
                 {tema}
               </a>
             </Normaltekst>
