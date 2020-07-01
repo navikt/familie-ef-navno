@@ -1,6 +1,6 @@
 import React from 'react';
 import Panel from 'nav-frontend-paneler';
-import { Undertittel, Sidetittel, Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
+import { Innholdstittel } from 'nav-frontend-typografi';
 
 interface Props {
     tittel: string,

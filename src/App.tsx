@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import logo from './logo.svg';
 import './app.less';
-import Card from './components/card';
-import  Knapp  from 'nav-frontend-knapper';
-import Panel from 'nav-frontend-paneler';
-import { client, hentAvsnittQuery } from './utils/sanity';
+import { client } from './utils/sanity';
 import Overgangsstonad from './sider/overgangsstonad/Overgangsstonad';
 import Tilpasningsboks from './components/Tilpasningsboks';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+import Temameny from './components/Temameny';
         
 const BlockContent = require('@sanity/block-content-to-react');
 
 function App() {
   const [test, setTest] = useState<any>({});
+  const temaer = ['Kort om overgangsstønad','Hvem kan få?','Barnas alder',
+                  'Arbeidssituasjonen din','Hvor lenge kan du få?','Hvor mye kan du få?',
+                  'Når utbetales pengene?', 'Du må melde fra om endringer', 'Du kan miste retten til stønad', 
+                  'Slik søker du', 'Hva sier loven?', 'klagerettigheter',]
 
   useEffect(() => {
     client
@@ -57,6 +58,9 @@ function App() {
           </Route>
           <Route path={'/komponent'}>
             <Tilpasningsboks></Tilpasningsboks>
+          </Route>
+          <Route path={'/temameny'}>
+            <Temameny temaer={temaer}/>
           </Route>
         </Switch>
       </Router>
