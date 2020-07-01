@@ -1,6 +1,7 @@
 import React from 'react';
 import './app.less';
 import Overgangsstonad from './sider/overgangsstonad/Overgangsstonad';
+import Barnetilsynstonad from './sider/barnetilsynsstonad/Barnetilsynsstonad';
 import Tilpasningsboks from './components/Tilpasningsboks';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Temameny from './components/Temameny';
@@ -17,6 +18,9 @@ function App() {
         <Switch>
           <Route path={'/overgangsstønad'}>
             <Overgangsstonad />
+          </Route>
+          <Route path={'/barnetilsynsstønad'}>
+            <Barnetilsynstonad />
           </Route>
           <Route path={'/tilpasningsboks'}>
             <Tilpasningsboks></Tilpasningsboks>
