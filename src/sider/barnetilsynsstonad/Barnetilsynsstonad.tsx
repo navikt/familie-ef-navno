@@ -4,14 +4,14 @@ import { Helmet } from 'react-helmet';
 import Temameny from '../../components/Temameny';
 import { Sidetittel } from 'nav-frontend-typografi';
 import Informasjonspanel from '../../components/Informasjonspanel';
+import Filtreringsboks from '../../components/Filtreringsboks';
+import NavFrontendSpinner from 'nav-frontend-spinner';
+
+import  checkboxData from '../../utils/checkboxData';
 
 const BlockContent = require('@sanity/block-content-to-react');
 
 const Barnetilsynstonad = () => {
-    const temaer = ['Kort om overgangsstønad','Hvem kan få?','Barnas alder',
-                  'Arbeidssituasjonen din','Hvor lenge kan du få?','Hvor mye kan du få?',
-                  'Når utbetales pengene?', 'Du må melde fra om endringer', 'Du kan miste retten til stønad', 
-                  'Slik søker du', 'Hva sier loven?', 'klagerettigheter',];
     
     const [side, setSide] = useState<any>({});
     useEffect(() => {
@@ -52,6 +52,7 @@ const Barnetilsynstonad = () => {
                 <Sidetittel>
                     Stønad til barnetilsyn for enslig mor eller far i arbeid
                 </Sidetittel>
+                <Filtreringsboks checkboxData={checkboxData.barnetilsynsstonad}/>
                 <Temameny temaer={side.artikler.map((artikkel:any) => artikkel.tittel_i_panel)}/>
                 <div className="hovedinfo">
                     {side?.artikler?.map((artikkel: any, index: number) => (
@@ -72,7 +73,7 @@ const Barnetilsynstonad = () => {
         );
     }   
     return (
-        <p>Ikke lastet</p>
+        <NavFrontendSpinner></NavFrontendSpinner>
     );
 }
 
