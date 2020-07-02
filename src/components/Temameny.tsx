@@ -3,22 +3,23 @@ import Panel from 'nav-frontend-paneler';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 
 interface Props {
-    temaer: string[];
-  }
+  temaer: string[];
+}
 
 const Temameny: React.FC<Props> = (props) => {
-    return (
-        <Panel className={"temapanel"} style={{width: "250px"}}>
-          <Undertittel>Temaer</Undertittel>
-          {props.temaer.map(tema => (
-            <Normaltekst className={"temalinje"}>
-              <a href={'temameny'}>
-                {tema}
-              </a>
-            </Normaltekst>
-          ))}
-        </Panel>
-    );
+  return (
+    <Panel>
+      <Undertittel>Temaer</Undertittel>
+      {props.temaer.map(tema => (
+        <a href={'temameny'} className={"temalinje"}>
+          <Normaltekst>
+            {tema}
+          </Normaltekst>
+        </a>
+      ))
+      }
+    </Panel >
+  );
 }
 
 export default Temameny;
