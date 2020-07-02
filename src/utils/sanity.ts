@@ -6,4 +6,25 @@ export const client = sanityClient({
     useCdn: true,
 });
 
-export const hentSideQuery = `*[_type == $type && side_id == $side_id][0]{ hovedtittel, side_id, artikler[]->{avsnitt[]->}}`;
+export const hentSideQuery = `*[_type == $type && side_id == $side_id][0]{
+    hovedtittel, 
+    side_id, 
+    artikler[]->{
+    artikkel_id,
+    tittel_i_panel,
+    avsnitt[]->{
+    avsnitt_innhold,
+    filtrer_blir_staende,
+    filtrer_1_til_8,
+    filtrer_over_8,
+    filtrer_under_1,
+    filtrer_i_arbeid,
+    filtrer_utdanning,
+    filtrer_arbeidssoker,
+    filtrer_egen_virksomhet,
+    filtrer_sykdom,
+    filtrer_tilsyn,
+    filtrer_barnepass,
+    knapp[]->
+    }
+}}`;
