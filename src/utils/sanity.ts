@@ -28,3 +28,5 @@ export const hentSideQuery = `*[_type == $type && side_id == $side_id][0]{
     knapp[]->
     }
 }}`;
+
+export const BlockContent = require('@sanity/block-content-to-react');

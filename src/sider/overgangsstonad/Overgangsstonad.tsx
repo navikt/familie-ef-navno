@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { client, hentSideQuery } from '../../utils/sanity';
+import { client, hentSideQuery, BlockContent } from '../../utils/sanity';
 import Informasjonspanel from '../../components/Informasjonspanel';
 import { Sidetittel } from 'nav-frontend-typografi';
 import Tilpasningsboks from '../../components/Tilpasningsboks';
 import { Helmet } from 'react-helmet';
-
-const BlockContent = require('@sanity/block-content-to-react');
 
 function Overgangsstonad() {
     const [side, setSide] = useState<any>({});
