@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { client } from '../../utils/sanity';
+import { client, hentSideQuery } from '../../utils/sanity';
 import { Helmet } from 'react-helmet';
 import Temameny from '../../components/Temameny';
 import { Sidetittel } from 'nav-frontend-typografi';
+import Informasjonspanel from '../../components/Informasjonspanel';
+
+const BlockContent = require('@sanity/block-content-to-react');
 
 const Barnetilsynstonad = () => {
     const temaer = ['Kort om overgangsstønad','Hvem kan få?','Barnas alder',
@@ -10,18 +13,66 @@ const Barnetilsynstonad = () => {
                   'Når utbetales pengene?', 'Du må melde fra om endringer', 'Du kan miste retten til stønad', 
                   'Slik søker du', 'Hva sier loven?', 'klagerettigheter',];
     
-                  
+    const [side, setSide] = useState<any>({});
+    useEffect(() => {
+        client
+            .fetch(hentSideQuery, { type: 'side' , side_id: 2})
+            .then((res: any) => {
+                setSide(res);
+            })
+    }, []);
+              
+    const BlockRenderer = (props: any) => {
+        const { style = 'normal' } = props.node;
+              
+        if (/^h\d/.test(style)) {
+            const level = style.replace(/[^\d]/g, '');
+            return React.createElement(
+                style,
+                { className: `heading-${level}` },
+                props.children
+            );
+        }
+              
+        if (style === 'blockquote') {
+            return <blockquote>- {props.children}</blockquote>;
+        }
+              
+        // Fall back to default handling
+        return BlockContent.defaultSerializers.types.block(props);
+    };
 
+
+    if (side.artikler !== undefined) {
+        return (
+            <div className={"barnetilsynsstønad"}>
+                <Helmet>
+                    <title>Barnetilsynsstønad</title>
+                </Helmet>
+                <Sidetittel>
+                    Stønad til barnetilsyn for enslig mor eller far i arbeid
+                </Sidetittel>
+                <Temameny temaer={side.artikler.map((artikkel:any) => artikkel.tittel_i_panel)}/>
+                <div className="hovedinfo">
+                    {side?.artikler?.map((artikkel: any, index: number) => (
+                        <Informasjonspanel tittel={artikkel.tittel_i_panel} key={index}>
+                            {artikkel?.avsnitt !== undefined ? artikkel?.avsnitt.map((avsnitt: any, index: number) => (
+                                <div className="typo-normal" key={index}>
+                                    <BlockContent
+                                    blocks={avsnitt.avsnitt_innhold}
+                                    serializers={{ types: { block: BlockRenderer } }}
+                                    />
+                                </div>
+                            )) : null}
+
+                        </Informasjonspanel>
+                    ))}
+                </div>
+            </div>
+        );
+    }   
     return (
-        <div className={"barnetilsynsstønad"}>
-            <Helmet>
-                <title>Barnetilsynsstønad</title>
-            </Helmet>
-            <Sidetittel>
-                Stønad til barnetilsyn for enslig mor eller far i arbeid
-            </Sidetittel>
-            <Temameny temaer={temaer}/>
-        </div>
+        <p>Ikke lastet</p>
     );
 }
 
