@@ -4,12 +4,15 @@ import Informasjonspanel from '../../components/Informasjonspanel';
 import { Sidetittel } from 'nav-frontend-typografi';
 import Tilpasningsboks from '../../components/Tilpasningsboks';
 import { Helmet } from 'react-helmet';
+import { Knapp } from 'nav-frontend-knapper';
+import { useHistory } from 'react-router-dom';
 
 function Overgangsstonad() {
     const [side, setSide] = useState<any>({});
+    const history = useHistory();
     useEffect(() => {
         client
-            .fetch(hentSideQuery, { type: 'side' , side_id: 1})
+            .fetch(hentSideQuery, { type: 'side', side_id: 1 })
             .then((res: any) => {
                 setSide(res);
                 console.log("test", res);
@@ -38,7 +41,7 @@ function Overgangsstonad() {
 
     if (side !== undefined) {
         return (
-            
+
             <div className="overgangsstonad">
                 <Helmet>
                     <title>Overgangsstønad</title>
@@ -56,15 +59,17 @@ function Overgangsstonad() {
                             {a?.avsnitt !== undefined ? a?.avsnitt.map((avsnitt: any) => (
                                 <div className="typo-normal">
                                     <BlockContent
-                                    blocks={avsnitt.avsnitt_innhold}
-                                    serializers={{ types: { block: BlockRenderer } }}
-                                />
+                                        blocks={avsnitt.avsnitt_innhold}
+                                        serializers={{ types: { block: BlockRenderer } }}
+                                    />
+                                    {avsnitt.knapp !== undefined ? avsnitt.knapp.map((knapp: any) => (
+                                        <Knapp onClick={() => history.push(knapp.lenke)}>{knapp.tekst}</Knapp>
+                                    )) : null}
                                 </div>
-                                
                             )) : null}
 
                         </Informasjonspanel>
-                            ))}
+                    ))}
                 </div>
 
             </div>
