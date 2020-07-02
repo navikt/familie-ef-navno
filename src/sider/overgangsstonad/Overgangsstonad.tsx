@@ -6,6 +6,8 @@ import Tilpasningsboks from '../../components/Tilpasningsboks';
 import { Helmet } from 'react-helmet';
 import { Knapp } from 'nav-frontend-knapper';
 import { useHistory } from 'react-router-dom';
+import Temameny from '../../components/Temameny';
+import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
 
 function Overgangsstonad() {
     const [side, setSide] = useState<any>({});
@@ -39,39 +41,66 @@ function Overgangsstonad() {
         return BlockContent.defaultSerializers.types.block(props);
     };
 
+    const temaer = ['Kort om overgangsstønad', 'Hvem kan få?', 'Barnas alder',
+        'Arbeidssituasjonen din', 'Hvor lenge kan du få?', 'Hvor mye kan du få?',
+        'Når utbetales pengene?', 'Du må melde fra om endringer', 'Du kan miste retten til stønad',
+        'Slik søker du', 'Hva sier loven?', 'klagerettigheter',]
+
     if (side !== undefined) {
         return (
-
-            <div className="overgangsstonad">
+            <div className="side">
                 <Helmet>
                     <title>Overgangsstønad</title>
                 </Helmet>
 
                 <div className="banner">
-                    <Sidetittel>Overgangsstønad for enslig mor og far</Sidetittel>
+                    <h1>Overgangsstønad for enslig mor og far</h1>
                 </div>
-                <div className="sideinfo">
-                    <Tilpasningsboks />
-                </div>
-                <div className="hovedinfo">
-                    {side?.artikler?.map((a: any) => (
-                        <Informasjonspanel tittel={a.tittel_i_panel}>
-                            {a?.avsnitt !== undefined ? a?.avsnitt.map((avsnitt: any) => (
-                                <div className="typo-normal">
-                                    <BlockContent
-                                        blocks={avsnitt.avsnitt_innhold}
-                                        serializers={{ types: { block: BlockRenderer } }}
-                                    />
-                                    {avsnitt.knapp !== undefined ? avsnitt.knapp.map((knapp: any) => (
-                                        <Knapp onClick={() => history.push(knapp.lenke)}>{knapp.tekst}</Knapp>
-                                    )) : null}
-                                </div>
-                            )) : null}
+                <p className="breadcrumb">Link/link</p>
+                <div className="overgangsstonad">
+                    <div className="sideinfo">
+                        <div className="sticky">
+                            <Tilpasningsboks />
+                            <Temameny temaer={temaer} />
+                        </div>
+                    </div>
+                    <div className="hovedinfo">
+                        <div className="sideAlertStripe">
+                            <AlertStripeAdvarsel>Vi opplever stor pågang! Innsendingen kan ta noe lengre tid.</AlertStripeAdvarsel>
+                        </div>
+                        {side?.artikler?.map((a: any) => (
+                            <Informasjonspanel tittel={a.tittel_i_panel}>
+                                {a?.avsnitt !== undefined ? a?.avsnitt.map((avsnitt: any) => (
+                                    <div className="typo-normal">
+                                        <BlockContent
+                                            blocks={avsnitt.avsnitt_innhold}
+                                            serializers={{ types: { block: BlockRenderer } }}
+                                        />
+                                        {avsnitt.knapp !== undefined ? avsnitt.knapp.map((knapp: any) => (
+                                            <Knapp onClick={() => history.push(knapp.lenke)}>{knapp.tekst}</Knapp>
+                                        )) : null}
+                                    </div>
+                                )) : null}
+                            </Informasjonspanel>
+                        ))}
+                        {side?.artikler?.map((a: any) => (
+                            <Informasjonspanel tittel={a.tittel_i_panel}>
+                                {a?.avsnitt !== undefined ? a?.avsnitt.map((avsnitt: any) => (
+                                    <div className="typo-normal">
+                                        <BlockContent
+                                            blocks={avsnitt.avsnitt_innhold}
+                                            serializers={{ types: { block: BlockRenderer } }}
+                                        />
+                                        {avsnitt.knapp !== undefined ? avsnitt.knapp.map((knapp: any) => (
+                                            <Knapp onClick={() => history.push(knapp.lenke)}>{knapp.tekst}</Knapp>
+                                        )) : null}
+                                    </div>
+                                )) : null}
 
-                        </Informasjonspanel>
-                    ))}
+                            </Informasjonspanel>
+                        ))}
+                    </div>
                 </div>
-
             </div>
         );
     }
