@@ -14,6 +14,8 @@ export const hentSideQuery = `*[_type == $type && side_id == $side_id][0]{
     artikler[]->{
     artikkel_id,
     tittel_i_panel,
+    "bilde": ikon.asset->url,
+    "alttekst": ikon.alttekst,
     avsnitt[]->{
     avsnitt_innhold,
     filtrer_blir_staende,
