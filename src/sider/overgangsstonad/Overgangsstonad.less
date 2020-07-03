@@ -7,7 +7,7 @@
     display: grid;
     margin-bottom: 4rem;
     grid-template-columns: repeat(2, auto);
-    //grid-template-areas: "side hoved hoved hoved";
+    grid-template-areas: "side hoved";
     grid-gap: 24px;
     max-width: 846px ;
     margin-left: auto;
@@ -20,7 +20,6 @@
     background-color: @navLillaLighten60;
     text-align: center;
     border-bottom: 4px solid #826ba1;   
-    //grid-area: banner;
     line-height: 68px;
 }
 
@@ -41,7 +40,7 @@
 .sideinfo{
     position: sticky;
     top: 0;
-    //grid-area: side;
+    grid-area: side;
     display: flex;
     flex-direction: column;
     max-width: 194px;
@@ -57,7 +56,7 @@
 }
 
 .hovedinfo{
-    //grid-area: hoved;
+    grid-area: hoved;
     display: grid;
     grid-gap: 24px;
     max-width: 628px;
