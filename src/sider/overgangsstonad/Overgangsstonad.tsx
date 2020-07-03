@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { client, hentSideQuery, BlockContent } from '../../utils/sanity';
 import Informasjonspanel from '../../components/Informasjonspanel';
-import { Sidetittel } from 'nav-frontend-typografi';
 import Tilpasningsboks from '../../components/Tilpasningsboks';
 import { Helmet } from 'react-helmet';
 import { Knapp } from 'nav-frontend-knapper';
@@ -44,11 +43,6 @@ function Overgangsstonad() {
         return BlockContent.defaultSerializers.types.block(props);
     };
 
-    const temaer = ['Kort om overgangsstønad', 'Hvem kan få?', 'Barnas alder',
-        'Arbeidssituasjonen din', 'Hvor lenge kan du få?', 'Hvor mye kan du få?',
-        'Når utbetales pengene?', 'Du må melde fra om endringer', 'Du kan miste retten til stønad',
-        'Slik søker du', 'Hva sier loven?', 'klagerettigheter',]
-
     if (side.artikler !== undefined) {
         return (
             <div className="side">
@@ -73,7 +67,7 @@ function Overgangsstonad() {
                             <AlertStripeAdvarsel>Vi opplever stor pågang! Innsendingen kan ta noe lengre tid.</AlertStripeAdvarsel>
                         </div>
                         {side?.artikler?.map((a: any) => (
-                            <Informasjonspanel tittel={a.tittel_i_panel}>
+                            <Informasjonspanel tittel={a.tittel_i_panel} bilde={a.bilde} alttekst={a.alttekst}>
                                 {a?.avsnitt !== undefined ? a?.avsnitt.map((avsnitt: any) => (
                                     <div className="typo-normal">
                                         <BlockContent

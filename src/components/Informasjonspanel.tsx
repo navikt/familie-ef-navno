@@ -4,12 +4,16 @@ import { Innholdstittel } from 'nav-frontend-typografi';
 
 interface Props {
     tittel: string,
+    bilde?: string,
+    alttekst?: string, 
 }
 
 const Informasjonspanel: React.FC<Props> = (props) => {
     return (
         <Panel className="informasjonspanel">
-            <p className="informasjonspanel-ikon"></p>
+            <div className="informasjonspanel-ikon">
+                <img src={props.bilde} alt={props.alttekst}/>
+            </div>
             <Innholdstittel className="center-text" >{props.tittel}</Innholdstittel>
             {props.children}
         </Panel>
