@@ -1,32 +1,34 @@
 import React, { useEffect, useState } from 'react';
-import { client, hentSideQuery, BlockContent } from '../../utils/sanity';
-import Informasjonspanel from '../../components/Informasjonspanel';
-import { Sidetittel } from 'nav-frontend-typografi';
-import Tilpasningsboks from '../../components/Tilpasningsboks';
+import { client, hentSideQuery } from '../../utils/sanity';
 import { Helmet } from 'react-helmet';
+import Temameny from '../../components/Temameny';
+import { Sidetittel } from 'nav-frontend-typografi';
+import Informasjonspanel from '../../components/Informasjonspanel';
+import Filtreringsboks from '../../components/Filtreringsboks';
+import NavFrontendSpinner from 'nav-frontend-spinner';
+import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
+import Tilpasningsboks from '../../components/Tilpasningsboks';
 import { Knapp } from 'nav-frontend-knapper';
 import { useHistory } from 'react-router-dom';
-import Temameny from '../../components/Temameny';
-import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
-import Filtreringsboks from '../../components/Filtreringsboks';
 
 import  checkboxData from '../../utils/checkboxData';
 
-function Overgangsstonad() {
+const BlockContent = require('@sanity/block-content-to-react');
+
+const Barnetilsynstonad = () => {
     const [side, setSide] = useState<any>({});
     const history = useHistory();
     useEffect(() => {
         client
-            .fetch(hentSideQuery, { type: 'side', side_id: 1 })
+            .fetch(hentSideQuery, { type: 'side' , side_id: 3})
             .then((res: any) => {
                 setSide(res);
-                console.log("test", res);
             })
     }, []);
-
+              
     const BlockRenderer = (props: any) => {
         const { style = 'normal' } = props.node;
-
+              
         if (/^h\d/.test(style)) {
             const level = style.replace(/[^\d]/g, '');
             return React.createElement(
@@ -35,50 +37,46 @@ function Overgangsstonad() {
                 props.children
             );
         }
-
+              
         if (style === 'blockquote') {
             return <blockquote>- {props.children}</blockquote>;
         }
-
+              
         // Fall back to default handling
         return BlockContent.defaultSerializers.types.block(props);
     };
 
-    const temaer = ['Kort om overgangsstønad', 'Hvem kan få?', 'Barnas alder',
-        'Arbeidssituasjonen din', 'Hvor lenge kan du få?', 'Hvor mye kan du få?',
-        'Når utbetales pengene?', 'Du må melde fra om endringer', 'Du kan miste retten til stønad',
-        'Slik søker du', 'Hva sier loven?', 'klagerettigheter',]
 
     if (side.artikler !== undefined) {
         return (
             <div className="side">
                 <Helmet>
-                    <title>Overgangsstønad</title>
+                    <title>Barnetilsynsstønad</title>
                 </Helmet>
-
-                <div className="banner">
-                    <h1>Overgangsstønad for enslig mor og far</h1>
-                </div>
+                <Sidetittel>
+                    Stønad til skolepenger for enslig mor eller far som tar utdanning
+                </Sidetittel>
                 <p className="breadcrumb">Link/link</p>
-                <div className="overgangsstonad">
+                <div className="skolepengerstonad">
                     <div className="sideinfo">
                         <div className="sticky">
-                            <Tilpasningsboks />
-                            <Filtreringsboks checkboxData={checkboxData.overgangsstonad}/>
-                            <Temameny temaer={side.artikler.map((artikkel:any) => artikkel.tittel_i_panel)} />
+
+                            <Temameny temaer={side.artikler.map((artikkel:any) => artikkel.tittel_i_panel)}/>
                         </div>
                     </div>
                     <div className="hovedinfo">
                         <div className="sideAlertStripe">
-                            <AlertStripeAdvarsel>Vi opplever stor pågang! Innsendingen kan ta noe lengre tid.</AlertStripeAdvarsel>
+                            <AlertStripeAdvarsel>
+                                Vi opplever stor pågang! Innsendingen kan ta noe lengre tid.
+                            </AlertStripeAdvarsel>
                         </div>
-                        {side?.artikler?.map((a: any) => (
-                            <Informasjonspanel tittel={a.tittel_i_panel}>
-                                {a?.avsnitt !== undefined ? a?.avsnitt.map((avsnitt: any) => (
-                                    <div className="typo-normal">
+                        {side?.artikler?.map((artikkel: any, index: number) => (
+                            <Informasjonspanel tittel={artikkel.tittel_i_panel} key={index}>
+                                {artikkel?.avsnitt !== undefined ? artikkel?.avsnitt.map((avsnitt: any, index: number) => (
+                                    <div className="typo-normal" key={index}>
                                         <BlockContent
-                                            blocks={avsnitt.avsnitt_innhold}
-                                            serializers={{ types: { block: BlockRenderer } }}
+                                        blocks={avsnitt.avsnitt_innhold}
+                                        serializers={{ types: { block: BlockRenderer } }}
                                         />
                                         {avsnitt.knapp !== undefined ? avsnitt.knapp.map((knapp: any) => (
                                             <Knapp onClick={() => history.push(knapp.lenke)}>{knapp.tekst}</Knapp>
@@ -91,12 +89,10 @@ function Overgangsstonad() {
                 </div>
             </div>
         );
-    }
-    else {
-        return (
-            <p>Ikke lastet</p>
-        );
-    }
+    }   
+    return (
+        <NavFrontendSpinner></NavFrontendSpinner>
+    );
 }
 
-export default Overgangsstonad; 
+export default Barnetilsynstonad;

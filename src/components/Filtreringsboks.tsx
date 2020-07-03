@@ -9,7 +9,7 @@ interface Props {
 
 const Filtreringsboks: React.FC<Props> = props => {
     return (
-        <Panel className={"temapanel"} style={{width: "250px"}}>
+        <Panel >
             {props.checkboxData.map((obj: any, index: number) => (
                 <CheckboxGruppe legend={obj.groupName} key={index}>
                     {obj.texts.map((text: any, index: number) => (
