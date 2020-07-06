@@ -61,7 +61,7 @@ const Barnetilsynstonad = () => {
                     <div className="sideinfo">
                         <div className="sticky">
                             <Tilpasningsboks />
-                            <Filtreringsboks checkboxData={checkboxData.barnetilsynsstonad}/>
+                            
                             
                         </div>
                     </div>

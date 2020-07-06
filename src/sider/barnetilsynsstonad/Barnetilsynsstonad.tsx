@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, RefObject } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { client, hentSideQuery } from '../../utils/sanity';
 import { Helmet } from 'react-helmet';
 import Temameny from '../../components/Temameny';
@@ -17,33 +17,32 @@ const BlockContent = require('@sanity/block-content-to-react');
 
 const Barnetilsynstonad = () => {
     const [side, setSide] = useState<any>({});
+    const [filter, setFilter] = useState<boolean[]>([]);
     const history = useHistory();
     const artikkelRef = useRef<any[]>([]);
+    const relevantCheckboxData = checkboxData.barnetilsynsstonad;
     useEffect(() => {
         client
             .fetch(hentSideQuery, { type: 'side' , side_id: 2})
             .then((res: any) => {
                 setSide(res);
-            })
-            .then(() => {
-                if (side.artikler !== undefined) {
-                    artikkelRef.current = new Array(side.artikler.length);
-                }     
+                setFilter(new Array(relevantCheckboxData[0].texts.length).fill(false));
             });
     }, []);
 
     const scrollTilRef = ( ref: any) => {
-        console.log(ref);
         if ( !ref ) return;
-        console.log("kommer hit");
         window.scrollTo({ top: ref.offsetTop, left: 0, behavior: 'smooth' });
     };
     
     const scrollTilArtikkel = (int: number) => {
         setTimeout(() => scrollTilRef(artikkelRef.current[int]), 120);
-        console.log(int, artikkelRef.current[int]);
       };
               
+    const handleCheckboxChange = (int: number) => {
+        setFilter(filter.map((filter, index) => index === int ? !filter : filter));
+    };
+    
     const BlockRenderer = (props: any) => {
         const { style = 'normal' } = props.node;
               
@@ -64,7 +63,6 @@ const Barnetilsynstonad = () => {
         return BlockContent.defaultSerializers.types.block(props);
     };
 
-
     if (side.artikler !== undefined) {
         return (
             <div className="side">
@@ -79,7 +77,10 @@ const Barnetilsynstonad = () => {
                     <div className="sideinfo">
                         <div className="sticky">
                             <Tilpasningsboks />
-                            <Filtreringsboks checkboxData={checkboxData.barnetilsynsstonad}/>
+                            <Filtreringsboks 
+                            checkboxData={relevantCheckboxData}
+                            handleChange={handleCheckboxChange}
+                            />
                             <Temameny 
                                 temaer={side.artikler.map((artikkel:any) => artikkel.tittel_i_panel)}
                                 scrollTil={scrollTilArtikkel}
@@ -101,6 +102,7 @@ const Barnetilsynstonad = () => {
                                             blocks={avsnitt.avsnitt_innhold}
                                             serializers={{ types: { block: BlockRenderer } }}
                                             />
+                                            {console.log(artikkel, filter)}
                                             {avsnitt.knapp !== undefined ? avsnitt.knapp.map((knapp: any) => (
                                                 <Knapp onClick={() => history.push(knapp.lenke)}>{knapp.tekst}</Knapp>
                                             )) : null}

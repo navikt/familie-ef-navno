@@ -58,7 +58,6 @@ function Overgangsstonad() {
                     <div className="sideinfo">
                         <div className="sticky">
                             <Tilpasningsboks />
-                            <Filtreringsboks checkboxData={checkboxData.overgangsstonad}/>
                         </div>
                     </div>
                     <div className="hovedinfo">
