@@ -71,7 +71,7 @@ const Barnetilsynstonad = () => {
                             </AlertStripeAdvarsel>
                         </div>
                         {side?.artikler?.map((artikkel: any, index: number) => (
-                            <Informasjonspanel tittel={artikkel.tittel_i_panel} key={index}>
+                            <Informasjonspanel tittel={artikkel.tittel_i_panel} key={index} bilde={artikkel.bilde} alttekst={artikkel.alttekst}>
                                 {artikkel?.avsnitt !== undefined ? artikkel?.avsnitt.map((avsnitt: any, index: number) => (
                                     <div className="typo-normal" key={index}>
                                         <BlockContent

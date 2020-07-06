@@ -1,7 +1,7 @@
 import React from 'react';
 import Panel from 'nav-frontend-paneler';
 import { Knapp } from 'nav-frontend-knapper';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { Element, Normaltekst } from 'nav-frontend-typografi';
 
 interface Props {
 
@@ -14,10 +14,10 @@ const Tilpasningsboks: React.FC<Props> = () => {
                 Fortell oss litt om situasjonen din,
                 så viser vi bare den informasjonen som er
                 relevant for deg.
-                </Normaltekst>
+            </Normaltekst>
             <Knapp className="tilpasningsknapp">
-                Tilpass informasjon <br /> til meg
-                </Knapp>
+                <Element>Tilpass informasjon <br /> til meg</Element>
+            </Knapp>
         </Panel>
     );
 }
