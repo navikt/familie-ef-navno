@@ -75,7 +75,7 @@ const Barnetilsynstonad = () => {
                     Stønad til barnetilsyn for enslig mor eller far i arbeid
                 </Sidetittel>
                 <p className="breadcrumb">Link/link</p>
-                <div className="barnetilsynsstonad">
+                <div className="overgangsstonad">
                     <div className="sideinfo">
                         <div className="sticky">
                             <Tilpasningsboks />
