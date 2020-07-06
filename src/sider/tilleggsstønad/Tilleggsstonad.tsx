@@ -62,7 +62,7 @@ const Barnetilsynstonad = () => {
                         <div className="sticky">
                             <Tilpasningsboks />
                             <Filtreringsboks checkboxData={checkboxData.barnetilsynsstonad}/>
-                            <Temameny temaer={side.artikler.map((artikkel:any) => artikkel.tittel_i_panel)}/>
+                            
                         </div>
                     </div>
                     <div className="hovedinfo">

@@ -61,7 +61,7 @@ const Barnetilsynstonad = () => {
                     <div className="sideinfo">
                         <div className="sticky">
 
-                            <Temameny temaer={side.artikler.map((artikkel:any) => artikkel.tittel_i_panel)}/>
+                            
                         </div>
                     </div>
                     <div className="hovedinfo">

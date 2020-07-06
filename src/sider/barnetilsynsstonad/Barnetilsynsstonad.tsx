@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef, RefObject } from 'react';
 import { client, hentSideQuery } from '../../utils/sanity';
 import { Helmet } from 'react-helmet';
 import Temameny from '../../components/Temameny';
@@ -18,13 +18,31 @@ const BlockContent = require('@sanity/block-content-to-react');
 const Barnetilsynstonad = () => {
     const [side, setSide] = useState<any>({});
     const history = useHistory();
+    const artikkelRef = useRef<any[]>([]);
     useEffect(() => {
         client
             .fetch(hentSideQuery, { type: 'side' , side_id: 2})
             .then((res: any) => {
                 setSide(res);
             })
+            .then(() => {
+                if (side.artikler !== undefined) {
+                    artikkelRef.current = new Array(side.artikler.length);
+                }     
+            });
     }, []);
+
+    const scrollTilRef = ( ref: any) => {
+        console.log(ref);
+        if ( !ref ) return;
+        console.log("kommer hit");
+        window.scrollTo({ top: ref.offsetTop, left: 0, behavior: 'smooth' });
+    };
+    
+    const scrollTilArtikkel = (int: number) => {
+        setTimeout(() => scrollTilRef(artikkelRef.current[int]), 120);
+        console.log(int, artikkelRef.current[int]);
+      };
               
     const BlockRenderer = (props: any) => {
         const { style = 'normal' } = props.node;
@@ -57,12 +75,15 @@ const Barnetilsynstonad = () => {
                     Stønad til barnetilsyn for enslig mor eller far i arbeid
                 </Sidetittel>
                 <p className="breadcrumb">Link/link</p>
-                <div className="barnetilsynsstonad">
+                <div className="overgangsstonad">
                     <div className="sideinfo">
                         <div className="sticky">
                             <Tilpasningsboks />
                             <Filtreringsboks checkboxData={checkboxData.barnetilsynsstonad}/>
-                            <Temameny temaer={side.artikler.map((artikkel:any) => artikkel.tittel_i_panel)}/>
+                            <Temameny 
+                                temaer={side.artikler.map((artikkel:any) => artikkel.tittel_i_panel)}
+                                scrollTil={scrollTilArtikkel}
+                            />
                         </div>
                     </div>
                     <div className="hovedinfo">
@@ -72,19 +93,21 @@ const Barnetilsynstonad = () => {
                             </AlertStripeAdvarsel>
                         </div>
                         {side?.artikler?.map((artikkel: any, index: number) => (
-                            <Informasjonspanel tittel={artikkel.tittel_i_panel} key={index} bilde={artikkel.bilde} alttekst={artikkel.alttekst}>
-                                {artikkel?.avsnitt !== undefined ? artikkel?.avsnitt.map((avsnitt: any, index: number) => (
-                                    <div className="typo-normal" key={index}>
-                                        <BlockContent
-                                        blocks={avsnitt.avsnitt_innhold}
-                                        serializers={{ types: { block: BlockRenderer } }}
-                                        />
-                                        {avsnitt.knapp !== undefined ? avsnitt.knapp.map((knapp: any) => (
-                                            <Knapp onClick={() => history.push(knapp.lenke)}>{knapp.tekst}</Knapp>
-                                        )) : null}
-                                    </div>
-                                )) : null}
-                            </Informasjonspanel>
+                            <div ref={ (el: any) => artikkelRef.current[index] = el} key={index}>
+                                <Informasjonspanel tittel={artikkel.tittel_i_panel} >
+                                    {artikkel?.avsnitt !== undefined ? artikkel?.avsnitt.map((avsnitt: any, index: number) => (
+                                        <div className="typo-normal" key={index}>
+                                            <BlockContent
+                                            blocks={avsnitt.avsnitt_innhold}
+                                            serializers={{ types: { block: BlockRenderer } }}
+                                            />
+                                            {avsnitt.knapp !== undefined ? avsnitt.knapp.map((knapp: any) => (
+                                                <Knapp onClick={() => history.push(knapp.lenke)}>{knapp.tekst}</Knapp>
+                                            )) : null}
+                                        </div>
+                                    )) : null}
+                                </Informasjonspanel>
+                            </div>
                         ))}
                     </div>
                 </div>
