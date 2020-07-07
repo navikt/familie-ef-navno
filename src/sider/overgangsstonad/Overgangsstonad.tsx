@@ -4,16 +4,38 @@ import Informasjonspanel from '../../components/Informasjonspanel';
 import Tilpasningsboks from '../../components/Tilpasningsboks';
 import { Helmet } from 'react-helmet';
 import { Knapp } from 'nav-frontend-knapper';
-import { useHistory } from 'react-router-dom';
-import Temameny from '../../components/Temameny';
-import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
+import AlertStripe, { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
 import Filtreringsboks from '../../components/Filtreringsboks';
+import checkboxData from '../../utils/checkboxData';
+import { Link } from "react-scroll";
+import Lenke from 'nav-frontend-lenker';
+import { Alert } from '../../components/Alert';
+const PortableText = require('@sanity/block-content-to-react');
 
-import  checkboxData from '../../utils/checkboxData';
+export const serializers = {
+    marks: {
+        internalLink: (props: any) => {
+            return <Link
+                to={props.mark.reference._ref}
+                spy={true}
+                smooth={true}
+                className="lenke"
+            >
+                {props.children}
+            </Link>
+        },
+        link: ({ mark }: { mark: any }, { children }: { children: any }) => {
+            const { blank, href } = mark
+            return blank ?
+                <Lenke href={href}>{children}</Lenke> : null
+
+        }
+    }
+}
 
 function Overgangsstonad() {
     const [side, setSide] = useState<any>({});
-    const history = useHistory();
+    
     useEffect(() => {
         client
             .fetch(hentSideQuery, { type: 'side', side_id: 1 })
@@ -43,6 +65,7 @@ function Overgangsstonad() {
         return BlockContent.defaultSerializers.types.block(props);
     };
 
+
     if (side.artikler !== undefined) {
         return (
             <div className="side">
@@ -58,30 +81,33 @@ function Overgangsstonad() {
                     <div className="sideinfo">
                         <div className="sticky">
                             <Tilpasningsboks />
-                            <Filtreringsboks checkboxData={checkboxData.overgangsstonad}/>
+                            <Filtreringsboks checkboxData={checkboxData.overgangsstonad} />
                         </div>
                     </div>
                     <div className="hovedinfo">
-                        <div className="sideAlertStripe">
-                            <AlertStripeAdvarsel>Vi opplever stor pågang! Innsendingen kan ta noe lengre tid.</AlertStripeAdvarsel>
+                        <div className="sideAlertStripe typo-normal" id='alertstripe'>
+                            <Alert alertstripe={side.alertstripe} />
                         </div>
                         {side?.artikler?.map((a: any) => (
-                            <Informasjonspanel tittel={a.tittel_i_panel} bilde={a.bilde} alttekst={a.alttekst}>
+                            <Informasjonspanel tittel={a.tittel_i_panel} bilde={a.bilde} alttekst={a.alttekst} id={a._id}>
                                 {a?.avsnitt !== undefined ? a?.avsnitt.map((avsnitt: any) => (
                                     <div className="typo-normal">
                                         <BlockContent
                                             blocks={avsnitt.avsnitt_innhold}
-                                            serializers={{ types: { block: BlockRenderer } }}
+                                            serializers={serializers}
                                         />
-                                        {avsnitt.knapp !== undefined ? avsnitt.knapp.map((knapp: any) => (
-                                            <Knapp onClick={() => history.push(knapp.lenke)}>{knapp.tekst}</Knapp>
-                                        )) : null}
                                     </div>
                                 )) : null}
                             </Informasjonspanel>
                         ))}
                     </div>
                 </div>
+                <Link
+                    to="alertstripe"
+                    spy={true}
+                    smooth={true}
+                >Test</Link>
+                <Knapp>Test</Knapp>
             </div>
         );
     }
