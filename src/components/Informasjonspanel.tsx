@@ -11,16 +11,11 @@ interface Props {
     alttekst?: string,
     id?: string,
     avsnitt?: any,
-    knapp?: {
-        lenke?: string,
-        tekst?: string,
-    },
 }
 
 const serializers = {
     marks: {
         internalLink: (props: any) => {
-            console.log("ref", props.mark?.reference?._ref)
             return <Link
                 to={props.mark?.reference?._ref}
                 spy={true}
@@ -33,7 +28,7 @@ const serializers = {
         link: (props: any) => {
             const { blank, href } = props.mark;
             return blank ?
-                <a href={href} target="_blank" rel="noopener" >{props.children}</a>
+                <a href={href} target="_blank" rel="noopener noreferrer" >{props.children}</a>
                 : <a href={href}>{props.children}</a>;
 
         }
@@ -47,17 +42,19 @@ const Informasjonspanel: React.FC<Props> = (props) => {
                 <img src={props.bilde} alt={props.alttekst} />
             </div>
             <Innholdstittel className="center-text" >{props.tittel}</Innholdstittel>
-            {props.avsnitt !== undefined ? props.avsnitt.map((avsnitt: any) => (
-                <div>
+            {props.avsnitt !== undefined ? props.avsnitt.map((a: any) => (
+                <div key={a._id}>
                     <BlockContent
                         className="typo-normal"
-                        blocks={avsnitt.avsnitt_innhold}
+                        blocks={a.avsnitt_innhold}
                         serializers={serializers}
                     />
-                    {avsnitt.knapp?.tekst !== undefined ?
-                        <a href={avsnitt.knapp.lenke} className="knapp lenkeknapp">{avsnitt.knapp.tekst}</a>
+                    {a.knapp?.tekst !== undefined ?
+                        <a href={a.knapp.lenke} className="knapp lenkeknapp">{a.knapp.tekst}</a>
                         : null}
-                    <Alert alertstripe={props.avsnitt?.alertstripe} />
+                    {a.alertstripe !== undefined ?
+                        <Alert alertstripe={a.alertstripe} />
+                        : null}
                 </div>
             )) : null}
             {props.children}
