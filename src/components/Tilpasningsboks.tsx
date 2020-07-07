@@ -4,7 +4,7 @@ import { Knapp } from 'nav-frontend-knapper';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 
 interface Props {
-
+    filterStatus: boolean[];
 }
 
 const Tilpasningsboks: React.FC<Props> = props => {
@@ -14,6 +14,7 @@ const Tilpasningsboks: React.FC<Props> = props => {
     }
 
     return (
+        
         <Panel className="tilpasningspanel">
             <Normaltekst >
                 Fortell oss litt om situasjonen din,
@@ -27,7 +28,9 @@ const Tilpasningsboks: React.FC<Props> = props => {
             className="tilpasningsknapp"
             onClick={handleClick}
             >
-                <Element>Tilpass informasjon <br /> til meg</Element>
+            {showComponent ? <Element>Vis tilpasset <br /> informasjon</Element> :
+            props.filterStatus.every( el => el === false) ? <Element>Tilpass informasjon <br /> til meg</Element> :
+            <Element>Endre situasjon</Element>}
             </Knapp>
         </Panel>
     );

@@ -57,7 +57,7 @@ function Overgangsstonad() {
                 <div className="overgangsstonad">
                     <div className="sideinfo">
                         <div className="sticky">
-                            <Tilpasningsboks />
+                            
                         </div>
                     </div>
                     <div className="hovedinfo">

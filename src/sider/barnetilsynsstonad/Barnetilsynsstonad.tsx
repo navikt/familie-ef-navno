@@ -82,10 +82,13 @@ const Barnetilsynstonad = () => {
                 <div className="overgangsstonad">
                     <div className="sideinfo">
                         <div className="sticky">
-                            <Tilpasningsboks >
+                            <Tilpasningsboks 
+                            filterStatus={filter}
+                            >
                             <Filtreringsboks 
                                     checkboxData={relevantCheckboxData}
                                     handleChange={handleCheckboxChange}
+                                    filterStatus={filter}
                                 />
                             </Tilpasningsboks>
                             <Temameny 

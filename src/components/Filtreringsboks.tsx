@@ -6,6 +6,7 @@ import { Checkbox, CheckboxGruppe } from 'nav-frontend-skjema';
 interface Props {
     checkboxData: any[];
     handleChange: (int: number) => void ;
+    filterStatus: boolean[];
 }
 
 const Filtreringsboks: React.FC<Props> = props => {
@@ -17,7 +18,9 @@ const Filtreringsboks: React.FC<Props> = props => {
                         <Checkbox 
                         label={text} 
                         key={index}
-                        onChange={() => props.handleChange(index)}>
+                        onChange={() => props.handleChange(index)}
+                        checked={props.filterStatus[index]}
+                        >
                         </Checkbox>
                     ))}
                 </CheckboxGruppe>

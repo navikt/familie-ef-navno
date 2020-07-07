@@ -60,7 +60,7 @@ const Barnetilsynstonad = () => {
                 <div className="tilleggsstonad">
                     <div className="sideinfo">
                         <div className="sticky">
-                            <Tilpasningsboks />
+                            
                             
                             
                         </div>
