@@ -63,6 +63,15 @@ const Barnetilsynstonad = () => {
         return BlockContent.defaultSerializers.types.block(props);
     };
 
+    const filterCheck = (avsnitt :any) => {
+        if (avsnitt.filtrer_blir_staende) return true;
+        if (filter.every( el => el === false )) return true;
+        if (avsnitt.filtrer_i_arbeid && filter[0]) return true;
+        if (avsnitt.filtrer_egen_virksomhet && filter[1]) return true;
+        if (avsnitt.filtrer_sykdom && filter[2]) return true;
+        return false;
+    }
+
     if (side.artikler !== undefined) {
         return (
             <div className="side">
@@ -97,16 +106,17 @@ const Barnetilsynstonad = () => {
                             <div ref={ (el: any) => artikkelRef.current[index] = el} key={index}>
                                 <Informasjonspanel tittel={artikkel.tittel_i_panel} >
                                     {artikkel?.avsnitt !== undefined ? artikkel?.avsnitt.map((avsnitt: any, index: number) => (
-                                        <div className="typo-normal" key={index}>
-                                            <BlockContent
-                                            blocks={avsnitt.avsnitt_innhold}
-                                            serializers={{ types: { block: BlockRenderer } }}
-                                            />
-                                            {console.log(artikkel, filter)}
-                                            {avsnitt.knapp !== undefined ? avsnitt.knapp.map((knapp: any) => (
-                                                <Knapp onClick={() => history.push(knapp.lenke)}>{knapp.tekst}</Knapp>
-                                            )) : null}
-                                        </div>
+                                        filterCheck(avsnitt) ?
+                                            <div className="typo-normal" key={index}>
+                                                <BlockContent
+                                                blocks={avsnitt.avsnitt_innhold}
+                                                serializers={{ types: { block: BlockRenderer } }}
+                                                />
+                                                {avsnitt.knapp !== undefined ? avsnitt.knapp.map((knapp: any) => (
+                                                    <Knapp onClick={() => history.push(knapp.lenke)}>{knapp.tekst}</Knapp>
+                                                )) : null}
+                                            </div> 
+                                        : null
                                     )) : null}
                                 </Informasjonspanel>
                             </div>
