@@ -2,7 +2,6 @@ import React from 'react';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { BlockContent } from '../utils/sanity';
 import { Link } from 'react-scroll';
-import Lenke from 'nav-frontend-lenker';
 
 interface Props {
     alertstripe?: {
@@ -17,8 +16,6 @@ interface Props {
 const serializers = {
     marks: {
         internalLink: (props: any) => {
-            console.log("ref", props.mark?.reference?._ref)
-
             return <Link
                 to={props.mark?.reference?._ref}
                 spy={true}
@@ -30,7 +27,7 @@ const serializers = {
         link: (props: any) => {
             const { blank, href } = props.mark;
             return blank ?
-                <a href={href} target="_blank" rel="noopener">{props.children}</a>
+                <a href={href} target="_blank" rel="noopener noreferrer">{props.children}</a>
                 : <a href={href}>{props.children}</a>;
 
         }
@@ -39,7 +36,6 @@ const serializers = {
 
 export const Alert: React.FC<Props> = ({ alertstripe }) => {
     if (alertstripe?.alertstripe_aktiv) {
-        console.log("alert", alertstripe)
         return (
             <AlertStripe
                 type={alertstripe.alertstripe_info ? "info" : "advarsel"}
@@ -53,7 +49,6 @@ export const Alert: React.FC<Props> = ({ alertstripe }) => {
         );
     }
     else {
-        console.log("ikke noe", alertstripe)
         return null;
     }
 }

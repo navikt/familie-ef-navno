@@ -1,7 +1,3 @@
-import React from 'react';
-import { Link } from 'react-scroll';
-import Lenke from 'nav-frontend-lenker';
-
 const sanityClient = require('@sanity/client');
 
 export const client = sanityClient({
