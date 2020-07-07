@@ -101,9 +101,6 @@ const Barnetilsynstonad = () => {
                                             blocks={avsnitt.avsnitt_innhold}
                                             serializers={{ types: { block: BlockRenderer } }}
                                             />
-                                            {avsnitt.knapp !== undefined ? avsnitt.knapp.map((knapp: any) => (
-                                                <Knapp onClick={() => history.push(knapp.lenke)}>{knapp.tekst}</Knapp>
-                                            )) : null}
                                         </div>
                                     )) : null}
                                 </Informasjonspanel>

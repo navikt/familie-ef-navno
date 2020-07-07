@@ -17,20 +17,21 @@ interface Props {
 const serializers = {
     marks: {
         internalLink: (props: any) => {
+            console.log("ref", props.mark?.reference?._ref)
+
             return <Link
-                to={props.mark.reference._ref}
+                to={props.mark?.reference?._ref}
                 spy={true}
                 smooth={true}
-                className="lenke"
             >
                 {props.children}
             </Link>
         },
-        link: ({ mark }: { mark: any }, { children }: { children: any }) => {
-            const { blank, href } = mark
-            console.log("hei")
+        link: (props: any) => {
+            const { blank, href } = props.mark;
             return blank ?
-                <Lenke href={href}>{children}</Lenke> : null
+                <a href={href} target="_blank" rel="noopener">{props.children}</a>
+                : <a href={href}>{props.children}</a>;
 
         }
     }
@@ -38,13 +39,15 @@ const serializers = {
 
 export const Alert: React.FC<Props> = ({ alertstripe }) => {
     if (alertstripe?.alertstripe_aktiv) {
-        console.log(alertstripe)
+        console.log("alert", alertstripe)
         return (
             <AlertStripe
                 type={alertstripe.alertstripe_info ? "info" : "advarsel"}
-                className={alertstripe.alertstripe_ikon ? "" : "alertstripe-utenIkon"}>
-                <BlockContent 
-                blocks={alertstripe.alertstripe_innhold}
+                className={alertstripe.alertstripe_ikon ? "alertstripe" : "alertstripe alertstripe-utenIkon"}
+            >
+                <BlockContent
+                    blocks={alertstripe.alertstripe_innhold}
+                    serializers={serializers}
                 />
             </AlertStripe>
         );

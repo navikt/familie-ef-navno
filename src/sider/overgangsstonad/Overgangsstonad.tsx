@@ -10,13 +10,15 @@ import checkboxData from '../../utils/checkboxData';
 import { Link } from "react-scroll";
 import Lenke from 'nav-frontend-lenker';
 import { Alert } from '../../components/Alert';
+import { useHistory } from 'react-router-dom';
 const PortableText = require('@sanity/block-content-to-react');
 
-export const serializers = {
+const serializers = {
     marks: {
         internalLink: (props: any) => {
+            console.log("ref", props.mark?.reference?._ref)
             return <Link
-                to={props.mark.reference._ref}
+                to={props.mark?.reference?._ref}
                 spy={true}
                 smooth={true}
                 className="lenke"
@@ -24,18 +26,22 @@ export const serializers = {
                 {props.children}
             </Link>
         },
-        link: ({ mark }: { mark: any }, { children }: { children: any }) => {
-            const { blank, href } = mark
+        link: (props: any) => {
+            const { blank, href } = props.mark;
             return blank ?
-                <Lenke href={href}>{children}</Lenke> : null
+                <a href={href} target="_blank" rel="noopener" >{props.children}</a>
+                : <a href={href}>{props.children}</a>;
 
         }
     }
 }
 
+
+
 function Overgangsstonad() {
     const [side, setSide] = useState<any>({});
-    
+    const history = useHistory();
+
     useEffect(() => {
         client
             .fetch(hentSideQuery, { type: 'side', side_id: 1 })
@@ -76,7 +82,7 @@ function Overgangsstonad() {
                 <div className="banner">
                     <h1>Overgangsstønad for enslig mor og far</h1>
                 </div>
-                <p className="breadcrumb">Link/link</p>
+                <p className="breadcrumb"><a>Forside</a> / <a>Alene med barn </a></p>
                 <div className="overgangsstonad">
                     <div className="sideinfo">
                         <div className="sticky">
@@ -85,29 +91,14 @@ function Overgangsstonad() {
                         </div>
                     </div>
                     <div className="hovedinfo">
-                        <div className="sideAlertStripe typo-normal" id='alertstripe'>
+                        <div className="sideAlertStripe" id='alertstripe'>
                             <Alert alertstripe={side.alertstripe} />
                         </div>
                         {side?.artikler?.map((a: any) => (
-                            <Informasjonspanel tittel={a.tittel_i_panel} bilde={a.bilde} alttekst={a.alttekst} id={a._id}>
-                                {a?.avsnitt !== undefined ? a?.avsnitt.map((avsnitt: any) => (
-                                    <div className="typo-normal">
-                                        <BlockContent
-                                            blocks={avsnitt.avsnitt_innhold}
-                                            serializers={serializers}
-                                        />
-                                    </div>
-                                )) : null}
-                            </Informasjonspanel>
+                            <Informasjonspanel tittel={a.tittel_i_panel} bilde={a.bilde} alttekst={a.alttekst} id={a._id} avsnitt={a?.avsnitt} knapp={a?.knapp} />
                         ))}
                     </div>
                 </div>
-                <Link
-                    to="alertstripe"
-                    spy={true}
-                    smooth={true}
-                >Test</Link>
-                <Knapp>Test</Knapp>
             </div>
         );
     }
