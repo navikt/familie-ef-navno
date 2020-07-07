@@ -30,7 +30,8 @@ export const hentSideQuery = `*[_type == 'side' && side_id == 1][0]{
       ...,
       _type == "internalLink" => {
         "slug": @.reference->slug
-      }
+      },
+     
     }
   }
 }}}`;
