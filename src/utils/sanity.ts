@@ -1,3 +1,7 @@
+import React from 'react';
+import { Link } from 'react-scroll';
+import Lenke from 'nav-frontend-lenker';
+
 const sanityClient = require('@sanity/client');
 
 export const client = sanityClient({
@@ -8,7 +12,30 @@ export const client = sanityClient({
 
 export const hentAvsnittQuery = '*[_type == $type][0]';
 
-export const hentSideQuery = `*[_type == $type && side_id == $side_id][0]{
+export const hentSideQuery = `*[_type == 'side' && side_id == 1][0]{
+    hovedtittel, 
+    side_id, 
+    alertstripe,
+    artikler[]->{
+    artikkel_id,
+    tittel_i_panel,
+    "bilde": ikon.asset->url,
+    "alttekst": ikon.alttekst,
+    _id,
+    avsnitt[]->{
+	...,
+  body[]{
+    ...,
+    markDefs[]{
+      ...,
+      _type == "internalLink" => {
+        "slug": @.reference->slug
+      }
+    }
+  }
+}}}`;
+
+export const gammelHentSideQuery = `*[_type == $type && side_id == $side_id][0]{
     hovedtittel, 
     side_id, 
     artikler[]->{

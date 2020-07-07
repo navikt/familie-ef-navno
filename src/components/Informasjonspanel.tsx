@@ -6,11 +6,12 @@ interface Props {
     tittel: string,
     bilde?: string,
     alttekst?: string, 
+    id?: string,
 }
 
 const Informasjonspanel: React.FC<Props> = (props) => {
     return (
-        <Panel className="informasjonspanel">
+        <Panel className="informasjonspanel" id={props.id}>
             <div className="informasjonspanel-ikon">
                 <img src={props.bilde} alt={props.alttekst}/>
             </div>
