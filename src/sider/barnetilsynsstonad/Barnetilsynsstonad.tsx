@@ -84,6 +84,7 @@ const Barnetilsynstonad = () => {
                         <div className="sticky">
                             <Tilpasningsboks 
                             filterStatus={filter}
+                            checkboxData={relevantCheckboxData}
                             >
                             <Filtreringsboks 
                                     checkboxData={relevantCheckboxData}
