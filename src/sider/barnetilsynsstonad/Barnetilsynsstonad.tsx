@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { client, hentSideQuery } from '../../utils/sanity';
 import { Helmet } from 'react-helmet';
 import Temameny from '../../components/Temameny';
-import { Sidetittel } from 'nav-frontend-typografi';
+import { Sidetittel, Normaltekst } from 'nav-frontend-typografi';
 import Informasjonspanel from '../../components/Informasjonspanel';
 import Filtreringsboks from '../../components/Filtreringsboks';
 import NavFrontendSpinner from 'nav-frontend-spinner';
@@ -78,18 +78,16 @@ const Barnetilsynstonad = () => {
                 <Helmet>
                     <title>Barnetilsynsstønad</title>
                 </Helmet>
-                <Sidetittel>
-                    Stønad til barnetilsyn for enslig mor eller far i arbeid
-                </Sidetittel>
                 <p className="breadcrumb">Link/link</p>
                 <div className="overgangsstonad">
                     <div className="sideinfo">
                         <div className="sticky">
-                            <Tilpasningsboks />
+                            <Tilpasningsboks >
                             <Filtreringsboks 
-                            checkboxData={relevantCheckboxData}
-                            handleChange={handleCheckboxChange}
-                            />
+                                    checkboxData={relevantCheckboxData}
+                                    handleChange={handleCheckboxChange}
+                                />
+                            </Tilpasningsboks>
                             <Temameny 
                                 temaer={side.artikler.map((artikkel:any) => artikkel.tittel_i_panel)}
                                 scrollTil={scrollTilArtikkel}
@@ -102,6 +100,9 @@ const Barnetilsynstonad = () => {
                                 Vi opplever stor pågang! Innsendingen kan ta noe lengre tid.
                             </AlertStripeAdvarsel>
                         </div>
+                        <Sidetittel>
+                            Stønad til barnetilsyn for enslig mor eller far i arbeid
+                        </Sidetittel>
                         {side?.artikler?.map((artikkel: any, index: number) => (
                             <div ref={ (el: any) => artikkelRef.current[index] = el} key={index}>
                                 <Informasjonspanel tittel={artikkel.tittel_i_panel} >
