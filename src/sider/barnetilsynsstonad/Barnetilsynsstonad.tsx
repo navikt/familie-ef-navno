@@ -11,9 +11,38 @@ import Tilpasningsboks from '../../components/Tilpasningsboks';
 import { Knapp } from 'nav-frontend-knapper';
 import { useHistory } from 'react-router-dom';
 
+
 import  checkboxData from '../../utils/checkboxData';
+import { Link } from 'react-scroll';
 
 const BlockContent = require('@sanity/block-content-to-react');
+
+const serializers = {
+    types: {
+        tallreferanse: (props: any) => {
+            return null;
+        }
+    },
+    marks: {
+        internalLink: (props: any) => {
+            return <Link
+                to={props.mark?.reference?._ref}
+                spy={true}
+                smooth={true}
+                className="lenke"
+            >
+                {props.children}
+            </Link>
+        },
+        link: (props: any) => {
+            const { blank, href } = props.mark;
+            return blank ?
+                <a href={href} target="_blank" rel="noopener noreferrer" >{props.children}</a>
+                : <a href={href}>{props.children}</a>;
+
+        }
+    }
+}
 
 const Barnetilsynstonad = () => {
     const [side, setSide] = useState<any>({});
@@ -110,11 +139,8 @@ const Barnetilsynstonad = () => {
                                             <div className="typo-normal" key={index}>
                                                 <BlockContent
                                                 blocks={avsnitt.avsnitt_innhold}
-                                                serializers={{ types: { block: BlockRenderer } }}
+                                                serializers={serializers}
                                                 />
-                                                {avsnitt.knapp !== undefined ? avsnitt.knapp.map((knapp: any) => (
-                                                    <Knapp onClick={() => history.push(knapp.lenke)}>{knapp.tekst}</Knapp>
-                                                )) : null}
                                             </div> 
                                         : null
                                     )) : null}

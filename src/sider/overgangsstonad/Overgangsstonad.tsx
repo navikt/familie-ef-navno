@@ -1,19 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { client, hentSideQuery, BlockContent } from '../../utils/sanity';
+import { client, hentSideQuery } from '../../utils/sanity';
 import Informasjonspanel from '../../components/Informasjonspanel';
 import Tilpasningsboks from '../../components/Tilpasningsboks';
 import { Helmet } from 'react-helmet';
-import { Knapp } from 'nav-frontend-knapper';
-import { useHistory } from 'react-router-dom';
-import Temameny from '../../components/Temameny';
-import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
 import Filtreringsboks from '../../components/Filtreringsboks';
-
-import  checkboxData from '../../utils/checkboxData';
+import checkboxData from '../../utils/checkboxData';
+import { Alert } from '../../components/Alert';
 
 function Overgangsstonad() {
     const [side, setSide] = useState<any>({});
-    const history = useHistory();
+
     useEffect(() => {
         client
             .fetch(hentSideQuery, { type: 'side', side_id: 1 })
@@ -22,26 +18,6 @@ function Overgangsstonad() {
                 console.log("test", res);
             })
     }, []);
-
-    const BlockRenderer = (props: any) => {
-        const { style = 'normal' } = props.node;
-
-        if (/^h\d/.test(style)) {
-            const level = style.replace(/[^\d]/g, '');
-            return React.createElement(
-                style,
-                { className: `heading-${level}` },
-                props.children
-            );
-        }
-
-        if (style === 'blockquote') {
-            return <blockquote>- {props.children}</blockquote>;
-        }
-
-        // Fall back to default handling
-        return BlockContent.defaultSerializers.types.block(props);
-    };
 
     if (side.artikler !== undefined) {
         return (
@@ -53,7 +29,7 @@ function Overgangsstonad() {
                 <div className="banner">
                     <h1>Overgangsstønad for enslig mor og far</h1>
                 </div>
-                <p className="breadcrumb">Link/link</p>
+                <p className="breadcrumb"><a href="#">Forside</a> / <a href="#">Alene med barn </a></p>
                 <div className="overgangsstonad">
                     <div className="sideinfo">
                         <div className="sticky">
@@ -61,23 +37,18 @@ function Overgangsstonad() {
                         </div>
                     </div>
                     <div className="hovedinfo">
-                        <div className="sideAlertStripe">
-                            <AlertStripeAdvarsel>Vi opplever stor pågang! Innsendingen kan ta noe lengre tid.</AlertStripeAdvarsel>
+                        <div className="sideAlertStripe" id='alertstripe'>
+                            <Alert alertstripe={side.alertstripe} />
                         </div>
                         {side?.artikler?.map((a: any) => (
-                            <Informasjonspanel tittel={a.tittel_i_panel} bilde={a.bilde} alttekst={a.alttekst}>
-                                {a?.avsnitt !== undefined ? a?.avsnitt.map((avsnitt: any) => (
-                                    <div className="typo-normal">
-                                        <BlockContent
-                                            blocks={avsnitt.avsnitt_innhold}
-                                            serializers={{ types: { block: BlockRenderer } }}
-                                        />
-                                        {avsnitt.knapp !== undefined ? avsnitt.knapp.map((knapp: any) => (
-                                            <Knapp onClick={() => history.push(knapp.lenke)}>{knapp.tekst}</Knapp>
-                                        )) : null}
-                                    </div>
-                                )) : null}
-                            </Informasjonspanel>
+                            <Informasjonspanel
+                                key={a._id}
+                                tittel={a.tittel_i_panel}
+                                bilde={a.bilde}
+                                alttekst={a.alttekst}
+                                id={a._id}
+                                avsnitt={a?.avsnitt}
+                            />
                         ))}
                     </div>
                 </div>

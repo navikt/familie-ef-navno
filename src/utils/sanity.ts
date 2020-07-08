@@ -11,6 +11,30 @@ export const hentAvsnittQuery = '*[_type == $type][0]';
 export const hentSideQuery = `*[_type == $type && side_id == $side_id][0]{
     hovedtittel, 
     side_id, 
+    alertstripe,
+    artikler[]->{
+    artikkel_id,
+    tittel_i_panel,
+    "bilde": ikon.asset->url,
+    "alttekst": ikon.alttekst,
+    _id,
+    avsnitt[]->{
+	...,
+  body[]{
+    ...,
+    markDefs[]{
+      ...,
+      _type == "internalLink" => {
+        "slug": @.reference->slug
+      },
+     
+    }
+  }
+}}}`;
+
+export const gammelHentSideQuery = `*[_type == $type && side_id == $side_id][0]{
+    hovedtittel, 
+    side_id, 
     artikler[]->{
     artikkel_id,
     tittel_i_panel,
