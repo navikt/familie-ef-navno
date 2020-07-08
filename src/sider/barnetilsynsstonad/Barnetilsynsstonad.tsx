@@ -39,8 +39,8 @@ const Barnetilsynstonad = () => {
         setTimeout(() => scrollTilRef(artikkelRef.current[int]), 120);
       };
               
-    const handleCheckboxChange = (int: number) => {
-        setFilter(filter.map((filter, index) => index === int ? !filter : filter));
+    const handleFilterChange = (filterStatus: boolean[]) => {
+        setFilter(filterStatus);
     };
     
     const BlockRenderer = (props: any) => {
@@ -85,13 +85,8 @@ const Barnetilsynstonad = () => {
                             <Tilpasningsboks 
                             filterStatus={filter}
                             checkboxData={relevantCheckboxData}
-                            >
-                            <Filtreringsboks 
-                                    checkboxData={relevantCheckboxData}
-                                    handleChange={handleCheckboxChange}
-                                    filterStatus={filter}
-                                />
-                            </Tilpasningsboks>
+                            handleChange={handleFilterChange}
+                            />
                             <Temameny 
                                 temaer={side.artikler.map((artikkel:any) => artikkel.tittel_i_panel)}
                                 scrollTil={scrollTilArtikkel}
