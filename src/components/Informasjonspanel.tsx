@@ -14,6 +14,11 @@ interface Props {
 }
 
 const serializers = {
+    types: {
+        tallreferanse: (props: any) => {
+            return null;
+        }
+    },
     marks: {
         internalLink: (props: any) => {
             return <Link

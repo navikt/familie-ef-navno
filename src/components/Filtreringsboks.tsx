@@ -5,6 +5,8 @@ import { Checkbox, CheckboxGruppe } from 'nav-frontend-skjema';
 
 interface Props {
     checkboxData: any[];
+    handleChange: (int: number) => void ;
+    filterStatus: boolean[];
 }
 
 const Filtreringsboks: React.FC<Props> = props => {
@@ -13,7 +15,13 @@ const Filtreringsboks: React.FC<Props> = props => {
             {props.checkboxData.map((obj: any, index: number) => (
                 <CheckboxGruppe legend={obj.groupName} key={index}>
                     {obj.texts.map((text: any, index: number) => (
-                        <Checkbox label={text} key={index}></Checkbox>
+                        <Checkbox 
+                        label={text} 
+                        key={index}
+                        onChange={() => props.handleChange(index)}
+                        checked={props.filterStatus[index]}
+                        >
+                        </Checkbox>
                     ))}
                 </CheckboxGruppe>
             ))}
