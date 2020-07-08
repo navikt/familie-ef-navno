@@ -4,7 +4,6 @@ import Informasjonspanel from '../../components/Informasjonspanel';
 import Tilpasningsboks from '../../components/Tilpasningsboks';
 import { Helmet } from 'react-helmet';
 import Filtreringsboks from '../../components/Filtreringsboks';
-import checkboxData from '../../utils/checkboxData';
 import { Alert } from '../../components/Alert';
 
 function Overgangsstonad() {
