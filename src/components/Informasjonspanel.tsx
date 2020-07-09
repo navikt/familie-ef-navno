@@ -13,6 +13,7 @@ interface Props {
     alttekst?: string;
     id?: string;
     avsnitt?: any;
+    side?: number;
     filterCheck: (avsnitt: any) => boolean;
 }
 
@@ -80,7 +81,7 @@ const Informasjonspanel: React.FC<Props> = (props) => {
                             <Alert alertstripe={avsnitt.alertstripe} topp={false}/>
                             : null}
                         {avsnitt.kalkulator ?
-                            <KalkulatorBarnetilsyn />
+                        (props.side === 1 ? <KalkulatorOvergangsstonad /> : <KalkulatorBarnetilsyn />)
                             : null
                         }
                     </div>

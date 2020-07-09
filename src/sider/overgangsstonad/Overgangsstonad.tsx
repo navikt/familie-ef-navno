@@ -82,6 +82,7 @@ const Overgangsstonad = () => {
                                     bilde={artikkel.bilde}
                                     alttekst={artikkel.alttekst}
                                     id={artikkel._id}
+                                    side={1}
                                     avsnitt={artikkel?.avsnitt}
                                     filterCheck={filterCheck}
                                 />
