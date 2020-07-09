@@ -2,52 +2,15 @@ import React, { useEffect, useState, useRef } from 'react';
 import { client, hentSideQuery } from '../../utils/sanity';
 import { Helmet } from 'react-helmet';
 import Temameny from '../../components/Temameny';
-import { Sidetittel, Normaltekst } from 'nav-frontend-typografi';
 import Informasjonspanel from '../../components/Informasjonspanel';
-import Filtreringsboks from '../../components/Filtreringsboks';
-import NavFrontendSpinner from 'nav-frontend-spinner';
-import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
 import Tilpasningsboks from '../../components/Tilpasningsboks';
-import { Knapp } from 'nav-frontend-knapper';
-import { useHistory } from 'react-router-dom';
-
-
+import NavFrontendSpinner from 'nav-frontend-spinner';
 import  checkboxData from '../../utils/checkboxData';
-import { Link } from 'react-scroll';
-
-const BlockContent = require('@sanity/block-content-to-react');
-
-const serializers = {
-    types: {
-        tallreferanse: (props: any) => {
-            return null;
-        }
-    },
-    marks: {
-        internalLink: (props: any) => {
-            return <Link
-                to={props.mark?.reference?._ref}
-                spy={true}
-                smooth={true}
-                className="lenke"
-            >
-                {props.children}
-            </Link>
-        },
-        link: (props: any) => {
-            const { blank, href } = props.mark;
-            return blank ?
-                <a href={href} target="_blank" rel="noopener noreferrer" >{props.children}</a>
-                : <a href={href}>{props.children}</a>;
-
-        }
-    }
-}
+import { Alert } from '../../components/Alert';
 
 const Barnetilsynstonad = () => {
     const [side, setSide] = useState<any>({});
     const [filter, setFilter] = useState<boolean[]>([]);
-    const history = useHistory();
     const artikkelRef = useRef<any[]>([]);
     const relevantCheckboxData = checkboxData.barnetilsynsstonad;
     useEffect(() => {
@@ -55,7 +18,9 @@ const Barnetilsynstonad = () => {
             .fetch(hentSideQuery, { type: 'side' , side_id: 2})
             .then((res: any) => {
                 setSide(res);
-                setFilter(new Array(relevantCheckboxData[0].texts.length).fill(false));
+                setFilter(new Array(relevantCheckboxData.map((obj: any) => obj.texts.length)
+                .reduce((a: number, b: number) => a+b))
+                .fill(false));
             });
     }, []);
 
@@ -70,26 +35,6 @@ const Barnetilsynstonad = () => {
               
     const handleFilterChange = (filterStatus: boolean[]) => {
         setFilter(filterStatus);
-    };
-    
-    const BlockRenderer = (props: any) => {
-        const { style = 'normal' } = props.node;
-              
-        if (/^h\d/.test(style)) {
-            const level = style.replace(/[^\d]/g, '');
-            return React.createElement(
-                style,
-                { className: `heading-${level}` },
-                props.children
-            );
-        }
-              
-        if (style === 'blockquote') {
-            return <blockquote>- {props.children}</blockquote>;
-        }
-              
-        // Fall back to default handling
-        return BlockContent.defaultSerializers.types.block(props);
     };
 
     const filterCheck = (avsnitt :any) => {
@@ -107,44 +52,43 @@ const Barnetilsynstonad = () => {
                 <Helmet>
                     <title>Barnetilsynsstønad</title>
                 </Helmet>
-                <p className="breadcrumb">Link/link</p>
+                <div className="banner">
+                    <h1>Stønad til barnetilsyn for enslig mor eller far i arbeid</h1>
+                </div>
+                <p className="breadcrumb"><a href="#">Forside</a> / <a href="#">Alene med barn </a></p>
                 <div className="overgangsstonad">
                     <div className="sideinfo">
                         <div className="sticky">
-                            <Tilpasningsboks 
-                            filterStatus={filter}
-                            checkboxData={relevantCheckboxData}
-                            handleChange={handleFilterChange}
-                            />
+                            {relevantCheckboxData.length ? 
+                                <Tilpasningsboks 
+                                filterStatus={filter}
+                                checkboxData={relevantCheckboxData}
+                                handleChange={handleFilterChange}
+                                /> :
+                                null}
                             <Temameny 
-                                temaer={side.artikler.map((artikkel:any) => artikkel.tittel_i_panel)}
-                                scrollTil={scrollTilArtikkel}
+                            temaer={side.artikler.map((artikkel:any) => artikkel.tittel_i_panel)}
+                            scrollTil={scrollTilArtikkel}
                             />
                         </div>
                     </div>
                     <div className="hovedinfo">
-                        <div className="sideAlertStripe">
-                            <AlertStripeAdvarsel>
-                                Vi opplever stor pågang! Innsendingen kan ta noe lengre tid.
-                            </AlertStripeAdvarsel>
-                        </div>
-                        <Sidetittel>
-                            Stønad til barnetilsyn for enslig mor eller far i arbeid
-                        </Sidetittel>
+                        {side.alertstripe ? 
+                        <div className="sideAlertStripe" id='alertstripe'>
+                            <Alert alertstripe={side.alertstripe} />
+                        </div> :
+                        null}     
                         {side?.artikler?.map((artikkel: any, index: number) => (
-                            <div ref={ (el: any) => artikkelRef.current[index] = el} key={index}>
-                                <Informasjonspanel tittel={artikkel.tittel_i_panel} >
-                                    {artikkel?.avsnitt !== undefined ? artikkel?.avsnitt.map((avsnitt: any, index: number) => (
-                                        filterCheck(avsnitt) ?
-                                            <div className="typo-normal" key={index}>
-                                                <BlockContent
-                                                blocks={avsnitt.avsnitt_innhold}
-                                                serializers={serializers}
-                                                />
-                                            </div> 
-                                        : null
-                                    )) : null}
-                                </Informasjonspanel>
+                            <div ref={ (el: any) => artikkelRef.current[index] = el} key={artikkel._id}>
+                                <Informasjonspanel
+                                    key={artikkel._id}
+                                    tittel={artikkel.tittel_i_panel}
+                                    bilde={artikkel.bilde}
+                                    alttekst={artikkel.alttekst}
+                                    id={artikkel._id}
+                                    avsnitt={artikkel?.avsnitt}
+                                    filterCheck={filterCheck}
+                                />
                             </div>
                         ))}
                     </div>
@@ -153,7 +97,7 @@ const Barnetilsynstonad = () => {
         );
     }   
     return (
-        <NavFrontendSpinner></NavFrontendSpinner>
+        <NavFrontendSpinner />
     );
 }
 

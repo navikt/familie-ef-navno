@@ -14,14 +14,25 @@ interface Props {
 const Tilpasningsboks: React.FC<Props> = props => {
     const [showComponent, setShowComponents] = useState(false);
     const [filter, setFilter] = useState<boolean[]>([]);
+    const [texts, setTexts] = useState<string[]>([]);
+    const [accumulativeTextCount, setAccumulativeTextCount] = useState<number[]>([]);
     useEffect(() => {
-        setFilter(new Array(props.checkboxData[0].texts.length).fill(false))
+        if (props.checkboxData.length) {
+            setFilter(new Array(props.checkboxData.map((obj: any) => obj.texts.length)
+            .reduce((a: number, b: number) => a+b))
+            .fill(false));
+            setTexts(props.checkboxData.map((obj: any) => obj.texts).flat());
+            setAccumulativeTextCount([...[0],...props.checkboxData.map((obj: any) => obj.texts.length)
+            .map(cumulativeSum)]);
+        }
     }, []);
 
     const handleButtonClick = () => {
         props.handleChange(filter);
         setShowComponents(!showComponent);
     }
+
+    const cumulativeSum = (sum => (value: number) => sum += value)(0);
 
     const handleCheckboxChange = (int: number) => {
         setFilter(filter.map((filter, index) => index === int ? !filter : filter));
@@ -38,7 +49,8 @@ const Tilpasningsboks: React.FC<Props> = props => {
                 <Filtreringsboks
                 checkboxData={props.checkboxData}
                 filterStatus={filter}
-                handleChange={handleCheckboxChange} 
+                handleChange={handleCheckboxChange}
+                accumulativeCount={accumulativeTextCount} 
                 /> : 
                 !props.filterStatus.every( el => el === false) ?
                     <div>
@@ -46,18 +58,16 @@ const Tilpasningsboks: React.FC<Props> = props => {
                         <Normaltekst>
                             Viser informasjon for:
                         </Normaltekst>
-                        
-                        {props.checkboxData.reduce( (acc, val) => (
-                            acc.texts.concat(val.texts))).texts.map( (text: string, index: number) => (
-                                props.filterStatus[index] ?
-                                    <EtikettBase
-                                    mini 
-                                    type="info" 
-                                    key={index}>
-                                        {text}
-                                    </EtikettBase> :
-                                    null
-                            ))}
+                        {texts.map((text: string, index: number) => (
+                            props.filterStatus[index] ?
+                            <EtikettBase
+                            mini 
+                            type="info" 
+                            key={index}>
+                                {text}
+                            </EtikettBase> :
+                            null
+                        ))}
                     </div> :
                     null}
             <Knapp 
