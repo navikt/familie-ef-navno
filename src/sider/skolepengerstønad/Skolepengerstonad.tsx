@@ -51,7 +51,7 @@ const Barnetilsynstonad = () => {
                     <title>Skolepengerstønad</title>
                 </Helmet>
                 <div className="banner">
-                    <h1>Overgangsstønad for enslig mor og far</h1>
+                    <h1>Stønad til skolepenger for enslig mor eller far som tar utdanning</h1>
                 </div>
                 <p className="breadcrumb"><a href="#">Forside</a> / <a href="#">Alene med barn </a></p>
                 <div className="overgangsstonad">

@@ -45,10 +45,10 @@ const Barnetilsynstonad = () => {
         return (
             <div className="side">
                 <Helmet>
-                    <title>Barnetilsynsstønad</title>
+                    <title>tilleggsstønad</title>
                 </Helmet>
                 <div className="banner">
-                    <h1>Stønad til barnetilsyn for enslig mor eller far i arbeid</h1>
+                    <h1>Tilleggsstønader for enslig mor eller far som tar utdanning eller er arbeidssøker</h1>
                 </div>
                 <p className="breadcrumb"><a href="#">Forside</a> / <a href="#">Alene med barn </a></p>
                 <div className="overgangsstonad">
