@@ -6,12 +6,10 @@ interface Props {
     checkboxData: any[];
     handleChange: (int: number) => void ;
     filterStatus: boolean[];
+    accumulativeCount: number[]
 }
 
-
-
 const Filtreringsboks: React.FC<Props> = props => {
-    const [lengths, setLengths] = useState<number[]>([0]);
 
     return (
         <Panel >
@@ -21,8 +19,8 @@ const Filtreringsboks: React.FC<Props> = props => {
                         <Checkbox 
                         label={text} 
                         key={index2}
-                        onChange={() => props.handleChange(index2 + index1*4)}
-                        checked={props.filterStatus[index2 + index1*4]}
+                        onChange={() => props.handleChange(index2 + props.accumulativeCount[index1])}
+                        checked={props.filterStatus[index2 + props.accumulativeCount[index1]]}
                         >
                         </Checkbox>   
                     ))}
