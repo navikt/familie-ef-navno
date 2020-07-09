@@ -39,7 +39,7 @@ function Overgangsstonad() {
                     </div>
                     <div className="hovedinfo">
                         <div className="sideAlertStripe" id='alertstripe'>
-                            <Alert alertstripe={side.alertstripe} />
+                            <Alert alertstripe={side.alertstripe} topp={true}/>
                         </div>
                         {side?.artikler?.map((a: any) => (
                             <Informasjonspanel

@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { Children } from 'react';
 import Panel from 'nav-frontend-paneler';
-import { Innholdstittel } from 'nav-frontend-typografi';
+import { Innholdstittel, Systemtittel } from 'nav-frontend-typografi';
 import { Link } from 'react-scroll';
-import { BlockContent } from '../utils/sanity';
+import { BlockContent, hentTall, client } from '../utils/sanity';
 import { Alert } from './Alert';
+import KalkulatorOvergangsstonad from './KalkulatorOvergangsstonad';
+import KalkulatorBarnetilsyn from './KalkulatorBarnetilsyn';
 
 interface Props {
     tittel: string,
@@ -14,6 +16,12 @@ interface Props {
 }
 
 const serializers = {
+    types: {
+        tallreferanse: (props: any) => {
+            console.log(props)
+            return <p>Test</p>; 
+        }, 
+    },
     marks: {
         internalLink: (props: any) => {
             return <Link
@@ -31,8 +39,23 @@ const serializers = {
                 <a href={href} target="_blank" rel="noopener noreferrer" >{props.children}</a>
                 : <a href={href}>{props.children}</a>;
 
-        }
+        },
+        tallreferanse: (props: any) => {
+            const { reference } = props.mark;
+            console.log("props", reference)
+        return <p>{reference._ref}</p>;
+        },
     }
+}
+
+const hentTallTilTekst = (ref: any) => {
+    console.log("metode kjører")
+    client
+        .fetch(hentTall, { tall_id: ref })
+        .then((res: any) => {
+            console.log("REEEEES", res)
+            return res.tallverdi
+        })
 }
 
 const Informasjonspanel: React.FC<Props> = (props) => {
@@ -45,7 +68,7 @@ const Informasjonspanel: React.FC<Props> = (props) => {
             {props.avsnitt !== undefined ? props.avsnitt.map((a: any) => (
                 <div key={a._id}>
                     <BlockContent
-                        className="typo-normal"
+                        className="typo-normal block-styling"
                         blocks={a.avsnitt_innhold}
                         serializers={serializers}
                     />
@@ -53,8 +76,12 @@ const Informasjonspanel: React.FC<Props> = (props) => {
                         <a href={a.knapp.lenke} className="knapp lenkeknapp">{a.knapp.tekst}</a>
                         : null}
                     {a.alertstripe !== undefined ?
-                        <Alert alertstripe={a.alertstripe} />
+                        <Alert alertstripe={a.alertstripe} topp={false}/>
                         : null}
+                    {a.kalkulator ? 
+                        <KalkulatorBarnetilsyn />
+                        : null
+                    }
                 </div>
             )) : null}
             {props.children}
