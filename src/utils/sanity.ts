@@ -8,7 +8,7 @@ export const client = sanityClient({
 
 export const hentAvsnittQuery = '*[_type == $type][0]';
 
-export const hentSideQuery = `*[_type == 'side' && side_id == 1][0]{
+export const hentSideQuery = `*[_type == $type && side_id == $side_id][0]{
     hovedtittel, 
     side_id, 
     alertstripe,

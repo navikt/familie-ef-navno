@@ -8,19 +8,19 @@ import KalkulatorOvergangsstonad from './KalkulatorOvergangsstonad';
 import KalkulatorBarnetilsyn from './KalkulatorBarnetilsyn';
 
 interface Props {
-    tittel: string,
-    bilde?: string,
-    alttekst?: string,
-    id?: string,
-    avsnitt?: any,
+    tittel: string;
+    bilde?: string;
+    alttekst?: string;
+    id?: string;
+    avsnitt?: any;
+    filterCheck: (avsnitt: any) => boolean;
 }
 
 const serializers = {
     types: {
         tallreferanse: (props: any) => {
-            console.log(props)
-            return <p>Test</p>; 
-        }, 
+            return null;
+        }
     },
     marks: {
         internalLink: (props: any) => {
@@ -43,7 +43,7 @@ const serializers = {
         tallreferanse: (props: any) => {
             const { reference } = props.mark;
             console.log("props", reference)
-        return <p>{reference._ref}</p>;
+            return <p>{reference._ref}</p>;
         },
     }
 }
@@ -65,24 +65,26 @@ const Informasjonspanel: React.FC<Props> = (props) => {
                 <img src={props.bilde} alt={props.alttekst} />
             </div>
             <Innholdstittel className="center-text" >{props.tittel}</Innholdstittel>
-            {props.avsnitt !== undefined ? props.avsnitt.map((a: any) => (
-                <div key={a._id}>
-                    <BlockContent
-                        className="typo-normal block-styling"
-                        blocks={a.avsnitt_innhold}
-                        serializers={serializers}
-                    />
-                    {a.knapp?.tekst !== undefined ?
-                        <a href={a.knapp.lenke} className="knapp lenkeknapp">{a.knapp.tekst}</a>
-                        : null}
-                    {a.alertstripe !== undefined ?
-                        <Alert alertstripe={a.alertstripe} topp={false}/>
-                        : null}
-                    {a.kalkulator ? 
-                        <KalkulatorBarnetilsyn />
-                        : null
-                    }
-                </div>
+            {props.avsnitt !== undefined ? props.avsnitt.map((avsnitt: any) => (
+                props.filterCheck(avsnitt) ?
+                    <div key={avsnitt._id}>
+                        <BlockContent
+                            className="typo-normal"
+                            blocks={avsnitt.avsnitt_innhold}
+                            serializers={serializers}
+                        />
+                        {avsnitt.knapp?.tekst !== undefined ?
+                            <a href={avsnitt.knapp.lenke} className="knapp lenkeknapp">{avsnitt.knapp.tekst}</a>
+                            : null}
+                        {avsnitt.alertstripe !== undefined ?
+                            <Alert alertstripe={avsnitt.alertstripe} topp={false}/>
+                            : null}
+                        {avsnitt.kalkulator ?
+                            <KalkulatorBarnetilsyn />
+                            : null
+                        }
+                    </div>
+                    : null
             )) : null}
             {props.children}
         </Panel>

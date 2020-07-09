@@ -22,7 +22,10 @@ const checkboxData = {
                 groupName: 'Hva er situasjonen din?',
                 texts: ['Jeg tar utdanning', 'Jeg er arbeidssøker']
             },
-        ]
+        ],
+    skolepengerstønad: [
+
+        ],
 }
 
 export default checkboxData; 
