@@ -7,7 +7,6 @@ import Tilpasningsboks from '../../components/Tilpasningsboks';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import  checkboxData from '../../utils/checkboxData';
 import { Alert } from '../../components/Alert';
-import { checkPropTypes } from 'prop-types';
 
 const Barnetilsynstonad = () => {
     const [side, setSide] = useState<any>({});

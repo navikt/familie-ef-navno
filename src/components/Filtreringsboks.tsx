@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Panel from 'nav-frontend-paneler';
 import { Checkbox, CheckboxGruppe } from 'nav-frontend-skjema';
 
