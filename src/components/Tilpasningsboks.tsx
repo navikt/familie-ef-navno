@@ -15,7 +15,11 @@ const Tilpasningsboks: React.FC<Props> = props => {
     const [showComponent, setShowComponents] = useState(false);
     const [filter, setFilter] = useState<boolean[]>([]);
     useEffect(() => {
-        setFilter(new Array(props.checkboxData[0].texts.length).fill(false))
+        if (props.checkboxData.length) {
+            setFilter(new Array(props.checkboxData.map((obj: any) => obj.texts.length)
+            .reduce((a: number, b: number) => a+b))
+            .fill(false));
+        }
     }, []);
 
     const handleButtonClick = () => {
