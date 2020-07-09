@@ -69,8 +69,8 @@ const KalkulatorBarnetilsyn = () => {
         <div className="kalkulator">
             <Select label="Antall barn du har utgifter til barnepass for" bredde="s" className="input-select">
                 <option value="">Velg</option>
-                {options.map(o => (
-                    <option value={o.value} onChange={event => handleChange(event)}>{o.name}</option>
+                {options.map((o: any, index: number) => (
+                    <option value={o.value} onChange={event => handleChange(event)} key={index}>{o.name}</option>
                 ))}
             </Select>
             <div className="input-med-label">

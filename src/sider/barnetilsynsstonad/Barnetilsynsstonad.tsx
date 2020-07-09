@@ -13,9 +13,10 @@ const Barnetilsynstonad = () => {
     const [filter, setFilter] = useState<boolean[]>([]);
     const artikkelRef = useRef<any[]>([]);
     const relevantCheckboxData = checkboxData.barnetilsynsstonad;
+    const sideID = 2;
     useEffect(() => {
         client
-            .fetch(hentSideQuery, { type: 'side' , side_id: 2})
+            .fetch(hentSideQuery, { type: 'side' , side_id: sideID})
             .then((res: any) => {
                 setSide(res);
                 setFilter(new Array(relevantCheckboxData.map((obj: any) => obj.texts.length)
@@ -36,15 +37,6 @@ const Barnetilsynstonad = () => {
     const handleFilterChange = (filterStatus: boolean[]) => {
         setFilter(filterStatus);
     };
-
-    const filterCheck = (avsnitt :any) => {
-        if (avsnitt.filtrer_blir_staende) return true;
-        if (filter.every( el => el === false )) return true;
-        if (avsnitt.filtrer_i_arbeid && filter[0]) return true;
-        if (avsnitt.filtrer_egen_virksomhet && filter[1]) return true;
-        if (avsnitt.filtrer_sykdom && filter[2]) return true;
-        return false;
-    }
 
     if (side.artikler !== undefined) {
         return (
@@ -87,7 +79,8 @@ const Barnetilsynstonad = () => {
                                     alttekst={artikkel.alttekst}
                                     id={artikkel._id}
                                     avsnitt={artikkel?.avsnitt}
-                                    filterCheck={filterCheck}
+                                    filterStatus={filter}
+                                    sideID={sideID}
                                 />
                             </div>
                         ))}

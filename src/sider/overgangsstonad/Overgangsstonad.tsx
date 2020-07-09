@@ -13,9 +13,10 @@ const Overgangsstonad = () => {
     const [filter, setFilter] = useState<boolean[]>([]);
     const artikkelRef = useRef<any[]>([]);
     const relevantCheckboxData = checkboxData.overgangsstonad;
+    const sideID = 1;
     useEffect(() => {
         client
-            .fetch(hentSideQuery, { type: 'side', side_id: 1 })
+            .fetch(hentSideQuery, { type: 'side', side_id: sideID })
             .then((res: any) => {
                 setSide(res);
                 setFilter(new Array(relevantCheckboxData.map((obj: any) => obj.texts.length)
@@ -37,14 +38,9 @@ const Overgangsstonad = () => {
         setFilter(filterStatus);
     };
 
-    const filterCheck = (avsnitt :any) => {
-        return true;
-    }
-
     if (side.artikler !== undefined) {
         return (
             <div className="side">
-                {console.log(filter)}
                 <Helmet>
                     <title>Overgangsstønad</title>
                 </Helmet>
@@ -82,9 +78,10 @@ const Overgangsstonad = () => {
                                     bilde={artikkel.bilde}
                                     alttekst={artikkel.alttekst}
                                     id={artikkel._id}
-                                    side={1}
+                                    side={sideID}
                                     avsnitt={artikkel?.avsnitt}
-                                    filterCheck={filterCheck}
+                                    filterStatus={filter}
+                                    sideID={sideID}
                                 />
                             </div>
                         ))}

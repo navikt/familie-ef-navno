@@ -14,12 +14,13 @@ interface Props {
     id?: string;
     avsnitt?: any;
     side?: number;
-    filterCheck: (avsnitt: any) => boolean;
+    filterStatus: boolean[];
+    sideID: number;
 }
 
 const serializers = {
     types: {
-        tallreferanse: (props: any) => {
+        tallreferanse: () => {
             return null;
         }
     },
@@ -43,31 +44,50 @@ const serializers = {
         },
         tallreferanse: (props: any) => {
             const { reference } = props.mark;
-            console.log("props", reference)
             return <p>{reference._ref}</p>;
         },
     }
 }
 
-const hentTallTilTekst = (ref: any) => {
-    console.log("metode kjører")
-    client
-        .fetch(hentTall, { tall_id: ref })
-        .then((res: any) => {
-            console.log("REEEEES", res)
-            return res.tallverdi
-        })
-}
-
 const Informasjonspanel: React.FC<Props> = (props) => {
+
+    const filterCheck = (avsnitt :any) => {
+        console.log(avsnitt);
+        if (avsnitt.filtrer_blir_staende) return true; 
+        if (props.filterStatus.every( el => el === false )) return true;
+        if (props.sideID === 1) {
+            if (avsnitt.filtrer_gravid && props.filterStatus[0]) return true;
+            if (avsnitt.filtrer_under_1 && props.filterStatus[1]) return true;
+            if (avsnitt.filtrer_1_til_8 && props.filterStatus[2]) return true;
+            if (avsnitt.filtrer_over_8 && props.filterStatus[3]) return true;
+            if (avsnitt.filtrer_i_arbeid && props.filterStatus[4]) return true;
+            if (avsnitt.filtrer_utdanning && props.filterStatus[5]) return true;
+            if (avsnitt.filtrer_arbeidssoker && props.filterStatus[6]) return true;
+            if (avsnitt.filtrer_egen_virksomhet && props.filterStatus[7]) return true;
+            if (avsnitt.filtrer_sykdom && props.filterStatus[8]) return true;
+            if (avsnitt.filtrer_tilsyn && props.filterStatus[9]) return true;
+            if (avsnitt.filtrer_barnepass && props.filterStatus[10]) return true;
+        }
+        if (props.sideID === 2) {
+            if (avsnitt.filtrer_i_arbeid && props.filterStatus[0]) return true;
+            if (avsnitt.filtrer_egen_virksomhet && props.filterStatus[1]) return true;
+            if (avsnitt.filtrer_sykdom && props.filterStatus[2]) return true;
+        }
+        if (props.sideID === 4) {
+            if (avsnitt.filtrer_utdanning && props.filterStatus[0]) return true;
+            if (avsnitt.filtrer_arbeidssoker && props.filterStatus[1]) return true;
+        }
+        return false;
+    }
+    
     return (
         <Panel className="informasjonspanel" id={props.id}>
             <div className="informasjonspanel-ikon">
                 <img src={props.bilde} alt={props.alttekst} />
             </div>
             <Innholdstittel className="center-text" >{props.tittel}</Innholdstittel>
-            {props.avsnitt !== undefined ? props.avsnitt.map((avsnitt: any) => (
-                props.filterCheck(avsnitt) ?
+            {props.avsnitt !== undefined ? props.avsnitt.map((avsnitt: any, index: number) => (
+                filterCheck(avsnitt) ?
                     <div key={avsnitt._id}>
                         <BlockContent
                             className="typo-normal"
@@ -81,7 +101,7 @@ const Informasjonspanel: React.FC<Props> = (props) => {
                             <Alert alertstripe={avsnitt.alertstripe} topp={false}/>
                             : null}
                         {avsnitt.kalkulator ?
-                        (props.side === 1 ? <KalkulatorOvergangsstonad /> : <KalkulatorBarnetilsyn />)
+                        (props.side === 1 ? <KalkulatorOvergangsstonad key={avsnitt._id + index}/> : <KalkulatorBarnetilsyn key={avsnitt._id + index} />)
                             : null
                         }
                     </div>
