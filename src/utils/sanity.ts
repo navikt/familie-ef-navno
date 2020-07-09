@@ -20,16 +20,7 @@ export const hentSideQuery = `*[_type == $type && side_id == $side_id][0]{
     _id,
     avsnitt[]->{
 	...,
-  body[]{
-    ...,
-    markDefs[]{
-      ...,
-      _type == "internalLink" => {
-        "slug": @.reference->slug
-      },
-     
-    }
-  }
+  
 }}}`;
 
 export const gammelHentSideQuery = `*[_type == $type && side_id == $side_id][0]{
@@ -56,5 +47,7 @@ export const gammelHentSideQuery = `*[_type == $type && side_id == $side_id][0]{
     knapp[]->
     }
 }}`;
+
+export const hentTall = `*[_type == 'tall' && _id==$tall_id]`
 
 export const BlockContent = require('@sanity/block-content-to-react');

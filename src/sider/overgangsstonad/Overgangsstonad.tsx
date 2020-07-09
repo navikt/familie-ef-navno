@@ -71,7 +71,7 @@ const Overgangsstonad = () => {
                     <div className="hovedinfo">
                     {side.alertstripe ? 
                         <div className="sideAlertStripe" id='alertstripe'>
-                            <Alert alertstripe={side.alertstripe} />
+                            <Alert alertstripe={side.alertstripe} topp={true}/>
                         </div> :
                         null}
                         {side?.artikler?.map((artikkel: any, index: number) => (
@@ -82,6 +82,7 @@ const Overgangsstonad = () => {
                                     bilde={artikkel.bilde}
                                     alttekst={artikkel.alttekst}
                                     id={artikkel._id}
+                                    side={1}
                                     avsnitt={artikkel?.avsnitt}
                                     filterCheck={filterCheck}
                                 />

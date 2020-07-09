@@ -70,7 +70,7 @@ const Barnetilsynstonad = () => {
                     <div className="hovedinfo">
                         {side.alertstripe ? 
                         <div className="sideAlertStripe" id='alertstripe'>
-                            <Alert alertstripe={side.alertstripe} />
+                            <Alert alertstripe={side.alertstripe} topp={true}/>
                         </div> :
                         null}     
                         {side?.artikler?.map((artikkel: any, index: number) => (

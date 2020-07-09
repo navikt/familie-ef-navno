@@ -11,6 +11,7 @@ interface Props {
         alertstripe_ikon?: boolean,
         alertstripe_innhold?: any,
     }
+    topp: boolean, 
 }
 
 const serializers = {
@@ -34,12 +35,13 @@ const serializers = {
     }
 }
 
-export const Alert: React.FC<Props> = ({ alertstripe }) => {
+export const Alert: React.FC<Props> = ({ topp, alertstripe }) => {
+    const style = (alertstripe?.alertstripe_ikon) ? (topp ? "alertstripe" : "alertstripe alertstripe-avsnitt") : (topp ? "alertstripe alertstripe-utenIkon" : "alertstripe alertstripe-avsnitt alertstripe-utenIkon")
     if (alertstripe?.alertstripe_aktiv) {
         return (
             <AlertStripe
                 type={alertstripe.alertstripe_info ? "info" : "advarsel"}
-                className={alertstripe.alertstripe_ikon ? "alertstripe" : "alertstripe alertstripe-utenIkon"}
+                className={style}
             >
                 <BlockContent
                     blocks={alertstripe.alertstripe_innhold}
