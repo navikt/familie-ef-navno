@@ -28,6 +28,7 @@ const KalkulatorBarnetilsyn = () => {
     const [visResultat, setVisResultat] = useState<boolean>(false);
 
     const beregn = () => {
+        console.log(utgifterBarnepass)
         if (utgifterBarnepass && antBarn) {
             setFeil(false);
             setFeilAntBarn(false);
@@ -44,10 +45,19 @@ const KalkulatorBarnetilsyn = () => {
             else {
                 setSum(stotte);
             }
+            console.log("hei")
             setVisResultat(true);
             return;
         }
+
+        if(utgifterBarnepass === 0){
+            setSum(0);
+            setVisResultat(true);
+            return;
+        }
+
         !utgifterBarnepass ? setFeil("Fyll inn utgifter for barnepass") : setFeil(false);
+        utgifterBarnepass === 0 ? setSum(0) : 
         !antBarn ? setFeilAntBarn("Velg antall barn") : setFeilAntBarn(false);
         setVisResultat(false);
     };
