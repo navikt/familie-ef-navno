@@ -21,6 +21,7 @@
     text-align: center;
     border-bottom: 4px solid #826ba1;   
     line-height: 68px;
+    width: 100vw;
 }
 
 .banner h1{
@@ -35,6 +36,9 @@
 .breadcrumb{
     max-width: 846px;
     margin: 18px auto 16px auto;
+}
+
+.breadcrumb-link{
     color: @navBla; 
     font-size: 16px;
     line-height: 137%;
@@ -106,14 +110,20 @@
 }
 
 @media screen and (max-width: 850px) {
+    .sideinnhold{
+        display: block;
+    }
+
     .sideinfo {
         display: none;
     }
     .breadcrumb {
-        display: none;
+        width: 95%;
+        margin: auto;
     }
     .hovedinfo {
-        width: 95%;
+        width: 100vw;
+        margin: 0;
     }
 }
 

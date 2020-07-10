@@ -15,7 +15,7 @@ const Barnetilsynstonad = () => {
     const sideID = 2;
     useEffect(() => {
         client
-            .fetch(hentSideQuery, { type: 'side' , side_id: sideID})
+            .fetch(hentSideQuery, { type: 'side', side_id: sideID })
             .then((res: any) => {
                 setSide(res);
                 setFilter(new Array(relevantCheckboxData.map((obj: any) => obj.texts.length)
@@ -38,7 +38,11 @@ const Barnetilsynstonad = () => {
                 <div className="banner">
                     <h1>Stønad til barnetilsyn for enslig mor eller far i arbeid</h1>
                 </div>
-                <p className="breadcrumb"><a href="https://www.nav.no/no/person">Forside</a> / <a href="https://www.nav.no/no/person/familie/enslig-mor-eller-far">Alene med barn </a></p>
+                <div className="breadcrumb">
+                    <p className="breadcrumb-link">
+                        <a href="https://www.nav.no/no/person">Forside</a>  /  <a href="https://www.nav.no/no/person/familie/enslig-mor-eller-far">Alene med barn </a>
+                    </p>
+                </div>
                 <div className="sideinnhold">
                     <div className="sideinfo">
                         <div className="sticky">
@@ -55,7 +59,7 @@ const Barnetilsynstonad = () => {
                         </div>
                     </div>
                     <div className="hovedinfo">
-                        {side.alertstripe ?
+                        {side.alertstripe?.alertstripe_aktiv ?
                             <div className="sideAlertStripe" id='alertstripe'>
                                 <Alert alertstripe={side.alertstripe} topp={true} />
                             </div> :

@@ -37,7 +37,11 @@ const Overgangsstonad = () => {
                 <div className="banner">
                     <h1>Overgangsstønad for enslig mor og far</h1>
                 </div>
-                <p className="breadcrumb"><a href="https://www.nav.no/no/person">Forside</a> / <a href="https://www.nav.no/no/person/familie/enslig-mor-eller-far">Alene med barn </a></p>
+                <div className="breadcrumb">
+                    <p className="breadcrumb-link">
+                        <a href="https://www.nav.no/no/person">Forside</a>  /  <a href="https://www.nav.no/no/person/familie/enslig-mor-eller-far">Alene med barn </a>
+                    </p>
+                </div>
                 <div className="sideinnhold">
                     <div className="sideinfo">
                         <div className="sticky">
@@ -54,7 +58,7 @@ const Overgangsstonad = () => {
                         </div>
                     </div>
                     <div className="hovedinfo">
-                        {side.alertstripe ?
+                        {side.alertstripe?.alertstripe_aktiv ?
                             <div className="sideAlertStripe" id='alertstripe'>
                                 <Alert alertstripe={side.alertstripe} topp={true} />
                             </div> :
