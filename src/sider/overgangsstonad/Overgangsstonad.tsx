@@ -12,10 +12,10 @@ const Overgangsstonad = () => {
     const [side, setSide] = useState<any>({});
     const [filter, setFilter] = useState<boolean[]>([]);
     const relevantCheckboxData = checkboxData.overgangsstonad;
-
+    const sideID = 1;
     useEffect(() => {
         client
-            .fetch(hentSideQuery, { type: 'side', side_id: 1 })
+            .fetch(hentSideQuery, { type: 'side', side_id: sideID })
             .then((res: any) => {
                 setSide(res);
                 setFilter(new Array(relevantCheckboxData.map((obj: any) => obj.texts.length)
@@ -28,26 +28,16 @@ const Overgangsstonad = () => {
         setFilter(filterStatus);
     };
 
-    const filterCheck = (avsnitt: any) => {
-        return true;
-    }
-
-    const test = [
-        {value: 'filter_gravid', name: 'Jeg er gravid'},
-        {value: 'filtrer_under_1', name: 'Under 1 år'}
-    ];
-
     if (side.artikler !== undefined) {
         return (
             <div className="side">
-                {console.log(filter)}
                 <Helmet>
                     <title>Overgangsstønad</title>
                 </Helmet>
                 <div className="banner">
                     <h1>Overgangsstønad for enslig mor og far</h1>
                 </div>
-                <p className="breadcrumb"><a href="#">Forside</a> / <a href="#">Alene med barn </a></p>
+                <p className="breadcrumb"><a href="https://www.nav.no/no/person">Forside</a> / <a href="https://www.nav.no/no/person/familie/enslig-mor-eller-far">Alene med barn </a></p>
                 <div className="overgangsstonad">
                     <div className="sideinfo">
                         <div className="sticky">
@@ -76,9 +66,10 @@ const Overgangsstonad = () => {
                                 bilde={artikkel.bilde}
                                 alttekst={artikkel.alttekst}
                                 id={artikkel._id}
-                                side={1}
+                                side={sideID}
                                 avsnitt={artikkel?.avsnitt}
-                                filterCheck={filterCheck}
+                                filterStatus={filter}
+                                sideID={sideID}
                             />
                         ))}
                     </div>

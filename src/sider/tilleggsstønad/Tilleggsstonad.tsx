@@ -12,10 +12,10 @@ const Barnetilsynstonad = () => {
     const [side, setSide] = useState<any>({});
     const [filter, setFilter] = useState<boolean[]>([]);
     const relevantCheckboxData = checkboxData.tilleggsstønad;
-
+    const sideID = 4;
     useEffect(() => {
         client
-            .fetch(hentSideQuery, { type: 'side', side_id: 4 })
+            .fetch(hentSideQuery, { type: 'side', side_id: sideID })
             .then((res: any) => {
                 setSide(res);
                 setFilter(new Array(relevantCheckboxData.map((obj: any) => obj.texts.length)
@@ -28,10 +28,6 @@ const Barnetilsynstonad = () => {
         setFilter(filterStatus);
     };
 
-    const filterCheck = (avsnitt: any) => {
-        return true;
-    }
-
     if (side.artikler !== undefined) {
         return (
             <div className="side">
@@ -41,7 +37,7 @@ const Barnetilsynstonad = () => {
                 <div className="banner">
                     <h1>Tilleggsstønader for enslig mor eller far som tar utdanning eller er arbeidssøker</h1>
                 </div>
-                <p className="breadcrumb"><a href="#">Forside</a> / <a href="#">Alene med barn </a></p>
+                <p className="breadcrumb"><a href="https://www.nav.no/no/person">Forside</a> / <a href="https://www.nav.no/no/person/familie/enslig-mor-eller-far">Alene med barn </a></p>
                 <div className="overgangsstonad">
                     <div className="sideinfo">
                         <div className="sticky">
@@ -71,7 +67,8 @@ const Barnetilsynstonad = () => {
                                 alttekst={artikkel.alttekst}
                                 id={artikkel._id}
                                 avsnitt={artikkel?.avsnitt}
-                                filterCheck={filterCheck}
+                                filterStatus={filter}
+                                sideID={sideID}
                             />
                         ))}
                     </div>
