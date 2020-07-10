@@ -13,7 +13,7 @@ const KalkulatorOvergangsstonad: React.FC<Props> = (props) => {
     const [sum, setSum] = useState<number>(0);
     const [grunnbelop, setGrunnbelop] = useState<number>(0);
     const [inntekt, setInntekt] = useState<number|undefined>();
-    const [feil, setFeil] = useState<boolean>(false);
+    const [feil, setFeil] = useState<boolean|string>(false);
     const [visResultat, setVisResultat] = useState<boolean>(false);
 
     useEffect(() => {
@@ -25,8 +25,7 @@ const KalkulatorOvergangsstonad: React.FC<Props> = (props) => {
     }, []);
 
     const beregn = () => {
-        if(inntekt !== undefined){
-            console.log("inntekt", inntekt)
+        if(inntekt !== undefined && inntekt){
             setFeil(false);
             if(inntekt*12 < grunnbelop/2){
                 setSum(Math.round((grunnbelop * 2.25)/12));
@@ -36,12 +35,16 @@ const KalkulatorOvergangsstonad: React.FC<Props> = (props) => {
                 let tall = Math.round(0.45*(inntekt-halvtGrunnbelop));
                 let fratrekk = Math.round(tall/12);
                 let uredusertOS = Math.round((grunnbelop * 2.25)/12);
-                setSum(uredusertOS-fratrekk);
+                setSum(uredusertOS-fratrekk > 0 ? uredusertOS-fratrekk : 0);
             }
             setVisResultat(true);
         }
+        else if(!inntekt){
+            setFeil("Fyll inn inntekt (må være tall)")
+            setVisResultat(false);
+        }
         else{
-            setFeil(true);
+            setFeil("Fyll inn inntekt (må være tall)");
             setVisResultat(false);
         }
     };
@@ -54,7 +57,8 @@ const KalkulatorOvergangsstonad: React.FC<Props> = (props) => {
                     bredde="S"
                     inputMode="numeric"
                     pattern="[0-9]*"
-                    onChange={(event: any) => setInntekt(event.target.value)}
+                    value={inntekt}
+                    onChange={(event: any) => !isNaN(event.target.value) ? setInntekt(event.target.value) : null}
                     feil={feil}
                 />
                 <Label htmlFor="overgangsstonad-kalkulator-input1">kroner</Label>
