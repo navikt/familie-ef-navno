@@ -39,7 +39,7 @@ const Barnetilsynstonad = () => {
                     <h1>Stønad til barnetilsyn for enslig mor eller far i arbeid</h1>
                 </div>
                 <p className="breadcrumb"><a href="https://www.nav.no/no/person">Forside</a> / <a href="https://www.nav.no/no/person/familie/enslig-mor-eller-far">Alene med barn </a></p>
-                <div className="overgangsstonad">
+                <div className="sideinnhold">
                     <div className="sideinfo">
                         <div className="sticky">
                             {relevantCheckboxData.length ?
