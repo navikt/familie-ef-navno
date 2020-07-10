@@ -59,7 +59,7 @@ const Overgangsstonad = () => {
                                 <Alert alertstripe={side.alertstripe} topp={true} />
                             </div> :
                             null}
-                        {side?.artikler?.map((artikkel: any, index: number) => (
+                        {side?.artikler?.map((artikkel: any) => (
                             <Informasjonspanel
                                 key={artikkel._id}
                                 tittel={artikkel.tittel_i_panel}
