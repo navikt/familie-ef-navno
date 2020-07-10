@@ -12,7 +12,7 @@ interface Props {
 const Filtreringsboks: React.FC<Props> = props => {
 
     return (
-        <Panel >
+        <div className="filterboks">
             {props.checkboxData.map((obj: any, index1: number) => (
                 <CheckboxGruppe legend={obj.groupName} key={index1}>
                     {obj.texts.map((text: any, index2: number) => (
@@ -26,7 +26,7 @@ const Filtreringsboks: React.FC<Props> = props => {
                     ))}
                 </CheckboxGruppe>             
             ))}
-        </Panel>
+        </div>
     );
 }
 

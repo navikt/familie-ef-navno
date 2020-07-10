@@ -21,7 +21,7 @@ const options = [
 const KalkulatorBarnetilsyn = () => {
     const [sum, setSum] = useState<number>(0);
     const [grunnbelop, setGrunnbelop] = useState<number>(0);
-    const [antBarn, setAntBarn] = useState<number | undefined>(5);
+    const [antBarn, setAntBarn] = useState<number | undefined>();
     const [utgifterBarnepass, setUtgifterBarnepass] = useState<number | undefined>();
     const [kontaktstotte, setKontantstotte] = useState<number | undefined>();
     const [feil, setFeil] = useState<boolean>(false);
@@ -42,17 +42,16 @@ const KalkulatorBarnetilsyn = () => {
             console.log("stotte", stotte);
             if(antBarn === 1 && stotte >= 4053){
                 setSum(4053);
-                return;
             }
             else if (antBarn === 2 && stotte >= 5289){
                 setSum(5289);
-                return;
             }
             else if (antBarn >= 3 && stotte >= 5993){
                 setSum(5993);
-                return;
             }
-            setSum(stotte);
+            else{
+                setSum(stotte);
+            }
             setVisResultat(true);
         }
         else {

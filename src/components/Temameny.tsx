@@ -1,24 +1,28 @@
 import React from 'react';
 import Panel from 'nav-frontend-paneler';
 import { Undertittel } from 'nav-frontend-typografi';
+import { Link } from 'react-scroll';
 
 interface Props {
-  temaer: string[];
-  scrollTil: (int: number) => void;
+  temaer: [{
+    tittel: string,
+    id: string,
+  }];
 }
 
 const Temameny: React.FC<Props> = (props) => {
   return (
-    <Panel>
+    <Panel className="temameny">
       <Undertittel>Temaer</Undertittel>
-      {props.temaer.map( (tema, index) => (
-        <div key={index}>
-          <button 
-          className={'temabutton'}
-          onClick={ () => props.scrollTil(index)}
+      {props.temaer.map((tema, index) => (
+        <div key={index} className='temameny-lenker'>
+          <Link
+            to={tema.id}
+            spy={true}
+            smooth={true}
           >
-            {tema}
-          </button>
+            {tema.tittel}
+          </Link>
         </div>
       ))
       }

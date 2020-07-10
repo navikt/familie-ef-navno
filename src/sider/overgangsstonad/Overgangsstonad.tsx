@@ -1,17 +1,16 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { client, hentSideQuery } from '../../utils/sanity';
 import { Helmet } from 'react-helmet';
 import Temameny from '../../components/Temameny';
 import Informasjonspanel from '../../components/Informasjonspanel';
 import Tilpasningsboks from '../../components/Tilpasningsboks';
 import NavFrontendSpinner from 'nav-frontend-spinner';
-import  checkboxData from '../../utils/checkboxData';
+import checkboxData from '../../utils/checkboxData';
 import { Alert } from '../../components/Alert';
 
 const Overgangsstonad = () => {
     const [side, setSide] = useState<any>({});
     const [filter, setFilter] = useState<boolean[]>([]);
-    const artikkelRef = useRef<any[]>([]);
     const relevantCheckboxData = checkboxData.overgangsstonad;
     const sideID = 1;
     useEffect(() => {
@@ -20,20 +19,11 @@ const Overgangsstonad = () => {
             .then((res: any) => {
                 setSide(res);
                 setFilter(new Array(relevantCheckboxData.map((obj: any) => obj.texts.length)
-                .reduce((a: number, b: number) => a+b))
-                .fill(false));
+                    .reduce((a: number, b: number) => a + b))
+                    .fill(false));
             })
     }, []);
 
-    const scrollTilRef = ( ref: any) => {
-        if ( !ref ) return;
-        window.scrollTo({ top: ref.offsetTop, left: 0, behavior: 'smooth' });
-    };
-    
-    const scrollTilArtikkel = (int: number) => {
-        setTimeout(() => scrollTilRef(artikkelRef.current[int]), 120);
-      };
-              
     const handleFilterChange = (filterStatus: boolean[]) => {
         setFilter(filterStatus);
     };
@@ -51,39 +41,36 @@ const Overgangsstonad = () => {
                 <div className="overgangsstonad">
                     <div className="sideinfo">
                         <div className="sticky">
-                            {relevantCheckboxData.length ? 
-                                <Tilpasningsboks 
-                                filterStatus={filter}
-                                checkboxData={relevantCheckboxData}
-                                handleChange={handleFilterChange}
+                            {relevantCheckboxData.length ?
+                                <Tilpasningsboks
+                                    filterStatus={filter}
+                                    checkboxData={relevantCheckboxData}
+                                    handleChange={handleFilterChange}
                                 /> :
                                 null}
-                            <Temameny 
-                            temaer={side.artikler.map((artikkel: any) => artikkel.tittel_i_panel)}
-                            scrollTil={scrollTilArtikkel}
+                            <Temameny
+                                temaer={side.artikler.map((artikkel: any) => ({ tittel: artikkel.tittel_i_liste, id: artikkel._id }))}
                             />
                         </div>
                     </div>
                     <div className="hovedinfo">
-                    {side.alertstripe ? 
-                        <div className="sideAlertStripe" id='alertstripe'>
-                            <Alert alertstripe={side.alertstripe} topp={true}/>
-                        </div> :
-                        null}
+                        {side.alertstripe ?
+                            <div className="sideAlertStripe" id='alertstripe'>
+                                <Alert alertstripe={side.alertstripe} topp={true} />
+                            </div> :
+                            null}
                         {side?.artikler?.map((artikkel: any, index: number) => (
-                            <div ref={ (el: any) => artikkelRef.current[index] = el} key={artikkel._id}>
-                                <Informasjonspanel
-                                    key={artikkel._id}
-                                    tittel={artikkel.tittel_i_panel}
-                                    bilde={artikkel.bilde}
-                                    alttekst={artikkel.alttekst}
-                                    id={artikkel._id}
-                                    side={sideID}
-                                    avsnitt={artikkel?.avsnitt}
-                                    filterStatus={filter}
-                                    sideID={sideID}
-                                />
-                            </div>
+                            <Informasjonspanel
+                                key={artikkel._id}
+                                tittel={artikkel.tittel_i_panel}
+                                bilde={artikkel.bilde}
+                                alttekst={artikkel.alttekst}
+                                id={artikkel._id}
+                                side={sideID}
+                                avsnitt={artikkel?.avsnitt}
+                                filterStatus={filter}
+                                sideID={sideID}
+                            />
                         ))}
                     </div>
                 </div>
