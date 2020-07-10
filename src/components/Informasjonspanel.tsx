@@ -6,6 +6,7 @@ import { BlockContent, hentTall, client } from '../utils/sanity';
 import { Alert } from './Alert';
 import KalkulatorOvergangsstonad from './KalkulatorOvergangsstonad';
 import KalkulatorBarnetilsyn from './KalkulatorBarnetilsyn';
+import Tabell from './Tabell';
 
 interface Props {
     tittel: string;
@@ -23,6 +24,10 @@ const serializers = {
         tallreferanse: () => {
             return null;
         },
+        tabell: (props: any) => {
+            console.log("tabell", props);
+            return null;
+        }
     },
     marks: {
         internalLink: (props: any) => {
@@ -42,7 +47,7 @@ const serializers = {
                 : <a href={href}>{props.children}</a>;
 
         },
-        tallreferanse: (props: any) => {
+        talltest: (props: any) => {
             const { reference } = props.mark;
             return <p>{reference._ref}</p>;
         },
@@ -92,6 +97,9 @@ const Informasjonspanel: React.FC<Props> = (props) => {
                             blocks={avsnitt.avsnitt_innhold}
                             serializers={serializers}
                         />
+                        {avsnitt._type === "tabell" ?
+                            <Tabell rows={avsnitt?.tabelldata?.rows} />
+                            : null}
                         {avsnitt.knapp?.tekst !== undefined ?
                             <a href={avsnitt.knapp.lenke} className="knapp lenkeknapp">{avsnitt.knapp.tekst}</a>
                             : null}
