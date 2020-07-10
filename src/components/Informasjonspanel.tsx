@@ -6,6 +6,7 @@ import { BlockContent, hentTall, client } from '../utils/sanity';
 import { Alert } from './Alert';
 import KalkulatorOvergangsstonad from './KalkulatorOvergangsstonad';
 import KalkulatorBarnetilsyn from './KalkulatorBarnetilsyn';
+import Tabell from './Tabell';
 
 interface Props {
     tittel: string;
@@ -21,6 +22,10 @@ interface Props {
 const serializers = {
     types: {
         tallreferanse: () => {
+            return null;
+        },
+        tabell: (props: any) => {
+            console.log("tabell", props);
             return null;
         }
     },
@@ -42,7 +47,7 @@ const serializers = {
                 : <a href={href}>{props.children}</a>;
 
         },
-        tallreferanse: (props: any) => {
+        talltest: (props: any) => {
             const { reference } = props.mark;
             return <p>{reference._ref}</p>;
         },
@@ -51,9 +56,9 @@ const serializers = {
 
 const Informasjonspanel: React.FC<Props> = (props) => {
 
-    const filterCheck = (avsnitt :any) => {
-        if (avsnitt.filtrer_blir_staende) return true; 
-        if (props.filterStatus.every( el => el === false )) return true;
+    const filterCheck = (avsnitt: any) => {
+        if (avsnitt.filtrer_blir_staende) return true;
+        if (props.filterStatus.every(el => el === false)) return true;
         if (props.sideID === 1) {
             if (avsnitt.filtrer_gravid && props.filterStatus[0]) return true;
             if (avsnitt.filtrer_under_1 && props.filterStatus[1]) return true;
@@ -78,7 +83,7 @@ const Informasjonspanel: React.FC<Props> = (props) => {
         }
         return false;
     }
-    
+
     return (
         <Panel className="informasjonspanel" id={props.id}>
             <div className="informasjonspanel-ikon">
@@ -93,14 +98,17 @@ const Informasjonspanel: React.FC<Props> = (props) => {
                             blocks={avsnitt.avsnitt_innhold}
                             serializers={serializers}
                         />
+                        {avsnitt._type === "tabell" ?
+                            <Tabell rows={avsnitt?.tabelldata?.rows} />
+                            : null}
                         {avsnitt.knapp?.tekst !== undefined ?
                             <a href={avsnitt.knapp.lenke} className="knapp lenkeknapp">{avsnitt.knapp.tekst}</a>
                             : null}
                         {avsnitt.alertstripe !== undefined ?
-                            <Alert alertstripe={avsnitt.alertstripe} topp={false}/>
+                            <Alert alertstripe={avsnitt.alertstripe} topp={false} />
                             : null}
                         {avsnitt.kalkulator ?
-                        (props.side === 1 ? <KalkulatorOvergangsstonad key={avsnitt._id + index}/> : <KalkulatorBarnetilsyn key={avsnitt._id + index} />)
+                            (props.side === 1 ? <KalkulatorOvergangsstonad key={avsnitt._id + index} /> : <KalkulatorBarnetilsyn key={avsnitt._id + index} />)
                             : null
                         }
                     </div>
