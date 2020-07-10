@@ -1,8 +1,7 @@
 import React from 'react';
-import './app.less';
 import Overgangsstonad from './sider/overgangsstonad/Overgangsstonad';
 import Barnetilsynstonad from './sider/barnetilsynsstonad/Barnetilsynsstonad';
-import Skolepengerstønad from './sider/skolepengerstønad/Skolepengerstonad';
+import Skolepengerstønad from './sider/skolepengerstønad/skolepengerstonad';
 import Tilleggsstonad from './sider/tilleggsstønad/Tilleggsstonad';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 

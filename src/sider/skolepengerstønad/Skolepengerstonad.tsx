@@ -8,7 +8,7 @@ import NavFrontendSpinner from 'nav-frontend-spinner';
 import checkboxData from '../../utils/checkboxData';
 import { Alert } from '../../components/Alert';
 
-const Barnetilsynstonad = () => {
+const Skolepengerstonad = () => {
     const [side, setSide] = useState<any>({});
     const [filter, setFilter] = useState<boolean[]>([]);
     const relevantCheckboxData = checkboxData.skolepengerstønad;
@@ -41,7 +41,7 @@ const Barnetilsynstonad = () => {
                     <h1>Stønad til skolepenger for enslig mor eller far som tar utdanning</h1>
                 </div>
                 <p className="breadcrumb"><a href="https://www.nav.no/no/person">Forside</a> / <a href="https://www.nav.no/no/person/familie/enslig-mor-eller-far">Alene med barn </a></p>
-                <div className="sideinnhold">
+                <div className="overgangsstonad">
                     <div className="sideinfo">
                         <div className="sticky">
                             {relevantCheckboxData.length ?
@@ -62,7 +62,7 @@ const Barnetilsynstonad = () => {
                                 <Alert alertstripe={side.alertstripe} topp={true} />
                             </div> :
                             null}
-                        {side?.artikler?.map((artikkel: any) => (
+                        {side?.artikler?.map((artikkel: any, index: number) => (
                             <Informasjonspanel
                                 key={artikkel._id}
                                 tittel={artikkel.tittel_i_panel}
@@ -84,4 +84,4 @@ const Barnetilsynstonad = () => {
     );
 }
 
-export default Barnetilsynstonad;
+export default Skolepengerstonad;

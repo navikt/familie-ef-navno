@@ -1,16 +1,11 @@
-@import "~nav-frontend-knapper-style";
-@import "~nav-frontend-paneler-style";
-
 body {
     background-color: #E5E5E5;
     margin: 0;
     font-family: 'Source Sans Pro';
     max-width: 100%;
     color: @navMorkGra;
-}
-
-.center-text {
-    text-align: center;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .panel{
@@ -33,16 +28,36 @@ a :hover{
     text-decoration: none;
 }
 
+p{
+    font-size: 18px;
+    line-height: 144%;
+}
+
+h1{
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 117%;
+    text-align: center;
+}
+
 h3{
     font-style: normal;
     font-weight: 600;
     font-size: 24px;
-    line-height: 28px;  
+    line-height: 117%;  
 }
 
 h6{
     font-style: normal;
     font-weight: 600;
-    font-size: 16px;
-    line-height: 22px; 
+    font-size: 18px;
+    line-height: 22px;
+    margin-bottom: 8px; 
+}
+
+li{
+    font-size: 18px;
+    line-height: 144%;
+    margin: 10px 0;
 }

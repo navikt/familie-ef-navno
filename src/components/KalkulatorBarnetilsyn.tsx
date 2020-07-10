@@ -65,7 +65,7 @@ const KalkulatorBarnetilsyn = () => {
     }
 
     return (
-        <div className="kalkulator">
+        <div>
             <Select label="Antall barn du har utgifter til barnepass for" bredde="s" className="input-select">
                 <option value="">Velg</option>
                 {options.map((o: any, index: number) => (
