@@ -12,10 +12,10 @@ const Barnetilsynstonad = () => {
     const [side, setSide] = useState<any>({});
     const [filter, setFilter] = useState<boolean[]>([]);
     const relevantCheckboxData = checkboxData.barnetilsynsstonad;
-
+    const sideID = 2;
     useEffect(() => {
         client
-            .fetch(hentSideQuery, { type: 'side', side_id: 2 })
+            .fetch(hentSideQuery, { type: 'side' , side_id: sideID})
             .then((res: any) => {
                 setSide(res);
                 setFilter(new Array(relevantCheckboxData.map((obj: any) => obj.texts.length)
@@ -29,15 +29,6 @@ const Barnetilsynstonad = () => {
         setFilter(filterStatus);
     };
 
-    const filterCheck = (avsnitt: any) => {
-        if (avsnitt.filtrer_blir_staende) return true;
-        if (filter.every(el => el === false)) return true;
-        if (avsnitt.filtrer_i_arbeid && filter[0]) return true;
-        if (avsnitt.filtrer_egen_virksomhet && filter[1]) return true;
-        if (avsnitt.filtrer_sykdom && filter[2]) return true;
-        return false;
-    }
-
     if (side.artikler !== undefined) {
         return (
             <div className="side">
@@ -47,7 +38,7 @@ const Barnetilsynstonad = () => {
                 <div className="banner">
                     <h1>Stønad til barnetilsyn for enslig mor eller far i arbeid</h1>
                 </div>
-                <p className="breadcrumb"><a href="#">Forside</a> / <a href="#">Alene med barn </a></p>
+                <p className="breadcrumb"><a href="https://www.nav.no/no/person">Forside</a> / <a href="https://www.nav.no/no/person/familie/enslig-mor-eller-far">Alene med barn </a></p>
                 <div className="overgangsstonad">
                     <div className="sideinfo">
                         <div className="sticky">
@@ -77,7 +68,8 @@ const Barnetilsynstonad = () => {
                                 alttekst={artikkel.alttekst}
                                 id={artikkel._id}
                                 avsnitt={artikkel?.avsnitt}
-                                filterCheck={filterCheck}
+                                filterStatus={filter}
+                                sideID={sideID}
                             />
                         ))}
                     </div>
