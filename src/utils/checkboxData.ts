@@ -26,6 +26,20 @@ const checkboxData = {
     skolepengerstønad: [
 
         ],
+    alenemedbarn: [
+            {
+                groupName: 'Hvorfor er du alene med barn?',
+                texts: ['På grunn av samlivsbrudd', 'Alene med barn fra fødsel', 'På grunn av dødsfall'],
+            },
+            {
+                groupName: 'Hvor mye av en daglige omsorgen for barn har du?',
+                texts: ['Jeg har 60 prosent eller mer av den daglige omsorgen', 'Jeg har mindre enn 60% av den daglige omsorgen'],
+            },
+            {
+                groupName: 'Hva er arbeidssituasjonen din?',
+                texts: ['Jeg er i arbeid', 'Jeg tar eller skal ta utdanning', 'Jeg er arbeidssøker', 'Jeg er ikke i arbeid, utdanning eller søker jobb'],
+            },
+        ],
 }
 
 export default checkboxData; 
