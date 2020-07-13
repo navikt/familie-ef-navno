@@ -20,8 +20,16 @@ export const hentSideQuery = `*[_type == $type && side_id == $side_id][0]{
     "alttekst": ikon.alttekst,
     _id,
     avsnitt[]->{
-	...,
-  
+    ...,
+    avsnitt_innhold[]{
+    ...,
+        markDefs[]{
+        ...,
+        _type == 'tallreferanse' => {
+            'tall': *[_type == 'tall' && _id == ^.reference._ref][0]{tallverdi}
+        }
+        }
+    }
 }}}`;
 
 export const gammelHentSideQuery = `*[_type == $type && side_id == $side_id][0]{

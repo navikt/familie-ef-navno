@@ -21,9 +21,6 @@ interface Props {
 
 const serializers = {
     types: {
-        tallreferanse: () => {
-            return null;
-        },
         tabell: (props: any) => {
             console.log("tabell", props);
             return null;
@@ -47,9 +44,10 @@ const serializers = {
                 : <a href={href}>{props.children}</a>;
 
         },
-        talltest: (props: any) => {
-            const { reference } = props.mark;
-            return <p>{reference._ref}</p>;
+        tallreferanse: (props: any) => {
+            const { tall } = props.mark;
+            console.log("props", props)
+            return tall.tallverdi
         },
     }
 }
