@@ -37,8 +37,12 @@ const Barnetilsynstonad = () => {
                 <div className="banner">
                     <h1>Tilleggsstønader for enslig mor eller far som tar utdanning eller er arbeidssøker</h1>
                 </div>
-                <p className="breadcrumb"><a href="https://www.nav.no/no/person">Forside</a> / <a href="https://www.nav.no/no/person/familie/enslig-mor-eller-far">Alene med barn </a></p>
-                <div className="overgangsstonad">
+                <div className="breadcrumb">
+                    <p className="breadcrumb-link">
+                        <a href="https://www.nav.no/no/person">Forside</a>  /  <a href="https://www.nav.no/no/person/familie/enslig-mor-eller-far">Alene med barn </a>
+                    </p>
+                </div>
+                <div className="sideinnhold">
                     <div className="sideinfo">
                         <div className="sticky">
                             {relevantCheckboxData.length ?
@@ -54,12 +58,12 @@ const Barnetilsynstonad = () => {
                         </div>
                     </div>
                     <div className="hovedinfo">
-                        {side.alertstripe ?
+                        {side.alertstripe?.alertstripe_aktiv ?
                             <div className="sideAlertStripe" id='alertstripe'>
                                 <Alert alertstripe={side.alertstripe} topp={true} />
                             </div> :
                             null}
-                        {side?.artikler?.map((artikkel: any, index: number) => (
+                        {side?.artikler?.map((artikkel: any) => (
                             <Informasjonspanel
                                 key={artikkel._id}
                                 tittel={artikkel.tittel_i_panel}

@@ -8,7 +8,7 @@ import NavFrontendSpinner from 'nav-frontend-spinner';
 import checkboxData from '../../utils/checkboxData';
 import { Alert } from '../../components/Alert';
 
-const Barnetilsynstonad = () => {
+const Skolepengerstonad = () => {
     const [side, setSide] = useState<any>({});
     const [filter, setFilter] = useState<boolean[]>([]);
     const relevantCheckboxData = checkboxData.skolepengerstønad;
@@ -33,15 +33,18 @@ const Barnetilsynstonad = () => {
     if (side.artikler !== undefined) {
         return (
             <div className="side">
-                {console.log(filter)}
                 <Helmet>
                     <title>Skolepengerstønad</title>
                 </Helmet>
                 <div className="banner">
                     <h1>Stønad til skolepenger for enslig mor eller far som tar utdanning</h1>
                 </div>
-                <p className="breadcrumb"><a href="https://www.nav.no/no/person">Forside</a> / <a href="https://www.nav.no/no/person/familie/enslig-mor-eller-far">Alene med barn </a></p>
-                <div className="overgangsstonad">
+                <div className="breadcrumb">
+                    <p className="breadcrumb-link">
+                        <a href="https://www.nav.no/no/person">Forside</a>  /  <a href="https://www.nav.no/no/person/familie/enslig-mor-eller-far">Alene med barn </a>
+                    </p>
+                </div>
+                <div className="sideinnhold">
                     <div className="sideinfo">
                         <div className="sticky">
                             {relevantCheckboxData.length ?
@@ -57,7 +60,7 @@ const Barnetilsynstonad = () => {
                         </div>
                     </div>
                     <div className="hovedinfo">
-                        {side.alertstripe ?
+                        {side.alertstripe?.alertstripe_aktiv ?
                             <div className="sideAlertStripe" id='alertstripe'>
                                 <Alert alertstripe={side.alertstripe} topp={true} />
                             </div> :
@@ -84,4 +87,4 @@ const Barnetilsynstonad = () => {
     );
 }
 
-export default Barnetilsynstonad;
+export default Skolepengerstonad;

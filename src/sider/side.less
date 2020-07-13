@@ -3,7 +3,7 @@
     width: 100vw;
 }
 
-.overgangsstonad {
+.sideinnhold {
     display: grid;
     margin-bottom: 4rem;
     grid-template-columns: repeat(2, auto);
@@ -15,12 +15,13 @@
 }
 
 .banner {
-    max-height: 68px;
+    max-height: 80px;
     min-height: 68px;
     background-color: @navLillaLighten60;
     text-align: center;
     border-bottom: 4px solid #826ba1;   
     line-height: 68px;
+    width: 100vw;
 }
 
 .banner h1{
@@ -35,8 +36,12 @@
 .breadcrumb{
     max-width: 846px;
     margin: 18px auto 16px auto;
+}
+
+.breadcrumb-link{
     color: @navBla; 
-    line-height: 26px;
+    font-size: 16px;
+    line-height: 137%;
 }
 
 .sideinfo {
@@ -58,11 +63,11 @@
     display: grid;
     grid-gap: 24px;
     max-width: 628px;
-    grid-auto-rows: minmax(min-content, max-content);
+    //grid-auto-rows: minmax(min-content, max-content);
 }
 
 .sideAlertStripe{
-    max-width: 497px;
+    width: 100%;
 }
 
 .alertstripe p{
@@ -97,9 +102,34 @@
     text-transform: none !important;
     letter-spacing: normal !important;
     text-decoration-line: underline !important;
+    width: 80%;
 }
 
 .alertstripe-avsnitt{
     max-width: 415px;
-    //margin-bottom: 12px;
+}
+
+@media screen and (max-width: 850px) {
+    .sideinnhold{
+        display: block;
+    }
+
+    .sideinfo {
+        display: none;
+    }
+    .breadcrumb {
+        width: 95%;
+        margin: auto;
+    }
+    .hovedinfo {
+        width: 100vw;
+        margin: 0;
+    }
+    .banner{
+        max-height: inherit;
+    }
+}
+
+@media screen and (max-width: 570px) {
+
 }

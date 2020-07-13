@@ -1,8 +1,6 @@
 .informasjonspanel {
     padding: 64px !important;
-    //min-width: 628px; 
-    //max-width: 628px;
-    //margin: 2rem auto;
+    margin: auto;
 }
 
 .informasjonspanel-ikon {
@@ -14,18 +12,10 @@
     margin-bottom: 2rem;
 }
 
-.block-styling h1{
-    font-weight: bold;
-    font-size: 24px;
-    line-height: 28px;
-}
-
-.block-styling p{
-    font-size: 18px;
-    line-height: 26px;
-}
-
-.block-styling li{
-    font-size: 18px;
-    line-height: 26px;
+@media screen and (max-width: 850px) {
+    .informasjonspanel{
+        padding: 2rem !important;
+        width: 80vw !important;
+        margin: auto;
+    }
 }

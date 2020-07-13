@@ -1,6 +1,6 @@
 import React, { Children } from 'react';
 import Panel from 'nav-frontend-paneler';
-import { Innholdstittel, Systemtittel } from 'nav-frontend-typografi';
+import { Innholdstittel, Systemtittel, Normaltekst } from 'nav-frontend-typografi';
 import { Link } from 'react-scroll';
 import { BlockContent, hentTall, client } from '../utils/sanity';
 import { Alert } from './Alert';
@@ -89,12 +89,11 @@ const Informasjonspanel: React.FC<Props> = (props) => {
             <div className="informasjonspanel-ikon">
                 <img src={props.bilde} alt={props.alttekst} />
             </div>
-            <Innholdstittel className="center-text" >{props.tittel}</Innholdstittel>
+            <h1>{props.tittel}</h1>
             {props.avsnitt !== undefined ? props.avsnitt.map((avsnitt: any, index: number) => (
                 filterCheck(avsnitt) ?
                     <div key={avsnitt._id}>
                         <BlockContent
-                            className="typo-normal"
                             blocks={avsnitt.avsnitt_innhold}
                             serializers={serializers}
                         />

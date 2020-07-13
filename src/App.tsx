@@ -1,5 +1,4 @@
 import React from 'react';
-import './app.less';
 import Overgangsstonad from './sider/overgangsstonad/Overgangsstonad';
 import Barnetilsynstonad from './sider/barnetilsynsstonad/Barnetilsynsstonad';
 import Skolepengerstønad from './sider/skolepengerstønad/Skolepengerstonad';

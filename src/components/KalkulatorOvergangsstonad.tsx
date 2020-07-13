@@ -53,7 +53,7 @@ const KalkulatorOvergangsstonad: React.FC<Props> = (props) => {
     };
 
     return (
-        <div className="kalkulator">
+        <div>
             <div className="input-kroner">
                 <Input
                     id="overgangsstonad-kalkulator-input1"
