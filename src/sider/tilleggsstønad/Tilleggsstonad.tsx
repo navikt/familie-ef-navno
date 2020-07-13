@@ -12,6 +12,7 @@ const Barnetilsynstonad = () => {
     const [side, setSide] = useState<any>({});
     const [filter, setFilter] = useState<boolean[]>([]);
     const relevantCheckboxData = checkboxData.tilleggsstønad;
+    const [sideOpen, setSideOpen] = useState<boolean>(false); 
     const sideID = 4;
     useEffect(() => {
         client
@@ -26,6 +27,18 @@ const Barnetilsynstonad = () => {
 
     const handleFilterChange = (filterStatus: boolean[]) => {
         setFilter(filterStatus);
+    };
+
+    const handleOpen = (open: boolean) => {
+        setSideOpen(open);
+        
+        if(open){
+            scrollTop();
+        }
+    }
+
+    const scrollTop = () => {
+        window.scrollTo({top: 0, behavior: 'smooth'});
     };
 
     if (side.artikler !== undefined) {
@@ -50,6 +63,7 @@ const Barnetilsynstonad = () => {
                                     filterStatus={filter}
                                     checkboxData={relevantCheckboxData}
                                     handleChange={handleFilterChange}
+                                    handleOpen={handleOpen}
                                 /> :
                                 null}
                             <Temameny

@@ -12,6 +12,7 @@ const Skolepengerstonad = () => {
     const [side, setSide] = useState<any>({});
     const [filter, setFilter] = useState<boolean[]>([]);
     const relevantCheckboxData = checkboxData.skolepengerstønad;
+    const [sideOpen, setSideOpen] = useState<boolean>(false);
     const sideID = 3;
     useEffect(() => {
         client
@@ -30,6 +31,17 @@ const Skolepengerstonad = () => {
         setFilter(filterStatus);
     };
 
+    const handleOpen = (open: boolean) => {
+        setSideOpen(open);
+        
+        if(open){
+            scrollTop();
+        }
+    }
+
+    const scrollTop = () => {
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    };
     if (side.artikler !== undefined) {
         return (
             <div className="side">
@@ -52,6 +64,7 @@ const Skolepengerstonad = () => {
                                     filterStatus={filter}
                                     checkboxData={relevantCheckboxData}
                                     handleChange={handleFilterChange}
+                                    handleOpen={handleOpen}
                                 /> :
                                 null}
                             <Temameny
