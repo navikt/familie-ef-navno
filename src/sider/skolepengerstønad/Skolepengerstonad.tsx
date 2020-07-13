@@ -33,7 +33,6 @@ const Skolepengerstonad = () => {
     if (side.artikler !== undefined) {
         return (
             <div className="side">
-                {console.log(filter)}
                 <Helmet>
                     <title>Skolepengerstønad</title>
                 </Helmet>
@@ -45,7 +44,7 @@ const Skolepengerstonad = () => {
                         <a href="https://www.nav.no/no/person">Forside</a>  /  <a href="https://www.nav.no/no/person/familie/enslig-mor-eller-far">Alene med barn </a>
                     </p>
                 </div>
-                <div className="overgangsstonad">
+                <div className="sideinnhold">
                     <div className="sideinfo">
                         <div className="sticky">
                             {relevantCheckboxData.length ?
