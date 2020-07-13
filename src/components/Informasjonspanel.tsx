@@ -58,7 +58,7 @@ const Informasjonspanel: React.FC<Props> = (props) => {
 
     const filterCheck = (avsnitt: any) => {
         if (avsnitt.filtrer_blir_staende) return true;
-        if (props.filterStatus.every(el => el === false)) return true;
+        if (props.filterStatus.every(filter => filter === false)) return true;
         if (props.sideID === 1) {
             if (avsnitt.filtrer_gravid && props.filterStatus[0]) return true;
             if (avsnitt.filtrer_under_1 && props.filterStatus[1]) return true;
@@ -80,6 +80,17 @@ const Informasjonspanel: React.FC<Props> = (props) => {
         if (props.sideID === 4) {
             if (avsnitt.filtrer_utdanning && props.filterStatus[0]) return true;
             if (avsnitt.filtrer_arbeidssoker && props.filterStatus[1]) return true;
+        }
+        if (props.sideID === 5) {
+            if (avsnitt.filtrer_samvlivsbrudd && props.filterStatus[0]) return true;
+            if (avsnitt.filtrer_fra_fodsel && props.filterStatus[1]) return true;
+            if (avsnitt.filtrer_dodsfall && props.filterStatus[2]) return true;
+            if (avsnitt.filtrer_mer_enn_60 && props.filterStatus[3]) return true;
+            if (avsnitt.filtrer_mindre_enn_60 && props.filterStatus[4]) return true;
+            if (avsnitt.filtrer_i_arbeid && props.filterStatus[5]) return true;
+            if (avsnitt.filtrer_utdanning && props.filterStatus[6]) return true;
+            if (avsnitt.filtrer_arbeidssoker && props.filterStatus[7]) return true;
+            if (avsnitt.filtrer_ikke_arbeid && props.filterStatus[8]) return true;
         }
         return false;
     }

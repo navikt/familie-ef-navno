@@ -12,7 +12,7 @@ const Alenemedbarn = () => {
     const [side, setSide] = useState<any>({});
     const [filter, setFilter] = useState<boolean[]>([]);
     const relevantCheckboxData = checkboxData.alenemedbarn;
-    const sideID = 2;
+    const sideID = 5;
     useEffect(() => {
         client
             .fetch(hentSideQuery, { type: 'side', side_id: sideID })
@@ -21,7 +21,6 @@ const Alenemedbarn = () => {
                 setFilter(new Array(relevantCheckboxData.map((obj: any) => obj.texts.length)
                     .reduce((a: number, b: number) => a + b))
                     .fill(false));
-                console.log(res)
             });
     }, []);
 
@@ -33,10 +32,10 @@ const Alenemedbarn = () => {
         return (
             <div className="side">
                 <Helmet>
-                    <title>Barnetilsynsstønad</title>
+                    <title>Alene med barn</title>
                 </Helmet>
                 <div className="banner">
-                    <h1>Stønad til barnetilsyn for enslig mor eller far i arbeid</h1>
+                    <h1>Alene med barn - hva nå?</h1>
                 </div>
                 <div className="breadcrumb">
                     <p className="breadcrumb-link">

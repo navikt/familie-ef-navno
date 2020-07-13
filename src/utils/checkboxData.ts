@@ -8,13 +8,13 @@ const checkboxData = {
                 groupName: 'Hva er situasjonen din?',
                 texts: ['Jeg er i arbeid', 'Jeg tar eller skal ta utdanning', 'Jeg er arbeidssøker', 
                         'Jeg etablerer egen virksomhet', 'Jeg er syk eller har sykt barn',
-                        'Jeg har et barn som trenger særlig tilsyn', 'Jeg mangler barnepass']
+                        'Jeg har et barn som trenger særlig tilsyn', 'Jeg mangler barnepass'],
             }
         ],
     barnetilsynsstonad:  [
             {
                 groupName: 'Hva er situasjonen din?',
-                texts: ['Jeg er i arbeid', 'Jeg etablerer egen virksomhet', 'Jeg er syk']
+                texts: ['Jeg er i arbeid', 'Jeg etablerer egen virksomhet', 'Jeg er syk'],
             },
         ],
     tilleggsstønad: [
@@ -32,12 +32,14 @@ const checkboxData = {
                 texts: ['På grunn av samlivsbrudd', 'Alene med barn fra fødsel', 'På grunn av dødsfall'],
             },
             {
-                groupName: 'Hvor mye av en daglige omsorgen for barn har du?',
-                texts: ['Jeg har 60 prosent eller mer av den daglige omsorgen', 'Jeg har mindre enn 60% av den daglige omsorgen'],
+                groupName: 'Hvor mye av den daglige omsorgen for barn har du?',
+                texts: ['Jeg har 60 prosent eller mer av den daglige omsorgen', 
+                        'Jeg har mindre enn 60% av den daglige omsorgen'],
             },
             {
                 groupName: 'Hva er arbeidssituasjonen din?',
-                texts: ['Jeg er i arbeid', 'Jeg tar eller skal ta utdanning', 'Jeg er arbeidssøker', 'Jeg er ikke i arbeid, utdanning eller søker jobb'],
+                texts: ['Jeg er i arbeid', 'Jeg tar eller skal ta utdanning', 'Jeg er arbeidssøker', 
+                        'Jeg er ikke i arbeid, utdanning eller søker jobb'],
             },
         ],
 }
