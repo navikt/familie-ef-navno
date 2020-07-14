@@ -14,6 +14,7 @@ const Barnetilsynstonad = () => {
     const relevantCheckboxData = checkboxData.barnetilsynsstonad;
     const [sideOpen, setSideOpen] = useState<boolean>(false);
     const sideID = 2;
+    const visSisteLenker = true;
     useEffect(() => {
         client
             .fetch(hentSideQuery, { type: 'side', side_id: sideID })
@@ -69,6 +70,7 @@ const Barnetilsynstonad = () => {
                                 null}
                             <Temameny
                                 temaer={side.artikler.map((artikkel: any) => ({ tittel: artikkel.tittel_i_liste, id: artikkel._id }))}
+                                visSisteLenker={visSisteLenker}
                             />
                         </div>
                     </div>

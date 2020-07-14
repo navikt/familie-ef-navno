@@ -12,8 +12,9 @@ const Alenemedbarn = () => {
     const [side, setSide] = useState<any>({});
     const [filter, setFilter] = useState<boolean[]>([]);
     const relevantCheckboxData = checkboxData.alenemedbarn;
-    const sideID = 5;
     const [sideOpen, setSideOpen] = useState<boolean>(false);
+    const sideID = 5;
+    const visSisteLenker = false;
     useEffect(() => {
         client
             .fetch(hentSideQuery, { type: 'side', side_id: sideID })
@@ -68,6 +69,7 @@ const Alenemedbarn = () => {
                                 null}
                             <Temameny
                                 temaer={side.artikler.map((artikkel: any) => ({ tittel: artikkel.tittel_i_liste, id: artikkel._id }))}
+                                visSisteLenker={visSisteLenker}
                             />
                         </div>
                     </div>

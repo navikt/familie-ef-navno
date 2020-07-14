@@ -12,10 +12,10 @@ const Overgangsstonad = () => {
     const [side, setSide] = useState<any>({});
     const [filter, setFilter] = useState<boolean[]>([]);
     const relevantCheckboxData = checkboxData.overgangsstonad;
-    const sideID = 1;
     const [sideOpen, setSideOpen] = useState<boolean>(false); 
     const pageRef = useRef(null); 
-
+    const sideID = 1;
+    const visSisteLenker = true;
     useEffect(() => {
         client
             .fetch(hentSideQuery, { type: 'side', side_id: sideID })
@@ -73,6 +73,7 @@ const Overgangsstonad = () => {
                                 null}
                             <Temameny
                                 temaer={side.artikler.map((artikkel: any) => ({ tittel: artikkel.tittel_i_liste, id: artikkel._id }))}
+                                visSisteLenker={visSisteLenker}
                             />
                         </div>
                     </div>
