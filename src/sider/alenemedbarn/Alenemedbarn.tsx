@@ -13,6 +13,7 @@ const Alenemedbarn = () => {
     const [filter, setFilter] = useState<boolean[]>([]);
     const relevantCheckboxData = checkboxData.alenemedbarn;
     const sideID = 5;
+    const [sideOpen, setSideOpen] = useState<boolean>(false);
     useEffect(() => {
         client
             .fetch(hentSideQuery, { type: 'side', side_id: sideID })
@@ -26,6 +27,18 @@ const Alenemedbarn = () => {
 
     const handleFilterChange = (filterStatus: boolean[]) => {
         setFilter(filterStatus);
+    };
+
+    const handleOpen = (open: boolean) => {
+        setSideOpen(open);
+        
+        if(open){
+            scrollTop();
+        }
+    };
+
+    const scrollTop = () => {
+        window.scrollTo({top: 0, behavior: 'smooth'});
     };
 
     if (side.artikler !== undefined) {
@@ -50,6 +63,7 @@ const Alenemedbarn = () => {
                                     filterStatus={filter}
                                     checkboxData={relevantCheckboxData}
                                     handleChange={handleFilterChange}
+                                    handleOpen={handleOpen}
                                 /> :
                                 null}
                             <Temameny

@@ -14,7 +14,6 @@ const Overgangsstonad = () => {
     const relevantCheckboxData = checkboxData.overgangsstonad;
     const sideID = 1;
     const [sideOpen, setSideOpen] = useState<boolean>(false); 
-    let height = document.getElementById('sticky_overgangsstonad')?.clientHeight;
     const pageRef = useRef(null); 
 
     useEffect(() => {
@@ -45,7 +44,6 @@ const Overgangsstonad = () => {
     };
 
     if (side.artikler !== undefined) {
-        console.log("høyde", document.getElementById('sticky_overgangsstonad')?.clientHeight)
         return (
             <div className="side" ref={pageRef}>
                 <Helmet>
