@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, createRef, useRef } from 'react';
 import { client, hentSideQuery } from '../../utils/sanity';
 import { Helmet } from 'react-helmet';
 import Temameny from '../../components/Temameny';
@@ -13,6 +13,10 @@ const Overgangsstonad = () => {
     const [filter, setFilter] = useState<boolean[]>([]);
     const relevantCheckboxData = checkboxData.overgangsstonad;
     const sideID = 1;
+    const [sideOpen, setSideOpen] = useState<boolean>(false); 
+    let height = document.getElementById('sticky_overgangsstonad')?.clientHeight;
+    const pageRef = useRef(null); 
+
     useEffect(() => {
         client
             .fetch(hentSideQuery, { type: 'side', side_id: sideID })
@@ -28,9 +32,22 @@ const Overgangsstonad = () => {
         setFilter(filterStatus);
     };
 
+    const handleOpen = (open: boolean) => {
+        setSideOpen(open);
+        
+        if(open){
+            scrollTop();
+        }
+    }
+
+    const scrollTop = () => {
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    };
+
     if (side.artikler !== undefined) {
+        console.log("høyde", document.getElementById('sticky_overgangsstonad')?.clientHeight)
         return (
-            <div className="side">
+            <div className="side" ref={pageRef}>
                 <Helmet>
                     <title>Overgangsstønad</title>
                 </Helmet>
@@ -44,12 +61,16 @@ const Overgangsstonad = () => {
                 </div>
                 <div className="sideinnhold">
                     <div className="sideinfo">
-                        <div className="sticky">
+                        <div
+                            className={sideOpen ? '' : 'sticky'} 
+                            id='sticky_overgangsstonad'
+                        >
                             {relevantCheckboxData.length ?
                                 <Tilpasningsboks
                                     filterStatus={filter}
                                     checkboxData={relevantCheckboxData}
                                     handleChange={handleFilterChange}
+                                    handleOpen={handleOpen}
                                 /> :
                                 null}
                             <Temameny

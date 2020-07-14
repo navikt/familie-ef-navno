@@ -9,6 +9,7 @@ interface Props {
     filterStatus: boolean[];
     checkboxData: any[];
     handleChange: (filterStatus: boolean[]) => void;
+    handleOpen: (open: boolean) => void;
 }
 
 const Tilpasningsboks: React.FC<Props> = props => {
@@ -30,6 +31,7 @@ const Tilpasningsboks: React.FC<Props> = props => {
     const handleButtonClick = () => {
         props.handleChange(filter);
         setShowComponents(!showComponent);
+        props.handleOpen(!showComponent);
     }
 
     const cumulativeSum = (sum => (value: number) => sum += value)(0);
