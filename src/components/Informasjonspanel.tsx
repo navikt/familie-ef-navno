@@ -49,7 +49,7 @@ const serializers = {
             return tall.tallverdi
         },
         datoreferanse: (props: any) => {
-            const {dato} = props.mark;
+            const { dato } = props.mark;
             return dato.dato;
         }
     }
@@ -58,7 +58,6 @@ const serializers = {
 const Informasjonspanel: React.FC<Props> = (props) => {
 
     const filterCheck = (avsnitt: any) => {
-        console.log(avsnitt)
         if (avsnitt.filtrer_blir_staende) return true;
         if (props.filterStatus.every(filter => filter === false)) return true;
         if (props.sideID === 1) {
@@ -106,10 +105,13 @@ const Informasjonspanel: React.FC<Props> = (props) => {
             {props.avsnitt !== undefined ? props.avsnitt.map((avsnitt: any, index: number) => (
                 filterCheck(avsnitt) ?
                     <div key={avsnitt._id} id={avsnitt._id}>
-                        <BlockContent
-                            blocks={avsnitt.avsnitt_innhold}
-                            serializers={serializers}
-                        />
+                        {avsnitt.avsnitt_innhold ?
+                            <BlockContent
+                                blocks={avsnitt.avsnitt_innhold}
+                                serializers={serializers}
+                            />
+                            : null
+                        }
                         {avsnitt._type === "tabell" ?
                             <Tabell rows={avsnitt?.tabelldata?.rows} />
                             : null}
@@ -123,7 +125,7 @@ const Informasjonspanel: React.FC<Props> = (props) => {
                             (props.side === 1 ? <KalkulatorOvergangsstonad key={avsnitt._id + index} /> : <KalkulatorBarnetilsyn key={avsnitt._id + index} />)
                             : null
                         }
-                        {avsnitt.dokument ? 
+                        {avsnitt.dokument ?
                             <Ekspanderbartpanel tittel="Dette må du dokumentere">
                                 <BlockContent
                                     blocks={avsnitt.dokument}

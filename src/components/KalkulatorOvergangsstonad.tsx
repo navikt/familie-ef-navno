@@ -11,7 +11,7 @@ interface Props {
 const KalkulatorOvergangsstonad: React.FC<Props> = (props) => {
     const [sum, setSum] = useState<number>(0);
     const [grunnbelop, setGrunnbelop] = useState<number>(0);
-    const [inntekt, setInntekt] = useState<number|undefined>();
+    const [inntekt, setInntekt] = useState<number>();
     const [feil, setFeil] = useState<boolean|string>(false);
     const [visResultat, setVisResultat] = useState<boolean>(false);
 
@@ -27,7 +27,7 @@ const KalkulatorOvergangsstonad: React.FC<Props> = (props) => {
         let uredusertOS = Math.round((grunnbelop*2.25)/12);
         let halvtGrunnbelop = grunnbelop/2;
 
-        if(inntekt !== undefined && inntekt){
+        if(inntekt && inntekt){
             let arsinntekt = Math.floor(inntekt*12/1000)*1000;
             setFeil(false);
             if(arsinntekt <= halvtGrunnbelop){

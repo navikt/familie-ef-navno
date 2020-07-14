@@ -7,17 +7,19 @@ interface Props {
 const Tabell: React.FC<Props> = ({ rows }) => {
 
     return (
-        <table className="tabell" style={{width: '85%'}}>
+        <table className="tabell" style={{ width: '85%' }}>
             <thead>
-                {rows[0].cells.map((cell: any) => (
-                    <th>{cell}</th>
-                ))}
+                <tr>
+                    {rows[0].cells.map((cell: any, index: number) => (
+                        <th key={index}>{cell}</th>
+                    ))}
+                </tr>
             </thead>
             <tbody>
                 {rows.slice(1).map((row: any) => (
-                    <tr>
-                        {row.cells.map((cell: any) => (
-                            <td>{cell}</td>
+                    <tr key={row._key}>
+                        {row.cells.map((cell: any, index: number) => (
+                            <td key={index}>{cell}</td>
                         ))}
                     </tr>
                 ))}

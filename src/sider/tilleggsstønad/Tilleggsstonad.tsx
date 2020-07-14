@@ -24,7 +24,7 @@ const Barnetilsynstonad = () => {
                     .reduce((a: number, b: number) => a + b))
                     .fill(false));
             })
-    }, []);
+    }, [relevantCheckboxData]);
 
     const handleFilterChange = (filterStatus: boolean[]) => {
         setFilter(filterStatus);
@@ -58,7 +58,7 @@ const Barnetilsynstonad = () => {
                 </div>
                 <div className="sideinnhold">
                     <div className="sideinfo">
-                        <div className="sticky">
+                        <div className={sideOpen ? '' : 'sticky'}>
                             {relevantCheckboxData.length ?
                                 <Tilpasningsboks
                                     filterStatus={filter}
