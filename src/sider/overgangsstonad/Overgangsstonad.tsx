@@ -12,7 +12,7 @@ const Overgangsstonad = () => {
     const [side, setSide] = useState<any>({});
     const [filter, setFilter] = useState<boolean[]>([]);
     const relevantCheckboxData = checkboxData.overgangsstonad;
-    const [sideOpen, setSideOpen] = useState<boolean>(false); 
+    const [sideOpen, setSideOpen] = useState<boolean>(false);
     const sideID = 1;
     const visSisteLenker = true;
     useEffect(() => {
@@ -32,21 +32,21 @@ const Overgangsstonad = () => {
 
     const handleOpen = (open: boolean) => {
         setSideOpen(open);
-        
-        if(open){
+
+        if (open) {
             scrollTop();
         }
     }
 
     const scrollTop = () => {
-        window.scrollTo({top: 0, behavior: 'smooth'});
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     if (side.artikler !== undefined) {
         return (
             <div className="side">
                 <Helmet>
-                    <title>Overgangsstønad</title>
+                    <title>{side.hovedtittel}</title>
                 </Helmet>
                 <div className="banner">
                     <h1>Overgangsstønad for enslig mor og far</h1>
@@ -59,7 +59,7 @@ const Overgangsstonad = () => {
                 <div className="sideinnhold">
                     <div className="sideinfo">
                         <div
-                            className={sideOpen ? '' : 'sticky'} 
+                            className={sideOpen ? '' : 'sticky'}
                             id='sticky_overgangsstonad'
                         >
                             {relevantCheckboxData.length ?

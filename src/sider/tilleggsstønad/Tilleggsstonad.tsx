@@ -46,7 +46,7 @@ const Barnetilsynstonad = () => {
         return (
             <div className="side">
                 <Helmet>
-                    <title>tilleggsstønad</title>
+                    <title>{side.hovedtittel}</title>
                 </Helmet>
                 <div className="banner">
                     <h1>Tilleggsstønader for enslig mor eller far som tar utdanning eller er arbeidssøker</h1>

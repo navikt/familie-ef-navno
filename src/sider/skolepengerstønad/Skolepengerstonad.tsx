@@ -47,7 +47,7 @@ const Skolepengerstonad = () => {
         return (
             <div className="side">
                 <Helmet>
-                    <title>Skolepengerstønad</title>
+                    <title>{side.hovedtittel}</title>
                 </Helmet>
                 <div className="banner">
                     <h1>Stønad til skolepenger for enslig mor eller far som tar utdanning</h1>
