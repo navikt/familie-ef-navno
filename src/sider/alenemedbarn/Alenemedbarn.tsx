@@ -8,13 +8,13 @@ import NavFrontendSpinner from 'nav-frontend-spinner';
 import checkboxData from '../../utils/checkboxData';
 import { Alert } from '../../components/Alert';
 
-const Barnetilsynstonad = () => {
+const Alenemedbarn = () => {
     const [side, setSide] = useState<any>({});
     const [filter, setFilter] = useState<boolean[]>([]);
-    const relevantCheckboxData = checkboxData.tilleggsstønad;
-    const [sideOpen, setSideOpen] = useState<boolean>(false); 
-    const sideID = 4;
-    const visSisteLenker = true;
+    const relevantCheckboxData = checkboxData.alenemedbarn;
+    const [sideOpen, setSideOpen] = useState<boolean>(false);
+    const sideID = 5;
+    const visSisteLenker = false;
     useEffect(() => {
         client
             .fetch(hentSideQuery, { type: 'side', side_id: sideID })
@@ -23,7 +23,7 @@ const Barnetilsynstonad = () => {
                 setFilter(new Array(relevantCheckboxData.map((obj: any) => obj.texts.length)
                     .reduce((a: number, b: number) => a + b))
                     .fill(false));
-            })
+            });
     }, []);
 
     const handleFilterChange = (filterStatus: boolean[]) => {
@@ -36,7 +36,7 @@ const Barnetilsynstonad = () => {
         if(open){
             scrollTop();
         }
-    }
+    };
 
     const scrollTop = () => {
         window.scrollTo({top: 0, behavior: 'smooth'});
@@ -46,19 +46,22 @@ const Barnetilsynstonad = () => {
         return (
             <div className="side">
                 <Helmet>
-                    <title>tilleggsstønad</title>
+                    <title>Alene med barn</title>
                 </Helmet>
                 <div className="banner">
-                    <h1>Tilleggsstønader for enslig mor eller far som tar utdanning eller er arbeidssøker</h1>
+                    <h1>Alene med barn - hva nå?</h1>
                 </div>
                 <div className="breadcrumb">
                     <p className="breadcrumb-link">
-                        <a href="https://www.nav.no/no/person">Forside</a>  /  <a href="https://www.nav.no/no/person/familie/enslig-mor-eller-far">Alene med barn </a>
+                        <a href="https://www.nav.no/no/person">Forside</a>  /  <a href="https://www.nav.no/no/person/familie/enslig-mor-eller-far">Enslig far eller mor </a>
                     </p>
                 </div>
                 <div className="sideinnhold">
                     <div className="sideinfo">
-                        <div className="sticky">
+                        <div 
+                            className={sideOpen ? '' : 'sticky'} 
+                            id='sticky_overgangsstonad'
+                        >
                             {relevantCheckboxData.length ?
                                 <Tilpasningsboks
                                     filterStatus={filter}
@@ -101,4 +104,4 @@ const Barnetilsynstonad = () => {
     );
 }
 
-export default Barnetilsynstonad;
+export default Alenemedbarn;

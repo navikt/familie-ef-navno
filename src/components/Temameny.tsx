@@ -8,6 +8,7 @@ interface Props {
     tittel: string,
     id: string,
   }];
+  visSisteLenker: boolean;
 }
 
 const Temameny: React.FC<Props> = (props) => {
@@ -26,6 +27,24 @@ const Temameny: React.FC<Props> = (props) => {
         </div>
       ))
       }
+      {props.visSisteLenker ? 
+        <div className='temameny-lenker'>
+          <a
+          href={'https://lovdata.no/nav/folketrygdloven/kap15'}
+          >
+            Hva sier loven?
+          </a>
+        </div> :
+        null}
+      {props.visSisteLenker ?
+        <div className='temameny-lenker'>
+          <a 
+          href={'https://www.nav.no/no/nav-og-samfunn/kontakt-nav/klage-ris-og-ros/klagerettigheter'}
+          >
+            Klagerettigheter
+          </a>
+        </div> :
+        null}
     </Panel >
   );
 }

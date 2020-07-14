@@ -12,11 +12,10 @@ const Overgangsstonad = () => {
     const [side, setSide] = useState<any>({});
     const [filter, setFilter] = useState<boolean[]>([]);
     const relevantCheckboxData = checkboxData.overgangsstonad;
-    const sideID = 1;
     const [sideOpen, setSideOpen] = useState<boolean>(false); 
-    let height = document.getElementById('sticky_overgangsstonad')?.clientHeight;
     const pageRef = useRef(null); 
-
+    const sideID = 1;
+    const visSisteLenker = true;
     useEffect(() => {
         client
             .fetch(hentSideQuery, { type: 'side', side_id: sideID })
@@ -45,7 +44,6 @@ const Overgangsstonad = () => {
     };
 
     if (side.artikler !== undefined) {
-        console.log("høyde", document.getElementById('sticky_overgangsstonad')?.clientHeight)
         return (
             <div className="side" ref={pageRef}>
                 <Helmet>
@@ -75,6 +73,7 @@ const Overgangsstonad = () => {
                                 null}
                             <Temameny
                                 temaer={side.artikler.map((artikkel: any) => ({ tittel: artikkel.tittel_i_liste, id: artikkel._id }))}
+                                visSisteLenker={visSisteLenker}
                             />
                         </div>
                     </div>

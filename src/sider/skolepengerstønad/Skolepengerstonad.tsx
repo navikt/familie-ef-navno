@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { client, hentSideQuery } from '../../utils/sanity';
 import { Helmet } from 'react-helmet';
 import Temameny from '../../components/Temameny';
@@ -14,6 +14,7 @@ const Skolepengerstonad = () => {
     const relevantCheckboxData = checkboxData.skolepengerstønad;
     const [sideOpen, setSideOpen] = useState<boolean>(false);
     const sideID = 3;
+    const visSisteLenker = true;
     useEffect(() => {
         client
             .fetch(hentSideQuery, { type: 'side', side_id: sideID })
@@ -69,6 +70,7 @@ const Skolepengerstonad = () => {
                                 null}
                             <Temameny
                                 temaer={side.artikler.map((artikkel: any) => ({ tittel: artikkel.tittel_i_liste, id: artikkel._id }))}
+                                visSisteLenker={visSisteLenker}
                             />
                         </div>
                     </div>

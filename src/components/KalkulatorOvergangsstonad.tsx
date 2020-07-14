@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Element } from 'nav-frontend-typografi';
 import { Input, Label } from 'nav-frontend-skjema';
 import { Knapp } from 'nav-frontend-knapper';
 import AlertStripe from 'nav-frontend-alertstriper';
