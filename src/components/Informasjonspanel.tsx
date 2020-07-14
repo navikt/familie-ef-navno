@@ -7,6 +7,7 @@ import { Alert } from './Alert';
 import KalkulatorOvergangsstonad from './KalkulatorOvergangsstonad';
 import KalkulatorBarnetilsyn from './KalkulatorBarnetilsyn';
 import Tabell from './Tabell';
+import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 
 interface Props {
     tittel: string;
@@ -46,9 +47,12 @@ const serializers = {
         },
         tallreferanse: (props: any) => {
             const { tall } = props.mark;
-            console.log("props", props)
             return tall.tallverdi
         },
+        datoreferanse: (props: any) => {
+            const {dato} = props.mark;
+            return dato.dato;
+        }
     }
 }
 
@@ -90,7 +94,7 @@ const Informasjonspanel: React.FC<Props> = (props) => {
             <h1>{props.tittel}</h1>
             {props.avsnitt !== undefined ? props.avsnitt.map((avsnitt: any, index: number) => (
                 filterCheck(avsnitt) ?
-                    <div key={avsnitt._id}>
+                    <div key={avsnitt._id} id={avsnitt._id}>
                         <BlockContent
                             blocks={avsnitt.avsnitt_innhold}
                             serializers={serializers}
@@ -99,13 +103,22 @@ const Informasjonspanel: React.FC<Props> = (props) => {
                             <Tabell rows={avsnitt?.tabelldata?.rows} />
                             : null}
                         {avsnitt.knapp?.tekst !== undefined ?
-                            <a href={avsnitt.knapp.lenke} className="lenkeknapp knapp">{avsnitt.knapp.tekst}</a>
+                            <a href={avsnitt.knapp.lenke} className={avsnitt.knapp.bla ? "lenkeknapp knapp knapp--hoved" : "lenkeknapp knapp"}>{avsnitt.knapp.tekst}</a>
                             : null}
                         {avsnitt.alertstripe !== undefined ?
                             <Alert alertstripe={avsnitt.alertstripe} topp={false} />
                             : null}
                         {avsnitt.kalkulator ?
                             (props.side === 1 ? <KalkulatorOvergangsstonad key={avsnitt._id + index} /> : <KalkulatorBarnetilsyn key={avsnitt._id + index} />)
+                            : null
+                        }
+                        {avsnitt.dokument ? 
+                            <Ekspanderbartpanel tittel="Dette må du dokumentere">
+                                <BlockContent
+                                    blocks={avsnitt.dokument}
+                                    serializers={serializers}
+                                />
+                            </Ekspanderbartpanel>
                             : null
                         }
                     </div>
