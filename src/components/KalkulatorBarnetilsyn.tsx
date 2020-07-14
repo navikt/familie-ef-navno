@@ -28,7 +28,6 @@ const KalkulatorBarnetilsyn = () => {
     const [visResultat, setVisResultat] = useState<boolean>(false);
 
     const beregn = () => {
-        console.log(utgifterBarnepass)
         if (utgifterBarnepass && antBarn) {
             setFeil(false);
             setFeilAntBarn(false);
@@ -43,9 +42,8 @@ const KalkulatorBarnetilsyn = () => {
                 setSum(5993);
             }
             else {
-                setSum(stotte);
+                setSum(stotte > 0 ? stotte : 0);
             }
-            console.log("hei")
             setVisResultat(true);
             return;
         }
@@ -86,6 +84,7 @@ const KalkulatorBarnetilsyn = () => {
                     <Input
                         id="barnetilsyn-kalkulator-input1"
                         bredde="S"
+                        value={utgifterBarnepass}
                         inputMode="numeric"
                         pattern="[0-9]*"
                         onChange={(event: any) => !isNaN(event.target.value) ? setUtgifterBarnepass(parseInt(event.target.value)) : null}
@@ -100,6 +99,7 @@ const KalkulatorBarnetilsyn = () => {
                     <Input
                         id="barnetilsyn-kalkulator-input2"
                         bredde="S"
+                        value={kontaktstotte}
                         inputMode="numeric"
                         pattern="[0-9]*"
                         onChange={(event: any) => !isNaN(event.target.value) ? setKontantstotte(event.target.value) : null}

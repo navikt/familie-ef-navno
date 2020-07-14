@@ -1,4 +1,4 @@
-import React, { useEffect, useState, createRef, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { client, hentSideQuery } from '../../utils/sanity';
 import { Helmet } from 'react-helmet';
 import Temameny from '../../components/Temameny';
@@ -13,7 +13,6 @@ const Overgangsstonad = () => {
     const [filter, setFilter] = useState<boolean[]>([]);
     const relevantCheckboxData = checkboxData.overgangsstonad;
     const [sideOpen, setSideOpen] = useState<boolean>(false); 
-    const pageRef = useRef(null); 
     const sideID = 1;
     const visSisteLenker = true;
     useEffect(() => {
@@ -25,7 +24,7 @@ const Overgangsstonad = () => {
                     .reduce((a: number, b: number) => a + b))
                     .fill(false));
             })
-    }, []);
+    }, [relevantCheckboxData]);
 
     const handleFilterChange = (filterStatus: boolean[]) => {
         setFilter(filterStatus);
@@ -45,7 +44,7 @@ const Overgangsstonad = () => {
 
     if (side.artikler !== undefined) {
         return (
-            <div className="side" ref={pageRef}>
+            <div className="side">
                 <Helmet>
                     <title>Overgangsstønad</title>
                 </Helmet>

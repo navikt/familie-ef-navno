@@ -24,7 +24,7 @@ const Alenemedbarn = () => {
                     .reduce((a: number, b: number) => a + b))
                     .fill(false));
             });
-    }, []);
+    }, [relevantCheckboxData]);
 
     const handleFilterChange = (filterStatus: boolean[]) => {
         setFilter(filterStatus);

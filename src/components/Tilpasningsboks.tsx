@@ -18,6 +18,7 @@ const Tilpasningsboks: React.FC<Props> = props => {
     const [texts, setTexts] = useState<string[]>([]);
     const [accumulativeTextCount, setAccumulativeTextCount] = useState<number[]>([]);
     const cumulativeSum = (sum => (value: number) => sum += value)(0);
+    
     useEffect(() => {
         if (props.checkboxData.length) {
             setFilter(new Array(props.checkboxData.map((obj: any) => obj.texts.length)

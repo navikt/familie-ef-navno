@@ -23,9 +23,8 @@ const Barnetilsynstonad = () => {
                 setFilter(new Array(relevantCheckboxData.map((obj: any) => obj.texts.length)
                     .reduce((a: number, b: number) => a + b))
                     .fill(false));
-                console.log(res)
             });
-    }, []);
+    }, [relevantCheckboxData]);
 
     const handleFilterChange = (filterStatus: boolean[]) => {
         setFilter(filterStatus);
@@ -33,14 +32,14 @@ const Barnetilsynstonad = () => {
 
     const handleOpen = (open: boolean) => {
         setSideOpen(open);
-        
-        if(open){
+
+        if (open) {
             scrollTop();
         }
     }
 
     const scrollTop = () => {
-        window.scrollTo({top: 0, behavior: 'smooth'});
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     if (side.artikler !== undefined) {
@@ -59,7 +58,7 @@ const Barnetilsynstonad = () => {
                 </div>
                 <div className="sideinnhold">
                     <div className="sideinfo">
-                        <div className="sticky">
+                        <div className={sideOpen ? '' : 'sticky'}>
                             {relevantCheckboxData.length ?
                                 <Tilpasningsboks
                                     filterStatus={filter}
