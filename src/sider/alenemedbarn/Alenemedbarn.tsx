@@ -1,4 +1,4 @@
-import React, { useEffect, useState, createRef, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { client, hentSideQuery } from '../../utils/sanity';
 import { Helmet } from 'react-helmet';
 import Temameny from '../../components/Temameny';
@@ -8,14 +8,12 @@ import NavFrontendSpinner from 'nav-frontend-spinner';
 import checkboxData from '../../utils/checkboxData';
 import { Alert } from '../../components/Alert';
 
-const Overgangsstonad = () => {
+const Alenemedbarn = () => {
     const [side, setSide] = useState<any>({});
     const [filter, setFilter] = useState<boolean[]>([]);
-    const relevantCheckboxData = checkboxData.overgangsstonad;
-    const sideID = 1;
-    const [sideOpen, setSideOpen] = useState<boolean>(false); 
-    const pageRef = useRef(null); 
-
+    const relevantCheckboxData = checkboxData.alenemedbarn;
+    const sideID = 5;
+    const [sideOpen, setSideOpen] = useState<boolean>(false);
     useEffect(() => {
         client
             .fetch(hentSideQuery, { type: 'side', side_id: sideID })
@@ -24,7 +22,7 @@ const Overgangsstonad = () => {
                 setFilter(new Array(relevantCheckboxData.map((obj: any) => obj.texts.length)
                     .reduce((a: number, b: number) => a + b))
                     .fill(false));
-            })
+            });
     }, []);
 
     const handleFilterChange = (filterStatus: boolean[]) => {
@@ -37,7 +35,7 @@ const Overgangsstonad = () => {
         if(open){
             scrollTop();
         }
-    }
+    };
 
     const scrollTop = () => {
         window.scrollTo({top: 0, behavior: 'smooth'});
@@ -45,24 +43,21 @@ const Overgangsstonad = () => {
 
     if (side.artikler !== undefined) {
         return (
-            <div className="side" ref={pageRef}>
+            <div className="side">
                 <Helmet>
-                    <title>Overgangsstønad</title>
+                    <title>Alene med barn</title>
                 </Helmet>
                 <div className="banner">
-                    <h1>Overgangsstønad for enslig mor og far</h1>
+                    <h1>Alene med barn - hva nå?</h1>
                 </div>
                 <div className="breadcrumb">
                     <p className="breadcrumb-link">
-                        <a href="https://www.nav.no/no/person">Forside</a>  /  <a href="https://www.nav.no/no/person/familie/enslig-mor-eller-far">Alene med barn </a>
+                        <a href="https://www.nav.no/no/person">Forside</a>  /  <a href="https://www.nav.no/no/person/familie/enslig-mor-eller-far">Enslig far eller mor </a>
                     </p>
                 </div>
                 <div className="sideinnhold">
                     <div className="sideinfo">
-                        <div
-                            className={sideOpen ? '' : 'sticky'} 
-                            id='sticky_overgangsstonad'
-                        >
+                        <div className="sticky">
                             {relevantCheckboxData.length ?
                                 <Tilpasningsboks
                                     filterStatus={filter}
@@ -89,7 +84,6 @@ const Overgangsstonad = () => {
                                 bilde={artikkel.bilde}
                                 alttekst={artikkel.alttekst}
                                 id={artikkel._id}
-                                side={sideID}
                                 avsnitt={artikkel?.avsnitt}
                                 filterStatus={filter}
                                 sideID={sideID}
@@ -105,4 +99,4 @@ const Overgangsstonad = () => {
     );
 }
 
-export default Overgangsstonad; 
+export default Alenemedbarn;
