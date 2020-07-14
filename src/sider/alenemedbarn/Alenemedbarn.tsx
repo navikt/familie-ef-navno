@@ -46,7 +46,7 @@ const Alenemedbarn = () => {
         return (
             <div className="side">
                 <Helmet>
-                    <title>Alene med barn</title>
+                    <title>{side.hovedtittel}</title>
                 </Helmet>
                 <div className="banner">
                     <h1>Alene med barn - hva nå?</h1>
