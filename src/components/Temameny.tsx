@@ -2,6 +2,7 @@ import React from 'react';
 import Panel from 'nav-frontend-paneler';
 import { Undertittel } from 'nav-frontend-typografi';
 import { Link } from 'react-scroll';
+import ExternalLink from '../utils/symbols/ExternalLink';
 
 interface Props {
   temaer: [{
@@ -32,8 +33,10 @@ const Temameny: React.FC<Props> = (props) => {
           <a
           href={'https://lovdata.no/nav/folketrygdloven/kap15'}
           >
-            Hva sier loven?
+            Hva sier loven? 
           </a>
+          <span>&nbsp;&nbsp;</span>
+          <ExternalLink />
         </div> :
         null}
       {props.visSisteLenker ?
@@ -41,8 +44,10 @@ const Temameny: React.FC<Props> = (props) => {
           <a 
           href={'https://www.nav.no/no/nav-og-samfunn/kontakt-nav/klage-ris-og-ros/klagerettigheter'}
           >
-            Klagerettigheter
+            Klagerettigheter 
           </a>
+          <span>&nbsp;&nbsp;</span>
+          <ExternalLink />
         </div> :
         null}
     </Panel >
