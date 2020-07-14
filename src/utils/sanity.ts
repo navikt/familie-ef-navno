@@ -25,9 +25,12 @@ export const hentSideQuery = `*[_type == $type && side_id == $side_id][0]{
     ...,
         markDefs[]{
         ...,
-        _type == 'tallreferanse' => {
-            'tall': *[_type == 'tall' && _id == ^.reference._ref][0]{tallverdi}
-        }
+            _type == 'tallreferanse' => {
+                'tall': *[_type == 'tall' && _id == ^.reference._ref][0]{tallverdi}
+            },
+            _type == 'datoreferanse' => {
+                'dato': *[_type == 'dato' && _id == ^.reference._ref][0]{dato}
+            }
         }
     }
 }}}`;
