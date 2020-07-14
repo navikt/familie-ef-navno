@@ -57,6 +57,7 @@ const serializers = {
 const Informasjonspanel: React.FC<Props> = (props) => {
 
     const filterCheck = (avsnitt: any) => {
+        console.log(avsnitt)
         if (avsnitt.filtrer_blir_staende) return true;
         if (props.filterStatus.every(filter => filter === false)) return true;
         if (props.sideID === 1) {
@@ -90,7 +91,7 @@ const Informasjonspanel: React.FC<Props> = (props) => {
             if (avsnitt.filtrer_i_arbeid && props.filterStatus[5]) return true;
             if (avsnitt.filtrer_utdanning && props.filterStatus[6]) return true;
             if (avsnitt.filtrer_arbeidssoker && props.filterStatus[7]) return true;
-            if (avsnitt.filtrer_ikke_arbeid && props.filterStatus[8]) return true;
+            if (avsnitt.filter_ikke_arbeid && props.filterStatus[8]) return true;
         }
         return false;
     }

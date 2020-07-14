@@ -39,7 +39,7 @@ const Alenemedbarn = () => {
                 </div>
                 <div className="breadcrumb">
                     <p className="breadcrumb-link">
-                        <a href="https://www.nav.no/no/person">Forside</a>  /  <a href="https://www.nav.no/no/person/familie/enslig-mor-eller-far">Alene med barn </a>
+                        <a href="https://www.nav.no/no/person">Forside</a>  /  <a href="https://www.nav.no/no/person/familie/enslig-mor-eller-far">Enslig far eller mor </a>
                     </p>
                 </div>
                 <div className="sideinnhold">
