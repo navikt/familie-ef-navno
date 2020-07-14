@@ -58,7 +58,10 @@ const Alenemedbarn = () => {
                 </div>
                 <div className="sideinnhold">
                     <div className="sideinfo">
-                        <div className="sticky">
+                        <div 
+                            className={sideOpen ? '' : 'sticky'} 
+                            id='sticky_overgangsstonad'
+                        >
                             {relevantCheckboxData.length ?
                                 <Tilpasningsboks
                                     filterStatus={filter}
