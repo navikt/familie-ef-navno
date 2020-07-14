@@ -1,8 +1,7 @@
-import React, { Children } from 'react';
+import React from 'react';
 import Panel from 'nav-frontend-paneler';
-import { Innholdstittel, Systemtittel, Normaltekst } from 'nav-frontend-typografi';
 import { Link } from 'react-scroll';
-import { BlockContent, hentTall, client } from '../utils/sanity';
+import { BlockContent } from '../utils/sanity';
 import { Alert } from './Alert';
 import KalkulatorOvergangsstonad from './KalkulatorOvergangsstonad';
 import KalkulatorBarnetilsyn from './KalkulatorBarnetilsyn';
