@@ -29,23 +29,20 @@ const Temameny: React.FC<Props> = (props) => {
       }
       {props.visSisteLenker ? 
         <div className='temameny-lenker'>
-          <Link
-            to={'https://lovdata.no/nav/folketrygdloven/kap15'} 
-            spy={true} 
-            smooth={true}
-            >
+          <a
+          href={'https://lovdata.no/nav/folketrygdloven/kap15'}
+          >
             Hva sier loven?
-          </Link>
+          </a>
         </div> :
         null}
       {props.visSisteLenker ?
         <div className='temameny-lenker'>
-          <Link to={'https://www.nav.no/no/nav-og-samfunn/kontakt-nav/klage-ris-og-ros/klagerettigheter'} 
-          spy={true} 
-          smooth={true}
+          <a 
+          href={'https://www.nav.no/no/nav-og-samfunn/kontakt-nav/klage-ris-og-ros/klagerettigheter'}
           >
             Klagerettigheter
-          </Link>
+          </a>
         </div> :
         null}
     </Panel >
