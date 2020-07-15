@@ -46,7 +46,6 @@ const Overgangsstonad = () => {
     };
 
     if (side.artikler !== undefined) {
-        console.log("høyde1", sideMenuHeight)
         return (
             <div className="side">
                 <Helmet>
