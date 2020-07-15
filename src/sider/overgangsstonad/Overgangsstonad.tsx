@@ -15,6 +15,9 @@ const Overgangsstonad = () => {
     const [sideOpen, setSideOpen] = useState<boolean>(false);
     const sideID = 1;
     const visSisteLenker = true;
+    let sideMenuHeight = document.getElementById("sticky_overgangsstonad")?.clientHeight;
+    let vinduHoyde = window.innerHeight;
+
     useEffect(() => {
         client
             .fetch(hentSideQuery, { type: 'side', side_id: sideID })
@@ -43,6 +46,7 @@ const Overgangsstonad = () => {
     };
 
     if (side.artikler !== undefined) {
+        console.log("høyde1", sideMenuHeight)
         return (
             <div className="side">
                 <Helmet>
@@ -59,7 +63,7 @@ const Overgangsstonad = () => {
                 <div className="sideinnhold">
                     <div className="sideinfo">
                         <div
-                            className={sideOpen ? '' : 'sticky'}
+                            className={sideMenuHeight ? (sideMenuHeight >= vinduHoyde ? '' : (sideOpen ? '' : 'sticky')): 'sticky'}
                             id='sticky_overgangsstonad'
                         >
                             {relevantCheckboxData.length ?

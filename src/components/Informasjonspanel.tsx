@@ -101,41 +101,37 @@ const Informasjonspanel: React.FC<Props> = (props) => {
                 <img src={props.bilde} alt={props.alttekst} />
             </div>
             <h1>{props.tittel}</h1>
-            {props.avsnitt !== undefined ? props.avsnitt.map((avsnitt: any, index: number) => (
-                filterCheck(avsnitt) ?
+            {props.avsnitt !== undefined && props.avsnitt.map((avsnitt: any, index: number) => (
+                filterCheck(avsnitt) &&
                     <div key={avsnitt._id} id={avsnitt._id}>
-                        {avsnitt.avsnitt_innhold ?
+                        {avsnitt.avsnitt_innhold &&
                             <BlockContent
                                 blocks={avsnitt.avsnitt_innhold}
                                 serializers={serializers}
                             />
-                            : null
                         }
-                        {avsnitt._type === "tabell" ?
+                        {avsnitt._type === "tabell" &&
                             <Tabell rows={avsnitt?.tabelldata?.rows} />
-                            : null}
-                        {avsnitt.knapp?.tekst !== undefined ?
-                            <a href={avsnitt.knapp.lenke} className={avsnitt.knapp.bla ? "lenkeknapp knapp knapp--hoved" : "lenkeknapp knapp"}>{avsnitt.knapp.tekst}</a>
-                            : null}
-                        {avsnitt.alertstripe !== undefined ?
-                            <Alert alertstripe={avsnitt.alertstripe} topp={false} />
-                            : null}
-                        {avsnitt.kalkulator ?
-                            (props.side === 1 ? <KalkulatorOvergangsstonad key={avsnitt._id + index} /> : <KalkulatorBarnetilsyn key={avsnitt._id + index} />)
-                            : null
                         }
-                        {avsnitt.dokument ?
+                        {avsnitt.knapp?.tekst !== undefined &&
+                            <a href={avsnitt.knapp.lenke} target="_blank" rel="noopener noreferrer" className={avsnitt.knapp.bla ? "lenkeknapp knapp knapp--hoved" : "lenkeknapp knapp"}>{avsnitt.knapp.tekst}</a>
+                        }
+                        {avsnitt.alertstripe !== undefined &&
+                            <Alert alertstripe={avsnitt.alertstripe} topp={false} />
+                        }
+                        {avsnitt.kalkulator &&
+                            (props.side === 1 ? <KalkulatorOvergangsstonad key={avsnitt._id + index} /> : <KalkulatorBarnetilsyn key={avsnitt._id + index} />)
+                        }
+                        {avsnitt.dokument &&
                             <Ekspanderbartpanel tittel="Dette må du dokumentere">
                                 <BlockContent
                                     blocks={avsnitt.dokument}
                                     serializers={serializers}
                                 />
                             </Ekspanderbartpanel>
-                            : null
                         }
                     </div>
-                    : null
-            )) : null}
+            ))}
             {props.children}
         </Panel>
     );
