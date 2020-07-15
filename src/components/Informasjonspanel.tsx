@@ -22,7 +22,6 @@ interface Props {
 const serializers = {
     types: {
         tabell: (props: any) => {
-            console.log("tabell", props);
             return null;
         }
     },
