@@ -49,7 +49,7 @@ const Overgangsstonad = () => {
                     <title>{side.hovedtittel}</title>
                 </Helmet>
                 <div className="banner">
-                    <h1>Overgangsstønad for enslig mor og far</h1>
+                    <h1>Overgangsstønad til enslig mor eller far</h1>
                 </div>
                 <div className="breadcrumb">
                     <p className="breadcrumb-link">
