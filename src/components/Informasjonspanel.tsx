@@ -84,13 +84,13 @@ const Informasjonspanel: React.FC<Props> = (props) => {
         if (props.sideID === 5) {
             if (avsnitt.filtrer_samvlivsbrudd && props.filterStatus[0]) return true;
             if (avsnitt.filtrer_fra_fodsel && props.filterStatus[1]) return true;
-            if (avsnitt.filtrer_dodsfall && props.filterStatus[2]) return true;
             if (avsnitt.filtrer_mer_enn_60 && props.filterStatus[3]) return true;
             if (avsnitt.filtrer_mindre_enn_60 && props.filterStatus[4]) return true;
             if (avsnitt.filtrer_i_arbeid && props.filterStatus[5]) return true;
             if (avsnitt.filtrer_utdanning && props.filterStatus[6]) return true;
             if (avsnitt.filtrer_arbeidssoker && props.filterStatus[7]) return true;
             if (avsnitt.filter_ikke_arbeid && props.filterStatus[8]) return true;
+            if (avsnitt.filtrer_dodsfall && props.filterStatus[2]) return true;
         }
         return false;
     }
