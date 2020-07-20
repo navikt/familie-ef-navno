@@ -13,12 +13,14 @@ const Overgangsstonad = () => {
     const [filter, setFilter] = useState<boolean[]>([]);
     const relevantCheckboxData = checkboxData.overgangsstonad;
     const [sideOpen, setSideOpen] = useState<boolean>(false);
+    const [className, setClassName] = useState('sticky');
     const sideID = 1;
     const visSisteLenker = true;
     let sideMenuHeight = document.getElementById("sticky_overgangsstonad")?.clientHeight;
     let vinduHoyde = window.innerHeight;
 
     useEffect(() => {
+        setClassName(sideMenuHeight ? (sideMenuHeight >= vinduHoyde ? '' : 'sticky') : 'sticky');
         client
             .fetch(hentSideQuery, { type: 'side', side_id: sideID })
             .then((res: any) => {
@@ -38,6 +40,11 @@ const Overgangsstonad = () => {
 
         if (open) {
             scrollTop();
+            setClassName('')
+        }
+
+        else{
+            setClassName(sideMenuHeight ? (sideMenuHeight >= vinduHoyde ? '' : 'sticky') : 'sticky');
         }
     }
 
@@ -62,7 +69,7 @@ const Overgangsstonad = () => {
                 <div className="sideinnhold">
                     <div className="sideinfo">
                         <div
-                            className={sideMenuHeight ? (sideMenuHeight >= vinduHoyde ? '' : (sideOpen ? '' : 'sticky')): 'sticky'}
+                            className={className}
                             id='sticky_overgangsstonad'
                         >
                             {relevantCheckboxData.length ?
