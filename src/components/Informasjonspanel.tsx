@@ -50,6 +50,10 @@ const serializers = {
         datoreferanse: (props: any) => {
             const { dato } = props.mark;
             return dato.dato;
+        },
+        filreferanse: (props: any) => {
+            console.log(props);
+            return null;
         }
     }
 }

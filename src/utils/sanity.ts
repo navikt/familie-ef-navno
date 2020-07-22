@@ -30,6 +30,11 @@ export const hentSideQuery = `*[_type == $type && side_id == $side_id][0]{
             },
             _type == 'datoreferanse' => {
                 'dato': *[_type == 'dato' && _id == ^.reference._ref][0]{dato}
+            },
+            _type == 'filreferanse' => {
+                'pdf': *[_type == 'pdf' && _id == ^.reference._ref][0]{
+                  'url': pdf.asset -> url
+                }
             }
         }
     }
