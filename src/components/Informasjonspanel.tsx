@@ -52,7 +52,13 @@ const serializers = {
             return dato.dato;
         },
         filreferanse: (props: any) => {
-            console.log(props);
+            const { blank, pdf } = props.mark;
+            console.log(props.mark);
+            if (pdf) {
+            return blank ?
+                <a href={pdf.url} target="_blank" rel="noopener noreferrer" >{props.children}</a>
+                : <a href={pdf.url}>{props.children}</a>;
+            }
             return null;
         }
     }
