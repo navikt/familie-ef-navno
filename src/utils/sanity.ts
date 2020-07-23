@@ -37,7 +37,19 @@ export const hentSideQuery = `*[_type == $type && side_id == $side_id][0]{
                 }
             }
         }
-    }
+    },
+	dokument[]{
+    ...,
+    markDefs[]{
+        ...,
+            _type == 'filreferanse' => {
+                'pdf': *[_type == 'pdf' && _id == ^.reference._ref][0]{
+                  'url': pdf.asset -> url
+                }
+            }
+        }
+    
+  }
 }}}`;
 
 export const gammelHentSideQuery = `*[_type == $type && side_id == $side_id][0]{
