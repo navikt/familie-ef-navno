@@ -129,8 +129,11 @@ const Informasjonspanel: React.FC<Props> = (props) => {
                         {avsnitt.alertstripe !== undefined &&
                             <Alert alertstripe={avsnitt.alertstripe} topp={false} />
                         }
-                        {avsnitt.kalkulator &&
-                            (props.side === 1 ? <KalkulatorOvergangsstonad key={avsnitt._id + index} /> : <KalkulatorBarnetilsyn key={avsnitt._id + index} />)
+                        {avsnitt.kalkulator ?
+                            props.sideID === 1 ? <KalkulatorOvergangsstonad key={avsnitt._id + index} />
+                                : props.sideID === 2 ? <KalkulatorBarnetilsyn key={avsnitt._id + index} /> 
+                                    : null
+                            : null
                         }
                         {avsnitt.dokument &&
                             <Ekspanderbartpanel tittel="Dette må du dokumentere">
