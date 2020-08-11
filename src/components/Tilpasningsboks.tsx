@@ -28,6 +28,7 @@ const Tilpasningsboks: React.FC<Props> = props => {
             setAccumulativeTextCount([...[0],...props.checkboxData.map((obj: any) => obj.texts.length)
             .map(cumulativeSum)]);
         }
+        // eslint-disable-next-line
     }, []);
 
     const handleButtonClick = () => {

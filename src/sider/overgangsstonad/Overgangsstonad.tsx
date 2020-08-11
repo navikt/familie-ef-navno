@@ -29,6 +29,7 @@ const Overgangsstonad = () => {
                     .reduce((a: number, b: number) => a + b))
                     .fill(false));
             })
+        // eslint-disable-next-line
     }, [relevantCheckboxData]);
 
     const handleFilterChange = (filterStatus: boolean[]) => {
@@ -37,6 +38,7 @@ const Overgangsstonad = () => {
 
     const handleOpen = (open: boolean) => {
         setSideOpen(open);
+        console.log(sideOpen); // TODO: fjern eller bruk senere for å fjerne warnings
 
         if (open) {
             scrollTop();
