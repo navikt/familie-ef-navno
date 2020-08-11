@@ -1,0 +1,45 @@
+apiVersion: 'nais.io/v1alpha1'
+kind: 'Application'
+metadata:
+  name: familie-ef-navno
+  namespace: teamfamilie
+  labels:
+    team: teamfamilie
+spec:
+  image: {{ image }}
+  team: teamfamilie
+  replicas:
+    min: 1
+    max: 2
+    cpuThresholdPercentage: 50
+  port: 8080
+  liveness:
+    path: /
+  readiness:
+    path: /
+  prometheus:
+    enabled: true
+    path: /metrics
+  ingresses:
+    - "https://familie-ef-navno.dev.nav.no"
+    - "https://familie-gcp.dev.nav.no/familie/alene-med-barn/"
+  # accessPolicy:
+    # outbound:
+      # rules:
+        # - application: familie-ef-soknad-api
+      # external:
+        # - host: appres-q0.nav.no
+        # - host: loginservice-q.nav.no
+        # - host: unleashproxy.nais.oera.no
+  env:
+    - name: APP_VERSION
+      value: '{{version}}'
+    - name: APPRES_CMS_URL
+      value: https://appres-q0.nav.no
+
+  resources:
+    limits:
+      cpu: 2000m
+      memory: 1024Mi
+    requests:
+      memory: 512Mi
