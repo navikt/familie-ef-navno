@@ -1,14 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { client, hentLandingssideQuery } from '../../utils/sanity';
-import { Helmet } from 'react-helmet';
-import Temameny from '../../components/Temameny';
-import Informasjonspanel from '../../components/Informasjonspanel';
-import Tilpasningsboks from '../../components/Tilpasningsboks';
-import { Element, Normaltekst, Systemtittel } from 'nav-frontend-typografi';
+import { Element, Systemtittel } from 'nav-frontend-typografi';
 import NavFrontendSpinner from 'nav-frontend-spinner';
-import checkboxData from '../../utils/checkboxData';
-import { Alert } from '../../components/Alert';
-import { Link } from 'react-router-dom'
 import kvinne from '../../assets/kvinne.svg';
 import barn from '../../assets/barn.svg';
 import sjekkliste from '../../assets/sjekkliste.svg';
@@ -17,15 +10,13 @@ import tablet from '../../assets/tablet.svg';
 const Landingsside = () => {
     const [side, setSide] = useState<any>({});
 
-useEffect(() => {
-    client
-        .fetch(hentLandingssideQuery, { type: 'landingsside', side_id: 1 })
-        .then((res: any) => {
-            setSide(res);
-        })
-}, []);
-
-    console.log("Landing", side);
+    useEffect(() => {
+        client
+            .fetch(hentLandingssideQuery, { type: 'landingsside', side_id: 1 })
+            .then((res: any) => {
+                setSide(res);
+            })
+    }, []);
 
     if (side.hovedkort_1) return (
         <div className="landingsside">
