@@ -1,0 +1,106 @@
+.banner-landingsside {
+    height: 200px;
+    background-color: @navLillaLighten60;
+    text-align: center;
+    border-bottom: 4px solid #826ba1;   
+    width: 100vw;
+
+    .banner-innhold {
+        margin-top: 2rem;
+        display: inline-block;
+        text-align: left
+    }
+}
+
+.banner-landingsside h1{
+    font-size: 36px;
+    font-weight: 600;
+    display: inline-block;
+    vertical-align: middle;
+    color: @navMorkGra;
+}
+
+.ingress {
+    font-size: 24px;
+}
+
+.innhold-landingsside {
+    margin: 0 auto;
+    max-width: 852px;
+    margin-bottom: 8rem;
+}
+
+.hovedbokser {
+    margin-top: 4rem;
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-row-gap: 3rem;  
+    grid-column-gap: 3rem;  
+    
+    .hovedboks {
+        height: 400px;
+        width: 250px;
+    
+        &__header {
+          padding-top: 9rem;
+          box-sizing: border-box;
+          height: 128px;
+          background-color: @navLillaLighten60;
+          border-top-right-radius: 5px;
+          border-top-left-radius: 5px;
+          border-bottom: 4px solid #826ba1;
+          display: flex;
+          align-items: flex-end;
+    
+          .img-wrapper {
+            padding: 0;
+            margin: 0;
+            display: block;
+            margin: 0 auto;
+          }
+
+          img {
+              vertical-align: bottom;
+          }
+        }
+    
+        &__innhold {
+          text-align: center;
+          background-color: #fff;
+          padding: 1rem;
+          text-align: left;
+    
+          border-bottom-left-radius: 5px;
+          border-bottom-right-radius: 5px;
+
+          .boks-overskrift {
+            margin-bottom: 1rem;
+        }
+        }
+    }
+}
+
+.stønadsbokser {
+    margin-top: 3rem;
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-row-gap: 3rem;  
+    grid-column-gap: 3rem;
+
+    .boks {
+        background-color: white;
+        padding: 1rem;
+        text-align: left;
+        border-radius: 4px;
+
+        .boks-overskrift {
+            margin-bottom: 1rem;
+        }
+    }
+}
+
+.stønad-tittel {
+    text-align: center;
+}
