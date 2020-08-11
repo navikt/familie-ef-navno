@@ -8,6 +8,7 @@ import { Element, Normaltekst, Systemtittel } from 'nav-frontend-typografi';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import checkboxData from '../../utils/checkboxData';
 import { Alert } from '../../components/Alert';
+import { Link } from 'react-router-dom'
 import kvinne from '../../assets/kvinne.svg';
 import barn from '../../assets/barn.svg';
 import sjekkliste from '../../assets/sjekkliste.svg';
@@ -26,7 +27,7 @@ useEffect(() => {
 
     console.log("Landing", side);
 
-    return (
+    if (side.hovedkort_1) return (
         <div className="landingsside">
                 <div className="banner-landingsside">
                     <div className="banner-innhold">
@@ -40,7 +41,7 @@ useEffect(() => {
                 <div className="innhold-landingsside">
 
                     <div className="hovedbokser">
-
+                        <a href={side?.hovedkort_1?.boks_lenke} target="_blank" rel="noopener noreferrer">
                         <div className="hovedboks">
                         <div className="hovedboks__header">
                             <div className="img-wrapper">
@@ -48,41 +49,47 @@ useEffect(() => {
                             <img alt="barn" className="barneikon" src={barn} />
                             </div>
                         </div>
-                        <div className="hovedboks__innhold">
-                            <Element className="boks-overskrift">Overskrift</Element>
-                            <div className="hovedboks-tekst">
-                                tekst tekst yo
-                            </div>
-                        </div>
-                        </div>
 
-                        <div className="hovedboks">
-                        <div className="hovedboks__header">
-                            <div className="img-wrapper">
-                            <img alt="kvinne" className="sjekklisteikon" src={sjekkliste} />
-                            </div>
-                        </div>
                         <div className="hovedboks__innhold">
-                            <Element className="boks-overskrift">Overskrift</Element>
+                            <Element className="boks-overskrift">{side?.hovedkort_1?.boks_overskrift}</Element>
                             <div className="hovedboks-tekst">
-                                tekst tekst yo
+                                {side?.hovedkort_1?.boks_innhold}
                             </div>
                         </div>
                         </div>
+                        </a>
 
-                        <div className="hovedboks">
-                        <div className="hovedboks__header">
-                            <div className="img-wrapper">
-                            <img alt="kvinne" className="tabletikon" src={tablet} />
+                        <a href={side?.hovedkort_2?.boks_lenke} target="_blank" rel="noopener noreferrer">
+                            <div className="hovedboks">
+                            <div className="hovedboks__header">
+                                <div className="img-wrapper">
+                                <img alt="kvinne" className="sjekklisteikon" src={sjekkliste} />
+                                </div>
                             </div>
-                        </div>
-                        <div className="hovedboks__innhold">
-                            <Element className="boks-overskrift">Overskrift</Element>
-                            <div className="hovedboks-tekst">
-                                tekst tekst yo
+                            <div className="hovedboks__innhold">
+                                <Element className="boks-overskrift">{side?.hovedkort_2?.boks_overskrift}</Element>
+                                <div className="hovedboks-tekst">
+                                    {side?.hovedkort_2?.boks_innhold}
+                                </div>
                             </div>
-                        </div>
-                        </div>
+                            </div>
+                        </a>
+
+                        <a href={side?.hovedkort_3?.boks_lenke} target="_blank" rel="noopener noreferrer">
+                            <div className="hovedboks">
+                            <div className="hovedboks__header">
+                                <div className="img-wrapper">
+                                <img alt="kvinne" className="tabletikon" src={tablet} />
+                                </div>
+                            </div>
+                            <div className="hovedboks__innhold">
+                                <Element className="boks-overskrift">{side?.hovedkort_3?.boks_overskrift}</Element>
+                                <div className="hovedboks-tekst">
+                                    {side?.hovedkort_3?.boks_innhold}
+                                </div>
+                            </div>
+                            </div>
+                        </a>
 
                     </div>
 
@@ -90,17 +97,22 @@ useEffect(() => {
                         <Systemtittel className="stønad-tittel">Aktuelle stønader</Systemtittel>
                         <div className="stønadsbokser">
                             {side?.aktuelle_stonader?.map((stønad: any) => 
-                            <div className="boks">
-                                <Element className="boks-overskrift">{stønad.boks_overskrift}</Element>
-                                <div className="boks-innhold">
-                                    {stønad.boks_innhold}
+                            <a href={stønad.boks_lenke} target="_blank" rel="noopener noreferrer">
+                                <div className="boks" key={stønad._key}>
+                                    <Element className="boks-overskrift">{stønad.boks_overskrift}</Element>
+                                    <div className="boks-innhold">
+                                        {stønad.boks_innhold}
+                                    </div>
                                 </div>
-                            </div>)}
+                            </a>)}
                         </div>
                     </div>
                 </div>
         </div>
     )
+    return (
+        <NavFrontendSpinner />
+    );
 
 }
 
