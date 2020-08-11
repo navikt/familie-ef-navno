@@ -12,7 +12,7 @@ spec:
     min: 1
     max: 2
     cpuThresholdPercentage: 50
-  port: 8080
+  port: 3000
   liveness:
     path: /
   readiness:
