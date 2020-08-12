@@ -5,6 +5,7 @@ import Skolepengerstønad from './sider/skolepengerstønad/Skolepengerstonad';
 import Tilleggsstonad from './sider/tilleggsstønad/Tilleggsstonad';
 import Alenemedbarn from './sider/alenemedbarn/Alenemedbarn';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import Landingsside from './sider/landingsside/Landingsside';
 
 function App() {
     
@@ -26,6 +27,9 @@ function App() {
           </Route>
           <Route path={'/alenemedbarn'}>
             <Alenemedbarn />
+          </Route>
+          <Route path={'/'}>
+            <Landingsside />
           </Route>
         </Switch>
       </Router>
