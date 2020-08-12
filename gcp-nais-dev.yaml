@@ -14,12 +14,11 @@ spec:
     cpuThresholdPercentage: 50
   port: 3000
   liveness:
-    path: /
+    path: /familie-ef-navno/logo192.png
   readiness:
-    path: /
+    path: /familie-ef-navno/logo192.png
   prometheus:
-    enabled: true
-    path: /metrics
+    enabled: false
   ingresses:
     - "https://familie-ef-navno.dev.nav.no"
     - "https://familie-gcp.dev.nav.no/familie/alene-med-barn/"
