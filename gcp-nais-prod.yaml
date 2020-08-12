@@ -6,7 +6,7 @@ metadata:
   labels:
     team: teamfamilie
 spec:
-  image: navikt/familie-ef-soknad:{{version}}
+  image: navikt/familie-ef-navno:{{version}}
   team: teamfamilie
   replicas:
     min: 1
@@ -30,7 +30,7 @@ spec:
   accessPolicy:
     outbound:
       rules:
-        - application: familie-ef-soknad-api
+        - application: familie-ef-navno
       external:
         - host: appres.nav.no
   env:
