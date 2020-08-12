@@ -12,13 +12,17 @@ spec:
     min: 1
     max: 2
     cpuThresholdPercentage: 50
-  port: 3000
+  port: 8080
   liveness:
-    path: /favicon.ico
+    path: /isAlive
     initialDelay: 5
+    periodSeconds: 5
+    failureThreshold: 30
   readiness:
-    path: /favicon.ico
+    path: /isReady
     initialDelay: 5
+    periodSeconds: 5
+    failureThreshold: 30
   prometheus:
     enabled: false
   ingresses:
