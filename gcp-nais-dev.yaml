@@ -14,9 +14,11 @@ spec:
     cpuThresholdPercentage: 50
   port: 3000
   liveness:
-    path: /favicon.ico
+    path: /isAlive
+    initialDelay: 5
   readiness:
-    path: /favicon.ico
+    path: /isReady
+    initialDelay: 5
   prometheus:
     enabled: false
   ingresses:
