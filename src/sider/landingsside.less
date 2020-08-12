@@ -24,7 +24,9 @@
     .banner-innhold {
         margin-top: 2rem;
         display: inline-block;
-        text-align: left
+        text-align: left;
+        padding-right: 1rem;
+        padding-left: 1rem;
     }
 }
 
@@ -46,13 +48,16 @@
     margin-bottom: 8rem;
 }
 
+.boks-link {
+    margin: 0 auto;
+}
 
 .hovedbokser {
     margin-top: 4rem;
     margin-bottom: 4rem;
     text-align: center;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     grid-row-gap: 3rem;  
     grid-column-gap: 3rem;  
     
@@ -103,11 +108,13 @@
     margin-top: 3rem;
     text-align: center;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     grid-row-gap: 3rem;  
     grid-column-gap: 3rem;
 
+
     .boks {
+        width: 220px;
         background-color: white;
         padding: 1rem;
         text-align: left;
