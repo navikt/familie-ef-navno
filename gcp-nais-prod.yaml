@@ -14,12 +14,12 @@ spec:
     cpuThresholdPercentage: 50
   port: 8080
   liveness:
-    path: /familie/alene-med-barn/status
+    path: /status
     initialDelay: 5
     periodSeconds: 5
     failureThreshold: 30
   readiness:
-    path: /familie/alene-med-barn/status
+    path: /status
     initialDelay: 5
     periodSeconds: 5
     failureThreshold: 30
