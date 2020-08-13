@@ -69,7 +69,14 @@ const Informasjonspanel: React.FC<Props> = (props) => {
     const filterCheck = (avsnitt: any) => {
         if (avsnitt.filtrer_blir_staende) return true;
         if (props.filterStatus.every(filter => filter === false)) return true;
+
         if (props.sideID === 1) {
+            const filterStatusAlder = props.filterStatus.slice(0, 4);
+            const filterStatusSituasjon = props.filterStatus.slice(4, 11);
+
+            if (avsnitt?.kategori === "alder" && filterStatusAlder.every(filter => filter === false)) return true;
+            if (avsnitt?.kategori === "situasjon" && filterStatusSituasjon.every(filter => filter === false)) return true;
+
             if (avsnitt.filtrer_gravid && props.filterStatus[0]) return true;
             if (avsnitt.filtrer_under_1 && props.filterStatus[1]) return true;
             if (avsnitt.filtrer_1_til_8 && props.filterStatus[2]) return true;
