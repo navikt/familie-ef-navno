@@ -14,15 +14,9 @@ spec:
     cpuThresholdPercentage: 50
   port: 8080
   liveness:
-    path: /status
-    initialDelay: 5
-    periodSeconds: 5
-    failureThreshold: 30
+    path: /
   readiness:
-    path: /status
-    initialDelay: 5
-    periodSeconds: 5
-    failureThreshold: 30
+    path: /
   prometheus:
     enabled: false
   ingresses:
