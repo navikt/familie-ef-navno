@@ -8,6 +8,9 @@ router.use(express.static(path.join(__dirname, 'build')));
 router.get('/status', (req, res) => {
     res.status(200).end();
 });
+app.get('/status', (req, res) => {
+    res.status(200).end();
+});
 
 router.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, 'build/', 'index.html'));
