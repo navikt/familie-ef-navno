@@ -99,6 +99,20 @@ const Informasjonspanel: React.FC<Props> = (props) => {
             if (avsnitt.filtrer_arbeidssoker && props.filterStatus[1]) return true;
         }
         if (props.sideID === 5) {
+            const filterStatusHvorforAlene = props.filterStatus.slice(0, 3);
+            const filterStatusHvorMyeOmsorg = props.filterStatus.slice(3, 5);
+            const filterStatusArbeidssituasjon = props.filterStatus.slice(5, 9);
+
+            const ingenFilterIRelevantKategori = (kategorier: string[]) => {
+                if (kategorier?.includes("hvorfor_alene") && filterStatusHvorforAlene.some(filter => filter === true)) return false;
+                if (kategorier?.includes("hvor_mye_omsorg") && filterStatusHvorMyeOmsorg.some(filter => filter === true)) return false;
+                if (kategorier?.includes("arbeidssituasjon") && filterStatusArbeidssituasjon.some(filter => filter === true)) return false;
+
+                return true;
+            }
+
+            if (ingenFilterIRelevantKategori(avsnitt.kategori)) return true;
+
             if (avsnitt.filtrer_samvlivsbrudd && props.filterStatus[0]) return true;
             if (avsnitt.filtrer_fra_fodsel && props.filterStatus[1]) return true;
             if (avsnitt.filtrer_mer_enn_60 && props.filterStatus[3]) return true;
