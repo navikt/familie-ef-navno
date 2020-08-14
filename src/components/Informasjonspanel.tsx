@@ -19,6 +19,14 @@ interface Props {
     sideID: number;
 }
 
+enum Kategori {
+    Alder = "alder",
+    Situasjon = "situasjon",
+    HvorforAlene = "hvorfor_alene",
+    HvorMyeOmsorg = "hvor_mye_omsorg",
+    Arbeidssituasjon = "arbeidssituasjon"
+}
+
 const serializers = {
     types: {
         tabell: (props: any) => {
@@ -74,8 +82,8 @@ const Informasjonspanel: React.FC<Props> = (props) => {
             const filterStatusAlder = props.filterStatus.slice(0, 4);
             const filterStatusSituasjon = props.filterStatus.slice(4, 11);
 
-            if (avsnitt?.kategori === "alder" && filterStatusAlder.every(filter => filter === false)) return true;
-            if (avsnitt?.kategori === "situasjon" && filterStatusSituasjon.every(filter => filter === false)) return true;
+            if (avsnitt?.kategori === Kategori.Alder && filterStatusAlder.every(filter => filter === false)) return true;
+            if (avsnitt?.kategori === Kategori.Situasjon && filterStatusSituasjon.every(filter => filter === false)) return true;
 
             if (avsnitt.filtrer_gravid && props.filterStatus[0]) return true;
             if (avsnitt.filtrer_under_1 && props.filterStatus[1]) return true;
@@ -104,9 +112,9 @@ const Informasjonspanel: React.FC<Props> = (props) => {
             const filterStatusArbeidssituasjon = props.filterStatus.slice(5, 9);
 
             const ingenFilterIRelevantKategori = (kategorier: string[]) => {
-                if (kategorier?.includes("hvorfor_alene") && filterStatusHvorforAlene.some(filter => filter === true)) return false;
-                if (kategorier?.includes("hvor_mye_omsorg") && filterStatusHvorMyeOmsorg.some(filter => filter === true)) return false;
-                if (kategorier?.includes("arbeidssituasjon") && filterStatusArbeidssituasjon.some(filter => filter === true)) return false;
+                if (kategorier?.includes(Kategori.HvorforAlene) && filterStatusHvorforAlene.some(filter => filter === true)) return false;
+                if (kategorier?.includes(Kategori.HvorMyeOmsorg) && filterStatusHvorMyeOmsorg.some(filter => filter === true)) return false;
+                if (kategorier?.includes(Kategori.Arbeidssituasjon) && filterStatusArbeidssituasjon.some(filter => filter === true)) return false;
 
                 return true;
             }
