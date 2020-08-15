@@ -111,26 +111,31 @@ const Informasjonspanel: React.FC<Props> = (props) => {
             const filterStatusHvorMyeOmsorg = props.filterStatus.slice(3, 5);
             const filterStatusArbeidssituasjon = props.filterStatus.slice(5, 9);
 
-            const ingenFilterIRelevantKategori = (kategorier: string[]) => {
-                if (kategorier?.includes(Kategori.HvorforAlene) && filterStatusHvorforAlene.some(filter => filter === true)) return false;
-                if (kategorier?.includes(Kategori.HvorMyeOmsorg) && filterStatusHvorMyeOmsorg.some(filter => filter === true)) return false;
-                if (kategorier?.includes(Kategori.Arbeidssituasjon) && filterStatusArbeidssituasjon.some(filter => filter === true)) return false;
+            const ingenValgIHvorforAlene = filterStatusHvorforAlene.every(filter => filter === false);
+            const ingenValgIHvorMyeOmsorg = filterStatusHvorMyeOmsorg.every(filter => filter === false);
+            const ingenValgIArbeidssituasjon = filterStatusArbeidssituasjon.every(filter => filter === false);
 
-                return true;
+            if (avsnitt?.kategori?.includes(Kategori.HvorforAlene)) {
+                if (!ingenValgIHvorforAlene && !(avsnitt.filtrer_samvlivsbrudd && props.filterStatus[0] || (avsnitt.filtrer_fra_fodsel && props.filterStatus[1]) || (avsnitt.filtrer_dodsfall && props.filterStatus[2]))) {
+                    return false
+                }
             }
 
-            if (ingenFilterIRelevantKategori(avsnitt.kategori)) return true;
+            if (avsnitt?.kategori?.includes(Kategori.HvorMyeOmsorg)) {
+                if (!ingenValgIHvorMyeOmsorg && !(avsnitt.filtrer_mer_enn_60 && props.filterStatus[3] || (avsnitt.filtrer_mindre_enn_60 && props.filterStatus[4]))) {
+                    return false
+                }
+            }
 
-            if (avsnitt.filtrer_samvlivsbrudd && props.filterStatus[0]) return true;
-            if (avsnitt.filtrer_fra_fodsel && props.filterStatus[1]) return true;
-            if (avsnitt.filtrer_mer_enn_60 && props.filterStatus[3]) return true;
-            if (avsnitt.filtrer_mindre_enn_60 && props.filterStatus[4]) return true;
-            if (avsnitt.filtrer_i_arbeid && props.filterStatus[5]) return true;
-            if (avsnitt.filtrer_utdanning && props.filterStatus[6]) return true;
-            if (avsnitt.filtrer_arbeidssoker && props.filterStatus[7]) return true;
-            if (avsnitt.filter_ikke_arbeid && props.filterStatus[8]) return true;
-            if (avsnitt.filtrer_dodsfall && props.filterStatus[2]) return true;
+            if (avsnitt?.kategori?.includes(Kategori.Arbeidssituasjon)) {
+                if (!ingenValgIArbeidssituasjon && !(avsnitt.filtrer_i_arbeid && props.filterStatus[5] || (avsnitt.filtrer_utdanning && props.filterStatus[6]) || (avsnitt.filtrer_arbeidssoker && props.filterStatus[7]) ||  (avsnitt.filter_ikke_arbeid && props.filterStatus[8]))) {
+                    return false
+                }
+            }
+
+            return true;
         }
+
         return false;
     }
 
