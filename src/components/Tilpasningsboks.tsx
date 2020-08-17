@@ -80,7 +80,7 @@ const Tilpasningsboks: React.FC<Props> = props => {
             {showComponent ? 
                 <Element>Vis tilpasset <br /> informasjon</Element> :
                 props.filterStatus.every( el => el === false) ? 
-                    <Element>Tilpass informasjon <br /> til meg</Element> :
+                    <Element>Tilpass informasjon til meg</Element> :
                     <Element>Endre situasjon</Element>}
             </Knapp>
         </Panel>

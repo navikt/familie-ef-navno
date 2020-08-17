@@ -3,6 +3,8 @@ import Panel from 'nav-frontend-paneler';
 import { Undertittel } from 'nav-frontend-typografi';
 import { Link } from 'react-scroll';
 import ExternalLink from '../utils/symbols/ExternalLink';
+import { Hovedknapp } from 'nav-frontend-knapper';
+import { Normaltekst } from 'nav-frontend-typografi';
 
 interface Props {
   temaer: [{
@@ -10,6 +12,10 @@ interface Props {
     id: string,
   }];
   visSisteLenker: boolean;
+  søkKnapp?: {
+    tekst: string;
+    url: string;
+  }
 }
 
 const Temameny: React.FC<Props> = (props) => {
@@ -50,6 +56,7 @@ const Temameny: React.FC<Props> = (props) => {
           <ExternalLink />
         </div> :
         null}
+        {props.søkKnapp && <a href={props.søkKnapp.url}><Hovedknapp className="tilpasningsknapp">{props.søkKnapp.tekst}</Hovedknapp></a>}
     </Panel >
   );
 }

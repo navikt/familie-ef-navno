@@ -115,9 +115,9 @@ const Informasjonspanel: React.FC<Props> = (props) => {
             const gjortValgIHvorMyeOmsorg = filterStatusHvorMyeOmsorg.some(filter => filter === true);
             const gjortValgIArbeidssituasjon = filterStatusArbeidssituasjon.some(filter => filter === true);
 
-            const ingenFilterMatchIHvorforAlene = !(avsnitt.filtrer_samvlivsbrudd && props.filterStatus[0] || (avsnitt.filtrer_fra_fodsel && props.filterStatus[1]) || (avsnitt.filtrer_dodsfall && props.filterStatus[2]));
-            const ingenFilterMatchIHvorMyeOmsorg = !(avsnitt.filtrer_mer_enn_60 && props.filterStatus[3] || (avsnitt.filtrer_mindre_enn_60 && props.filterStatus[4]));
-            const ingenFilterMatchIArbeidssituasjon = !(avsnitt.filtrer_i_arbeid && props.filterStatus[5] || (avsnitt.filtrer_utdanning && props.filterStatus[6]) || (avsnitt.filtrer_arbeidssoker && props.filterStatus[7]) ||  (avsnitt.filter_ikke_arbeid && props.filterStatus[8]));
+            const ingenFilterMatchIHvorforAlene = !((avsnitt.filtrer_samvlivsbrudd && props.filterStatus[0]) || (avsnitt.filtrer_fra_fodsel && props.filterStatus[1]) || (avsnitt.filtrer_dodsfall && props.filterStatus[2]));
+            const ingenFilterMatchIHvorMyeOmsorg = !((avsnitt.filtrer_mer_enn_60 && props.filterStatus[3]) || (avsnitt.filtrer_mindre_enn_60 && props.filterStatus[4]));
+            const ingenFilterMatchIArbeidssituasjon = !((avsnitt.filtrer_i_arbeid && props.filterStatus[5]) || (avsnitt.filtrer_utdanning && props.filterStatus[6]) || (avsnitt.filtrer_arbeidssoker && props.filterStatus[7]) ||  (avsnitt.filter_ikke_arbeid && props.filterStatus[8]));
 
             if (avsnitt?.kategori?.includes(Kategori.HvorforAlene)) {
                 if (gjortValgIHvorforAlene && ingenFilterMatchIHvorforAlene) {
