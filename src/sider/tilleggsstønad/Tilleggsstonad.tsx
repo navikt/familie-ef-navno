@@ -42,6 +42,11 @@ const Barnetilsynstonad = () => {
         window.scrollTo({top: 0, behavior: 'smooth'});
     };
 
+    const søkKnapp = {
+        tekst: "Søk tilleggsstønader",
+        url: "https://www.nav.no/soknader/nb/person/familie/tilleggsstonader"
+    }
+
     if (side.artikler !== undefined) {
         return (
             <div className="side">
@@ -70,6 +75,7 @@ const Barnetilsynstonad = () => {
                             <Temameny
                                 temaer={side.artikler.map((artikkel: any) => ({ tittel: artikkel.tittel_i_liste, id: artikkel._id }))}
                                 visSisteLenker={visSisteLenker}
+                                søkKnapp={søkKnapp}
                             />
                         </div>
                     </div>
