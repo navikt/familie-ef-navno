@@ -19,6 +19,14 @@ interface Props {
     sideID: number;
 }
 
+enum Kategori {
+    Alder = "alder",
+    Situasjon = "situasjon",
+    HvorforAlene = "hvorfor_alene",
+    HvorMyeOmsorg = "hvor_mye_omsorg",
+    Arbeidssituasjon = "arbeidssituasjon"
+}
+
 const serializers = {
     types: {
         tabell: (props: any) => {
@@ -69,7 +77,14 @@ const Informasjonspanel: React.FC<Props> = (props) => {
     const filterCheck = (avsnitt: any) => {
         if (avsnitt.filtrer_blir_staende) return true;
         if (props.filterStatus.every(filter => filter === false)) return true;
+
         if (props.sideID === 1) {
+            const filterStatusAlder = props.filterStatus.slice(0, 4);
+            const filterStatusSituasjon = props.filterStatus.slice(4, 11);
+
+            if (avsnitt?.kategori === Kategori.Alder && filterStatusAlder.every(filter => filter === false)) return true;
+            if (avsnitt?.kategori === Kategori.Situasjon && filterStatusSituasjon.every(filter => filter === false)) return true;
+
             if (avsnitt.filtrer_gravid && props.filterStatus[0]) return true;
             if (avsnitt.filtrer_under_1 && props.filterStatus[1]) return true;
             if (avsnitt.filtrer_1_til_8 && props.filterStatus[2]) return true;
@@ -92,16 +107,39 @@ const Informasjonspanel: React.FC<Props> = (props) => {
             if (avsnitt.filtrer_arbeidssoker && props.filterStatus[1]) return true;
         }
         if (props.sideID === 5) {
-            if (avsnitt.filtrer_samvlivsbrudd && props.filterStatus[0]) return true;
-            if (avsnitt.filtrer_fra_fodsel && props.filterStatus[1]) return true;
-            if (avsnitt.filtrer_mer_enn_60 && props.filterStatus[3]) return true;
-            if (avsnitt.filtrer_mindre_enn_60 && props.filterStatus[4]) return true;
-            if (avsnitt.filtrer_i_arbeid && props.filterStatus[5]) return true;
-            if (avsnitt.filtrer_utdanning && props.filterStatus[6]) return true;
-            if (avsnitt.filtrer_arbeidssoker && props.filterStatus[7]) return true;
-            if (avsnitt.filter_ikke_arbeid && props.filterStatus[8]) return true;
-            if (avsnitt.filtrer_dodsfall && props.filterStatus[2]) return true;
+            const filterStatusHvorforAlene = props.filterStatus.slice(0, 3);
+            const filterStatusHvorMyeOmsorg = props.filterStatus.slice(3, 5);
+            const filterStatusArbeidssituasjon = props.filterStatus.slice(5, 9);
+
+            const gjortValgIHvorforAlene = filterStatusHvorforAlene.some(filter => filter === true);
+            const gjortValgIHvorMyeOmsorg = filterStatusHvorMyeOmsorg.some(filter => filter === true);
+            const gjortValgIArbeidssituasjon = filterStatusArbeidssituasjon.some(filter => filter === true);
+
+            const ingenFilterMatchIHvorforAlene = !(avsnitt.filtrer_samvlivsbrudd && props.filterStatus[0] || (avsnitt.filtrer_fra_fodsel && props.filterStatus[1]) || (avsnitt.filtrer_dodsfall && props.filterStatus[2]));
+            const ingenFilterMatchIHvorMyeOmsorg = !(avsnitt.filtrer_mer_enn_60 && props.filterStatus[3] || (avsnitt.filtrer_mindre_enn_60 && props.filterStatus[4]));
+            const ingenFilterMatchIArbeidssituasjon = !(avsnitt.filtrer_i_arbeid && props.filterStatus[5] || (avsnitt.filtrer_utdanning && props.filterStatus[6]) || (avsnitt.filtrer_arbeidssoker && props.filterStatus[7]) ||  (avsnitt.filter_ikke_arbeid && props.filterStatus[8]));
+
+            if (avsnitt?.kategori?.includes(Kategori.HvorforAlene)) {
+                if (gjortValgIHvorforAlene && ingenFilterMatchIHvorforAlene) {
+                    return false
+                }
+            }
+
+            if (avsnitt?.kategori?.includes(Kategori.HvorMyeOmsorg)) {
+                if (gjortValgIHvorMyeOmsorg && ingenFilterMatchIHvorMyeOmsorg) {
+                    return false
+                }
+            }
+
+            if (avsnitt?.kategori?.includes(Kategori.Arbeidssituasjon)) {
+                if (gjortValgIArbeidssituasjon && ingenFilterMatchIArbeidssituasjon) {
+                    return false
+                }
+            }
+
+            return true;
         }
+
         return false;
     }
 

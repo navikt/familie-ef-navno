@@ -28,4 +28,4 @@ const Tabell: React.FC<Props> = ({ rows }) => {
     );
 }
 
-export default Tabell; 
+export default Tabell;
