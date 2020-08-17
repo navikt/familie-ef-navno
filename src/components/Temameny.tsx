@@ -4,7 +4,6 @@ import { Undertittel } from 'nav-frontend-typografi';
 import { Link } from 'react-scroll';
 import ExternalLink from '../utils/symbols/ExternalLink';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { Normaltekst } from 'nav-frontend-typografi';
 
 interface Props {
   temaer: [{
