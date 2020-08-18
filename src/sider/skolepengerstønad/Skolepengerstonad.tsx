@@ -43,6 +43,12 @@ const Skolepengerstonad = () => {
     const scrollTop = () => {
         window.scrollTo({top: 0, behavior: 'smooth'});
     };
+
+    const søkKnapp = {
+        tekst: "Søk stønad til skolepenger",
+        url: "https://www.nav.no/soknader/nb/person/familie/enslig-mor-eller-far#NAV150004"
+    }
+
     if (side.artikler !== undefined) {
         return (
             <div className="side">
@@ -71,6 +77,7 @@ const Skolepengerstonad = () => {
                             <Temameny
                                 temaer={side.artikler.map((artikkel: any) => ({ tittel: artikkel.tittel_i_liste, id: artikkel._id }))}
                                 visSisteLenker={visSisteLenker}
+                                søkKnapp={søkKnapp}
                             />
                         </div>
                     </div>

@@ -54,6 +54,11 @@ const Overgangsstonad = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
+    const søkKnapp = {
+        tekst: "Søk overgangsstønad",
+        url: "https://www.nav.no/soknader/nb/person/familie/enslig-mor-eller-far#NAV150001"
+    }
+
     if (side.artikler !== undefined) {
         return (
             <div className="side">
@@ -85,6 +90,7 @@ const Overgangsstonad = () => {
                             <Temameny
                                 temaer={side.artikler.map((artikkel: any) => ({ tittel: artikkel.tittel_i_liste, id: artikkel._id }))}
                                 visSisteLenker={visSisteLenker}
+                                søkKnapp={søkKnapp}
                             />
                         </div>
                     </div>
