@@ -7,6 +7,7 @@ import KalkulatorOvergangsstonad from './KalkulatorOvergangsstonad';
 import KalkulatorBarnetilsyn from './KalkulatorBarnetilsyn';
 import Tabell from './Tabell';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
+import EtikettBase from 'nav-frontend-etiketter';
 
 interface Props {
     tittel: string;
@@ -31,7 +32,15 @@ const serializers = {
     types: {
         tabell: (props: any) => {
             return null;
-        }
+        },
+        etikett: (props: any) => {
+            const node = props.node;
+            return (<EtikettBase
+                className="etikett-sanity"
+                mini
+                type="info">{node.etikett}</EtikettBase>
+            );
+        },
     },
     marks: {
         internalLink: (props: any) => {
@@ -68,7 +77,7 @@ const serializers = {
                 : <a href={pdf.url}>{props.children}</a>;
             }
             return null;
-        }
+        },
     }
 }
 
