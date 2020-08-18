@@ -21,9 +21,12 @@ const Temameny: React.FC<Props> = (props) => {
   return (
     <Panel className="temameny">
       <Undertittel>Temaer</Undertittel>
-      {props.temaer.map((tema, index) => (
+      {props.temaer.map((tema, index) => {
+        console.log("tema", tema)
+        return (
         <div key={index} className='temameny-lenker'>
           <Link
+          hashSpy={true}
             to={tema.id}
             spy={true}
             smooth={true}
@@ -31,7 +34,7 @@ const Temameny: React.FC<Props> = (props) => {
             {tema.tittel}
           </Link>
         </div>
-      ))
+      )})
       }
       {props.visSisteLenker ? 
         <div className='temameny-lenker'>
