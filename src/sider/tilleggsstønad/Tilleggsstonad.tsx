@@ -53,6 +53,10 @@ const Barnetilsynstonad = () => {
         url: "https://www.nav.no/soknader/nb/person/familie/tilleggsstonader"
     }
 
+    const lagAnkerLinkID = (artikkel: any) => {
+        return artikkel.tittel_i_liste.toLowerCase().replace(/ /g,"-");
+    }
+
     if (side.artikler !== undefined) {
         return (
             <div className="side">
@@ -83,7 +87,10 @@ const Barnetilsynstonad = () => {
                                 /> :
                                 null}
                             <Temameny
-                                temaer={side.artikler.map((artikkel: any) => ({ tittel: artikkel.tittel_i_liste, id: artikkel._id }))}
+                                temaer={side.artikler.map((artikkel: any) => {
+                                    const ankerLinkID = lagAnkerLinkID(artikkel);
+                                    return ({ tittel: artikkel.tittel_i_liste, id: ankerLinkID })})
+                                }
                                 visSisteLenker={visSisteLenker}
                                 søkKnapp={søkKnapp}
                             />
@@ -95,18 +102,22 @@ const Barnetilsynstonad = () => {
                                 <Alert alertstripe={side.alertstripe} topp={true} />
                             </div> :
                             null}
-                        {side?.artikler?.map((artikkel: any) => (
-                            <Informasjonspanel
-                                key={artikkel._id}
-                                tittel={artikkel.tittel_i_panel}
-                                bilde={artikkel.bilde}
-                                alttekst={artikkel.alttekst}
-                                id={artikkel._id}
-                                avsnitt={artikkel?.avsnitt}
-                                filterStatus={filter}
-                                sideID={sideID}
-                            />
-                        ))}
+                        {side?.artikler?.map((artikkel: any) => {
+
+                        const ankerLinkID = lagAnkerLinkID(artikkel);
+
+                        return (<Informasjonspanel
+                            key={artikkel._id}
+                            tittel={artikkel.tittel_i_panel}
+                            bilde={artikkel.bilde}
+                            alttekst={artikkel.alttekst}
+                            id={ankerLinkID}
+                            side={sideID}
+                            avsnitt={artikkel?.avsnitt}
+                            filterStatus={filter}
+                            sideID={sideID}
+                        />
+                        )})}
                     </div>
                 </div>
             </div>

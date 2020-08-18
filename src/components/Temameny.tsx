@@ -22,11 +22,10 @@ const Temameny: React.FC<Props> = (props) => {
     <Panel className="temameny">
       <Undertittel>Temaer</Undertittel>
       {props.temaer.map((tema, index) => {
-        console.log("tema", tema)
         return (
         <div key={index} className='temameny-lenker'>
           <Link
-          hashSpy={true}
+            hashSpy={true}
             to={tema.id}
             spy={true}
             smooth={true}
