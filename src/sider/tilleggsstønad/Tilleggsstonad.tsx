@@ -12,10 +12,17 @@ const Barnetilsynstonad = () => {
     const [side, setSide] = useState<any>({});
     const [filter, setFilter] = useState<boolean[]>([]);
     const relevantCheckboxData = checkboxData.tilleggsstønad;
-    const [sideOpen, setSideOpen] = useState<boolean>(false); 
+    const [className, setClassName] = useState('sticky');
     const sideID = 4;
     const visSisteLenker = true;
+
+    let sideMenuHeight = document.getElementById("sticky_tilleggsstonad")?.clientHeight;
+    let vinduHoyde = window.innerHeight;
+
+    let diff = sideMenuHeight && vinduHoyde - sideMenuHeight < 0 ? vinduHoyde - sideMenuHeight : 0;
+
     useEffect(() => {
+        setClassName(sideMenuHeight ? (sideMenuHeight >= vinduHoyde ? '' : 'sticky') : 'sticky');
         client
             .fetch(hentSideQuery, { type: 'side', side_id: sideID })
             .then((res: any) => {
@@ -24,6 +31,7 @@ const Barnetilsynstonad = () => {
                     .reduce((a: number, b: number) => a + b))
                     .fill(false));
             })
+            //eslint-disable-next-line
     }, [relevantCheckboxData]);
 
     const handleFilterChange = (filterStatus: boolean[]) => {
@@ -31,8 +39,6 @@ const Barnetilsynstonad = () => {
     };
 
     const handleOpen = (open: boolean) => {
-        setSideOpen(open);
-        
         if(open){
             scrollTop();
         }
@@ -63,7 +69,11 @@ const Barnetilsynstonad = () => {
                 </div>
                 <div className="sideinnhold">
                     <div className="sideinfo">
-                        <div className={sideOpen ? '' : 'sticky'}>
+                        <div
+                            id={'sticky_tilleggsstonad'}
+                            className={className}
+                            style={{top: diff}}
+                        >
                             {relevantCheckboxData.length ?
                                 <Tilpasningsboks
                                     filterStatus={filter}

@@ -70,7 +70,6 @@ const serializers = {
         },
         filreferanse: (props: any) => {
             const { blank, pdf } = props.mark;
-            console.log(props.mark);
             if (pdf) {
             return blank ?
                 <a href={pdf.url} target="_blank" rel="noopener noreferrer" >{props.children}</a>

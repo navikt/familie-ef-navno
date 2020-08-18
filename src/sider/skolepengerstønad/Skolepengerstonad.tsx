@@ -15,6 +15,12 @@ const Skolepengerstonad = () => {
     const [sideOpen, setSideOpen] = useState<boolean>(false);
     const sideID = 3;
     const visSisteLenker = true;
+
+    let menuHoyde = 670;
+    let vinduHoyde = window.innerHeight;
+
+    let diff = vinduHoyde - menuHoyde < 0 ? vinduHoyde - menuHoyde : 0;
+
     useEffect(() => {
         client
             .fetch(hentSideQuery, { type: 'side', side_id: sideID })
@@ -65,7 +71,11 @@ const Skolepengerstonad = () => {
                 </div>
                 <div className="sideinnhold">
                     <div className="sideinfo">
-                        <div className={sideOpen ? '' : 'sticky'}>
+                            <div 
+                                className={sideOpen ? '' : 'sticky'}
+                                id={'sticky_skolepengerstonad'}
+                                style={{top: diff}}
+                            >
                             {relevantCheckboxData.length ?
                                 <Tilpasningsboks
                                     filterStatus={filter}

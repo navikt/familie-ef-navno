@@ -19,6 +19,8 @@ const Overgangsstonad = () => {
     let sideMenuHeight = document.getElementById("sticky_overgangsstonad")?.clientHeight;
     let vinduHoyde = window.innerHeight;
 
+    let diff = sideMenuHeight && vinduHoyde - sideMenuHeight < 0 ? vinduHoyde - sideMenuHeight : 0;
+
     useEffect(() => {
         setClassName(sideMenuHeight ? (sideMenuHeight >= vinduHoyde ? '' : 'sticky') : 'sticky');
         client
@@ -78,6 +80,7 @@ const Overgangsstonad = () => {
                         <div
                             className={className}
                             id='sticky_overgangsstonad'
+                            style={{top: diff}}
                         >
                             {relevantCheckboxData.length ?
                                 <Tilpasningsboks
