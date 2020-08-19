@@ -1,29 +1,29 @@
 {
   "files": {
-    "main.css": "/familie/alene-med-barn/static/css/main.1c5e25ee.chunk.css",
-    "main.js": "/familie/alene-med-barn/static/js/main.8e9a48f7.chunk.js",
-    "main.js.map": "/familie/alene-med-barn/static/js/main.8e9a48f7.chunk.js.map",
-    "runtime-main.js": "/familie/alene-med-barn/static/js/runtime-main.00888297.js",
-    "runtime-main.js.map": "/familie/alene-med-barn/static/js/runtime-main.00888297.js.map",
-    "static/css/2.f3519212.chunk.css": "/familie/alene-med-barn/static/css/2.f3519212.chunk.css",
-    "static/js/2.dd248f0f.chunk.js": "/familie/alene-med-barn/static/js/2.dd248f0f.chunk.js",
-    "static/js/2.dd248f0f.chunk.js.map": "/familie/alene-med-barn/static/js/2.dd248f0f.chunk.js.map",
-    "index.html": "/familie/alene-med-barn/index.html",
-    "precache-manifest.0b13521f1bca8477311c76436ce6833e.js": "/familie/alene-med-barn/precache-manifest.0b13521f1bca8477311c76436ce6833e.js",
-    "service-worker.js": "/familie/alene-med-barn/service-worker.js",
-    "static/css/2.f3519212.chunk.css.map": "/familie/alene-med-barn/static/css/2.f3519212.chunk.css.map",
-    "static/css/main.1c5e25ee.chunk.css.map": "/familie/alene-med-barn/static/css/main.1c5e25ee.chunk.css.map",
-    "static/js/2.dd248f0f.chunk.js.LICENSE.txt": "/familie/alene-med-barn/static/js/2.dd248f0f.chunk.js.LICENSE.txt",
-    "static/media/barn.svg": "/familie/alene-med-barn/static/media/barn.67f20a77.svg",
-    "static/media/kvinne.svg": "/familie/alene-med-barn/static/media/kvinne.286f33b3.svg",
-    "static/media/sjekkliste.svg": "/familie/alene-med-barn/static/media/sjekkliste.61d53845.svg",
-    "static/media/tablet.svg": "/familie/alene-med-barn/static/media/tablet.977d65b7.svg"
+    "main.css": "/familie-ef-navno/static/css/main.1c5e25ee.chunk.css",
+    "main.js": "/familie-ef-navno/static/js/main.1b576f04.chunk.js",
+    "main.js.map": "/familie-ef-navno/static/js/main.1b576f04.chunk.js.map",
+    "runtime-main.js": "/familie-ef-navno/static/js/runtime-main.6ef1080e.js",
+    "runtime-main.js.map": "/familie-ef-navno/static/js/runtime-main.6ef1080e.js.map",
+    "static/css/2.f3519212.chunk.css": "/familie-ef-navno/static/css/2.f3519212.chunk.css",
+    "static/js/2.dd248f0f.chunk.js": "/familie-ef-navno/static/js/2.dd248f0f.chunk.js",
+    "static/js/2.dd248f0f.chunk.js.map": "/familie-ef-navno/static/js/2.dd248f0f.chunk.js.map",
+    "index.html": "/familie-ef-navno/index.html",
+    "precache-manifest.9c1a8b35b5434fb3e158fefe4191c983.js": "/familie-ef-navno/precache-manifest.9c1a8b35b5434fb3e158fefe4191c983.js",
+    "service-worker.js": "/familie-ef-navno/service-worker.js",
+    "static/css/2.f3519212.chunk.css.map": "/familie-ef-navno/static/css/2.f3519212.chunk.css.map",
+    "static/css/main.1c5e25ee.chunk.css.map": "/familie-ef-navno/static/css/main.1c5e25ee.chunk.css.map",
+    "static/js/2.dd248f0f.chunk.js.LICENSE.txt": "/familie-ef-navno/static/js/2.dd248f0f.chunk.js.LICENSE.txt",
+    "static/media/barn.svg": "/familie-ef-navno/static/media/barn.67f20a77.svg",
+    "static/media/kvinne.svg": "/familie-ef-navno/static/media/kvinne.286f33b3.svg",
+    "static/media/sjekkliste.svg": "/familie-ef-navno/static/media/sjekkliste.61d53845.svg",
+    "static/media/tablet.svg": "/familie-ef-navno/static/media/tablet.977d65b7.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.00888297.js",
+    "static/js/runtime-main.6ef1080e.js",
     "static/css/2.f3519212.chunk.css",
     "static/js/2.dd248f0f.chunk.js",
     "static/css/main.1c5e25ee.chunk.css",
-    "static/js/main.8e9a48f7.chunk.js"
+    "static/js/main.1b576f04.chunk.js"
   ]
 }
