@@ -8,6 +8,8 @@ import KalkulatorBarnetilsyn from './KalkulatorBarnetilsyn';
 import Tabell from './Tabell';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import EtikettBase from 'nav-frontend-etiketter';
+import { Normaltekst } from 'nav-frontend-typografi';
+import checkboxData from '../utils/checkboxData';
 
 interface Props {
     tittel: string;
@@ -81,15 +83,14 @@ const serializers = {
 }
 
 const Informasjonspanel: React.FC<Props> = (props) => {
+    const filterStatusAlder = props.filterStatus.slice(0, 4);
+    const filterStatusSituasjon = props.filterStatus.slice(4, 11);
 
     const filterCheck = (avsnitt: any) => {
         if (avsnitt.filtrer_blir_staende) return true;
         if (props.filterStatus.every(filter => filter === false)) return true;
 
         if (props.sideID === 1) {
-            const filterStatusAlder = props.filterStatus.slice(0, 4);
-            const filterStatusSituasjon = props.filterStatus.slice(4, 11);
-
             if (avsnitt?.kategori === Kategori.Alder && filterStatusAlder.every(filter => filter === false)) return true;
             if (avsnitt?.kategori === Kategori.Situasjon && filterStatusSituasjon.every(filter => filter === false)) return true;
 
@@ -151,14 +152,31 @@ const Informasjonspanel: React.FC<Props> = (props) => {
         return false;
     }
 
+    const etiketterSide1Barn = () => {
+        const filterTekster = checkboxData.overgangsstonad[0].texts;
+        console.log(filterStatusAlder);
+        console.log(filterTekster);
+
+        if (filterStatusAlder.every(filter => filter === false)) return null;
+
+        return <div className="viser-informasjon-for">
+            <Normaltekst>Viser informasjon for</Normaltekst>
+            {filterTekster.map((filterTekst: string, index: number) => {
+                if (filterStatusAlder[index]) return filterTekst;
+            })}
+        </div>
+    }
+
     return (
         <Panel className="informasjonspanel" id={props.id}>
             <div className="informasjonspanel-ikon">
                 <img src={props.bilde} alt={props.alttekst} />
             </div>
             <h1>{props.tittel}</h1>
-            {props.avsnitt !== undefined && props.avsnitt.map((avsnitt: any, index: number) => (
-                filterCheck(avsnitt) &&
+            {props.avsnitt !== undefined && props.avsnitt.map((avsnitt: any, index: number) => {
+                return <>
+                {props.tittel === "Barnas alder" && index === 1 && etiketterSide1Barn()}
+                {(filterCheck(avsnitt)) && (
                     <div key={avsnitt._id} id={avsnitt._id}>
                         {avsnitt.avsnitt_innhold &&
                             <BlockContent
@@ -190,7 +208,7 @@ const Informasjonspanel: React.FC<Props> = (props) => {
                             </Ekspanderbartpanel>
                         }
                     </div>
-            ))}
+            )}</>})}
             {props.children}
         </Panel>
     );
