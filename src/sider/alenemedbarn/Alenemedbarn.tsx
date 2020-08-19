@@ -42,6 +42,14 @@ const Alenemedbarn = () => {
         window.scrollTo({top: 0, behavior: 'smooth'});
     };
 
+    const lagAnkerLinkID = (artikkel: any) => {
+        if (artikkel.liste_i_panel) {
+            return artikkel.tittel_i_panel.toLowerCase().replace(/ /g,"-");
+        } else {
+            return artikkel._id;
+        }
+    }
+
     if (side.artikler !== undefined) {
         return (
             <div className="side">
@@ -71,7 +79,10 @@ const Alenemedbarn = () => {
                                 /> :
                                 null}
                             <Temameny
-                                temaer={side.artikler.map((artikkel: any) => ({ tittel: artikkel.tittel_i_liste, id: artikkel._id }))}
+                                temaer={side.artikler.map((artikkel: any) => {
+                                    const ankerLinkID = lagAnkerLinkID(artikkel);
+                                    return ({ tittel: artikkel.tittel_i_liste, id: ankerLinkID })})
+                                }
                                 visSisteLenker={visSisteLenker}
                             />
                         </div>
@@ -82,18 +93,22 @@ const Alenemedbarn = () => {
                                 <Alert alertstripe={side.alertstripe} topp={true} />
                             </div> :
                             null}
-                        {side?.artikler?.map((artikkel: any) => (
-                            <Informasjonspanel
+                            {side?.artikler?.map((artikkel: any) => {
+
+                            const ankerLinkID = lagAnkerLinkID(artikkel);
+
+                            return (<Informasjonspanel
                                 key={artikkel._id}
                                 tittel={artikkel.tittel_i_panel}
                                 bilde={artikkel.bilde}
                                 alttekst={artikkel.alttekst}
-                                id={artikkel._id}
+                                id={ankerLinkID}
+                                side={sideID}
                                 avsnitt={artikkel?.avsnitt}
                                 filterStatus={filter}
                                 sideID={sideID}
                             />
-                        ))}
+                            )})}
                     </div>
                 </div>
             </div>

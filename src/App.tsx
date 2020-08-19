@@ -4,14 +4,14 @@ import Barnetilsynstonad from './sider/barnetilsynsstonad/Barnetilsynsstonad';
 import Skolepengerstønad from './sider/skolepengerstønad/Skolepengerstonad';
 import Tilleggsstonad from './sider/tilleggsstønad/Tilleggsstonad';
 import Alenemedbarn from './sider/alenemedbarn/Alenemedbarn';
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Landingsside from './sider/landingsside/Landingsside';
 
 function App() {
     
    return (
     <div>
-      <Router>
+      <Router basename={'/familie/alene-med-barn'}>
         <Switch>
           <Route path={'/overgangsstønad'}>
             <Overgangsstonad />

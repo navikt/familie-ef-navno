@@ -55,6 +55,10 @@ const Skolepengerstonad = () => {
         url: "https://www.nav.no/soknader/nb/person/familie/enslig-mor-eller-far#NAV150004"
     }
 
+    const lagAnkerLinkID = (artikkel: any) => {
+        return artikkel.tittel_i_liste.toLowerCase().replace(/ /g,"-");
+    }
+
     if (side.artikler !== undefined) {
         return (
             <div className="side">
@@ -85,7 +89,10 @@ const Skolepengerstonad = () => {
                                 /> :
                                 null}
                             <Temameny
-                                temaer={side.artikler.map((artikkel: any) => ({ tittel: artikkel.tittel_i_liste, id: artikkel._id }))}
+                                temaer={side.artikler.map((artikkel: any) => {
+                                    const ankerLinkID = lagAnkerLinkID(artikkel);
+                                    return ({ tittel: artikkel.tittel_i_liste, id: ankerLinkID })})
+                                }
                                 visSisteLenker={visSisteLenker}
                                 søkKnapp={søkKnapp}
                             />
@@ -97,18 +104,22 @@ const Skolepengerstonad = () => {
                                 <Alert alertstripe={side.alertstripe} topp={true} />
                             </div> :
                             null}
-                        {side?.artikler?.map((artikkel: any, index: number) => (
-                            <Informasjonspanel
+                        {side?.artikler?.map((artikkel: any) => {
+
+                            const ankerLinkID = lagAnkerLinkID(artikkel);
+
+                            return (<Informasjonspanel
                                 key={artikkel._id}
                                 tittel={artikkel.tittel_i_panel}
                                 bilde={artikkel.bilde}
                                 alttekst={artikkel.alttekst}
-                                id={artikkel._id}
+                                id={ankerLinkID}
+                                side={sideID}
                                 avsnitt={artikkel?.avsnitt}
                                 filterStatus={filter}
                                 sideID={sideID}
                             />
-                        ))}
+                        )})}
                     </div>
                 </div>
             </div>
