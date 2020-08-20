@@ -29,7 +29,7 @@ const Tilpasningsboks: React.FC<Props> = props => {
             .map(cumulativeSum)]);
         }
         // eslint-disable-next-line
-    }, []);
+    }, [props.filterStatus]);
 
     const handleButtonClick = () => {
         props.handleChange(filter);

@@ -19,6 +19,7 @@ interface Props {
     avsnitt?: any;
     side?: number;
     filterStatus: boolean[];
+    handleFilterChange: Function;
     sideID: number;
 }
 
@@ -192,6 +193,32 @@ const Informasjonspanel: React.FC<Props> = (props) => {
         </div>
     }
 
+    const etiketterSide2 = () => {
+        const filterTekster = checkboxData.barnetilsynsstonad[0].texts;
+
+        console.log("filter", props.filterStatus);
+
+        const resattFilter = props.filterStatus.map(_ => false);
+
+        console.log(resattFilter);
+
+        if (props.filterStatus.every(filter => filter === false)) return null;
+
+        return <div className="viser-informasjon-for">
+            <Normaltekst>Viser informasjon for</Normaltekst>
+            {filterTekster.map((filterTekst: string, index: number) => {
+                if (props.filterStatus[index]) return <div className="etikett-i-artikkel-wrapper"><EtikettBase
+                className="etikett-i-artikkel"
+                mini
+                type="info" 
+                key={index}>
+                    {filterTekst}
+                </EtikettBase></div>;
+            })}
+            {props.filterStatus.some(filter => filter === false) && <p onClick={() => props.handleFilterChange(resattFilter)}>Vis alle situasjoner</p>}
+        </div>
+    }
+
     const etiketterSide4 = () => {
         const filterTekster = checkboxData.tilleggsstønad[0].texts;
 
@@ -231,28 +258,6 @@ const Informasjonspanel: React.FC<Props> = (props) => {
             {props.filterStatus.some(filter => filter === false) && <p>Vis alle situasjoner</p>}
         </div>
     }
-
-    const etiketterSide2 = () => {
-        const filterTekster = checkboxData.barnetilsynsstonad[0].texts;
-
-        if (props.filterStatus.every(filter => filter === false)) return null;
-
-        return <div className="viser-informasjon-for">
-            <Normaltekst>Viser informasjon for</Normaltekst>
-            {filterTekster.map((filterTekst: string, index: number) => {
-                if (props.filterStatus[index]) return <div className="etikett-i-artikkel-wrapper"><EtikettBase
-                className="etikett-i-artikkel"
-                mini
-                type="info" 
-                key={index}>
-                    {filterTekst}
-                </EtikettBase></div>;
-            })}
-            {props.filterStatus.some(filter => filter === false) && <p>Vis alle situasjoner</p>}
-        </div>
-    }
-
-    console.log("PROPS", props);
 
     return (
         <Panel className="informasjonspanel" id={props.id}>
