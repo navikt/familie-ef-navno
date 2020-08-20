@@ -63,12 +63,12 @@ const Tilpasningsboks: React.FC<Props> = props => {
                         </Normaltekst>
                         {texts.map((text: string, index: number) => (
                             props.filterStatus[index] ?
-                            <EtikettBase
+                            <div className="etikett-i-tilpasningsboks-wrapper"><EtikettBase
                             mini 
                             type="info" 
                             key={index}>
                                 {text}
-                            </EtikettBase> :
+                            </EtikettBase></div> :
                             null
                         ))}
                     </div> :
