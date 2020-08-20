@@ -154,18 +154,85 @@ const Informasjonspanel: React.FC<Props> = (props) => {
 
     const etiketterSide1Barn = () => {
         const filterTekster = checkboxData.overgangsstonad[0].texts;
-        console.log(filterStatusAlder);
-        console.log(filterTekster);
 
         if (filterStatusAlder.every(filter => filter === false)) return null;
 
         return <div className="viser-informasjon-for">
             <Normaltekst>Viser informasjon for</Normaltekst>
             {filterTekster.map((filterTekst: string, index: number) => {
-                if (filterStatusAlder[index]) return filterTekst;
+                if (filterStatusAlder[index]) return <div className="etikett-i-artikkel-wrapper"><EtikettBase
+                className="etikett-i-artikkel"
+                mini
+                type="info" 
+                key={index}>
+                    {filterTekst}
+                </EtikettBase></div>;
             })}
+            {filterStatusAlder.some(filter => filter === false) && <p>Vis alle situasjoner</p>}
         </div>
     }
+
+    const etiketterSide1Situasjon = () => {
+        const filterTekster = checkboxData.overgangsstonad[1].texts;
+
+        if (filterStatusSituasjon.every(filter => filter === false)) return null;
+
+        return <div className="viser-informasjon-for">
+            <Normaltekst>Viser informasjon for</Normaltekst>
+            {filterTekster.map((filterTekst: string, index: number) => {
+                if (filterStatusSituasjon[index]) return <div className="etikett-i-artikkel-wrapper"><EtikettBase
+                className="etikett-i-artikkel"
+                mini
+                type="info" 
+                key={index}>
+                    {filterTekst}
+                </EtikettBase></div>;
+            })}
+            {filterStatusSituasjon.some(filter => filter === false) && <p>Vis alle situasjoner</p>}
+        </div>
+    }
+
+    const etiketterSide4 = () => {
+        const filterTekster = checkboxData.tilleggsstønad[0].texts;
+
+        if (props.filterStatus.every(filter => filter === false)) return null;
+
+        return <div className="viser-informasjon-for">
+            <Normaltekst>Viser informasjon for</Normaltekst>
+            {filterTekster.map((filterTekst: string, index: number) => {
+                if (props.filterStatus[index]) return <div className="etikett-i-artikkel-wrapper"><EtikettBase
+                className="etikett-i-artikkel"
+                mini
+                type="info" 
+                key={index}>
+                    {filterTekst}
+                </EtikettBase></div>;
+            })}
+            {props.filterStatus.some(filter => filter === false) && <p>Vis alle situasjoner</p>}
+        </div>
+    }
+
+    const etiketterSide5 = () => {
+        const filterTekster = checkboxData.alenemedbarn.map((obj: any) => obj.texts).flat()
+
+        if (props.filterStatus.every(filter => filter === false)) return null;
+
+        return <div className="viser-informasjon-for">
+            <Normaltekst>Viser informasjon for</Normaltekst>
+            {filterTekster.map((filterTekst: string, index: number) => {
+                if (props.filterStatus[index]) return <div className="etikett-i-artikkel-wrapper"><EtikettBase
+                className="etikett-i-artikkel"
+                mini
+                type="info" 
+                key={index}>
+                    {filterTekst}
+                </EtikettBase></div>;
+            })}
+            {props.filterStatus.some(filter => filter === false) && <p>Vis alle situasjoner</p>}
+        </div>
+    }
+
+    console.log("PROPS", props);
 
     return (
         <Panel className="informasjonspanel" id={props.id}>
@@ -175,7 +242,12 @@ const Informasjonspanel: React.FC<Props> = (props) => {
             <h1>{props.tittel}</h1>
             {props.avsnitt !== undefined && props.avsnitt.map((avsnitt: any, index: number) => {
                 return <>
-                {props.tittel === "Barnas alder" && index === 1 && etiketterSide1Barn()}
+                {props.side === 1 && props.tittel === "Barnas alder" && index === 1 && etiketterSide1Barn()}
+                {props.side === 1 && props.tittel === "Arbeid, utdanning og andre aktiviteter" && index === 1 && etiketterSide1Situasjon()}
+
+                {props.side === 4 && props.tittel === "Hva kan du få støtte til?" && index === 1 && etiketterSide4()}
+
+                {props.side === 5 && props.tittel && index === 0 && etiketterSide5()}
                 {(filterCheck(avsnitt)) && (
                     <div key={avsnitt._id} id={avsnitt._id}>
                         {avsnitt.avsnitt_innhold &&
