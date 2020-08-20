@@ -196,11 +196,7 @@ const Informasjonspanel: React.FC<Props> = (props) => {
     const etiketterSide2 = () => {
         const filterTekster = checkboxData.barnetilsynsstonad[0].texts;
 
-        console.log("filter", props.filterStatus);
-
         const resattFilter = props.filterStatus.map(_ => false);
-
-        console.log(resattFilter);
 
         if (props.filterStatus.every(filter => filter === false)) return null;
 
@@ -215,13 +211,15 @@ const Informasjonspanel: React.FC<Props> = (props) => {
                     {filterTekst}
                 </EtikettBase></div>;
             })}
-            {props.filterStatus.some(filter => filter === false) && <p onClick={() => props.handleFilterChange(resattFilter)}>Vis alle situasjoner</p>}
+            {props.filterStatus.some(filter => filter === false) && <a onClick={() => props.handleFilterChange(resattFilter)}>Vis alle situasjoner</a>}
         </div>
     }
 
     const etiketterSide4 = () => {
         const filterTekster = checkboxData.tilleggsstønad[0].texts;
 
+        const resattFilter = props.filterStatus.map(_ => false);
+
         if (props.filterStatus.every(filter => filter === false)) return null;
 
         return <div className="viser-informasjon-for">
@@ -235,7 +233,7 @@ const Informasjonspanel: React.FC<Props> = (props) => {
                     {filterTekst}
                 </EtikettBase></div>;
             })}
-            {props.filterStatus.some(filter => filter === false) && <p>Vis alle situasjoner</p>}
+            {props.filterStatus.some(filter => filter === false) && <a onClick={() => props.handleFilterChange(resattFilter)}>Vis alle situasjoner</a>}
         </div>
     }
 
