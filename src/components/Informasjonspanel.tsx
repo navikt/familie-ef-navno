@@ -169,15 +169,17 @@ const Informasjonspanel: React.FC<Props> = (props) => {
         return <div className="viser-informasjon-for">
             <Normaltekst>Viser informasjon for</Normaltekst>
             {filterTekster.map((filterTekst: string, index: number) => {
-                if (filterStatusAlder[index]) return <div className="etikett-i-artikkel-wrapper"><EtikettBase
+                if (filterStatusAlder[index]) {return <div className="etikett-i-artikkel-wrapper"><EtikettBase
                 className="etikett-i-artikkel"
                 mini
                 type="info" 
                 key={index}>
                     {filterTekst}
-                </EtikettBase></div>;
+            </EtikettBase></div>} else {
+                return null
+            };
             })}
-            {filterStatusAlder.some(filter => filter === false) && <a onClick={() => props.handleFilterChange(resattFilter)}>Vis alle aldre</a>}
+            {filterStatusAlder.some(filter => filter === false) && <div className="link-knapp" onClick={() => props.handleFilterChange(resattFilter)}>Vis alle aldre</div>}
         </div>
     }
 
@@ -197,15 +199,17 @@ const Informasjonspanel: React.FC<Props> = (props) => {
         return <div className="viser-informasjon-for">
             <Normaltekst>Viser informasjon for</Normaltekst>
             {filterTekster.map((filterTekst: string, index: number) => {
-                if (filterStatusSituasjon[index]) return <div className="etikett-i-artikkel-wrapper"><EtikettBase
+                if (filterStatusSituasjon[index]) {return <div className="etikett-i-artikkel-wrapper"><EtikettBase
                 className="etikett-i-artikkel"
                 mini
                 type="info" 
                 key={index}>
                     {filterTekst}
-                </EtikettBase></div>;
+            </EtikettBase></div>} else {
+                return null
+            };
             })}
-            {filterStatusSituasjon.some(filter => filter === false) && <a onClick={() => props.handleFilterChange(resattFilter)}>Vis alle situasjoner</a>}
+            {filterStatusSituasjon.some(filter => filter === false) && <div className="link-knapp" onClick={() => props.handleFilterChange(resattFilter)}>Vis alle situasjoner</div>}
         </div>
     }
 
@@ -219,15 +223,17 @@ const Informasjonspanel: React.FC<Props> = (props) => {
         return <div className="viser-informasjon-for">
             <Normaltekst>Viser informasjon for</Normaltekst>
             {filterTekster.map((filterTekst: string, index: number) => {
-                if (props.filterStatus[index]) return <div className="etikett-i-artikkel-wrapper"><EtikettBase
+                if (props.filterStatus[index]) {return <div className="etikett-i-artikkel-wrapper"><EtikettBase
                 className="etikett-i-artikkel"
                 mini
                 type="info" 
                 key={index}>
                     {filterTekst}
-                </EtikettBase></div>;
+            </EtikettBase></div>} else {
+                return null
+            };
             })}
-            {props.filterStatus.some(filter => filter === false) && <a onClick={() => props.handleFilterChange(resattFilter)}>Vis alle situasjoner</a>}
+            {props.filterStatus.some(filter => filter === false) && <div className="link-knapp" onClick={() => props.handleFilterChange(resattFilter)}>Vis alle situasjoner</div>}
         </div>
     }
 
@@ -241,15 +247,17 @@ const Informasjonspanel: React.FC<Props> = (props) => {
         return <div className="viser-informasjon-for">
             <Normaltekst>Viser informasjon for</Normaltekst>
             {filterTekster.map((filterTekst: string, index: number) => {
-                if (props.filterStatus[index]) return <div className="etikett-i-artikkel-wrapper"><EtikettBase
+                if (props.filterStatus[index]) {return <div className="etikett-i-artikkel-wrapper"><EtikettBase
                 className="etikett-i-artikkel"
                 mini
                 type="info" 
                 key={index}>
                     {filterTekst}
-                </EtikettBase></div>;
+            </EtikettBase></div>} else {
+                return null
+            };
             })}
-            {props.filterStatus.some(filter => filter === false) && <a onClick={() => props.handleFilterChange(resattFilter)}>Vis alle situasjoner</a>}
+            {props.filterStatus.some(filter => filter === false) && <div className="link-knapp" onClick={() => props.handleFilterChange(resattFilter)}>Vis alle situasjoner</div>}
         </div>
     }
 
@@ -263,15 +271,17 @@ const Informasjonspanel: React.FC<Props> = (props) => {
         return <div className="viser-informasjon-for">
             <Normaltekst>Viser informasjon for</Normaltekst>
             {filterTekster.map((filterTekst: string, index: number) => {
-                if (props.filterStatus[index]) return <div className="etikett-i-artikkel-wrapper"><EtikettBase
+                if (props.filterStatus[index]) {return <div className="etikett-i-artikkel-wrapper"><EtikettBase
                 className="etikett-i-artikkel"
                 mini
                 type="info" 
                 key={index}>
                     {filterTekst}
-                </EtikettBase></div>;
+            </EtikettBase></div>} else {
+                return null
+            };
             })}
-            {props.filterStatus.some(filter => filter === false) && <a onClick={() => props.handleFilterChange(resattFilter)}>Vis alle situasjoner</a>}
+            {props.filterStatus.some(filter => filter === false) && <div className="link-knapp" onClick={() => props.handleFilterChange(resattFilter)}>Vis alle situasjoner</div>}
         </div>
     }
 
