@@ -186,7 +186,7 @@ const Informasjonspanel: React.FC<Props> = (props) => {
 
         const filterTekster = checkboxData.overgangsstonad[1].texts;
 
-        const resattFilter = props.filterStatus.reverse().map((verdi: boolean, index: number) => {
+        const resattFilter = props.filterStatus.slice().reverse().map((verdi: boolean, index: number) => {
             if (index < filterStatusSituasjon.length) {
                 return false;
             } else {
