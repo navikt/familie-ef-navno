@@ -232,6 +232,26 @@ const Informasjonspanel: React.FC<Props> = (props) => {
         </div>
     }
 
+    const etiketterSide2 = () => {
+        const filterTekster = checkboxData.barnetilsynsstonad[0].texts;
+
+        if (props.filterStatus.every(filter => filter === false)) return null;
+
+        return <div className="viser-informasjon-for">
+            <Normaltekst>Viser informasjon for</Normaltekst>
+            {filterTekster.map((filterTekst: string, index: number) => {
+                if (props.filterStatus[index]) return <div className="etikett-i-artikkel-wrapper"><EtikettBase
+                className="etikett-i-artikkel"
+                mini
+                type="info" 
+                key={index}>
+                    {filterTekst}
+                </EtikettBase></div>;
+            })}
+            {props.filterStatus.some(filter => filter === false) && <p>Vis alle situasjoner</p>}
+        </div>
+    }
+
     console.log("PROPS", props);
 
     return (
@@ -244,6 +264,8 @@ const Informasjonspanel: React.FC<Props> = (props) => {
                 return <>
                 {props.side === 1 && props.tittel === "Barnas alder" && index === 1 && etiketterSide1Barn()}
                 {props.side === 1 && props.tittel === "Arbeid, utdanning og andre aktiviteter" && index === 1 && etiketterSide1Situasjon()}
+
+                {props.side === 2 && props.tittel === "Når har du rett til stønad?" && index === 1 && etiketterSide2()}
 
                 {props.side === 4 && props.tittel === "Hva kan du få støtte til?" && index === 1 && etiketterSide4()}
 
