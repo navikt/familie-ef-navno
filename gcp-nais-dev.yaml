@@ -27,9 +27,8 @@ spec:
     enabled: false
   ingresses:
     - https://www-q0.nav.no/familie/alene-med-barn
-    - https://intern.dev.nav.no/familie/alene-med-barn
-    - https://dev.nav.no/familie/alene-med-barn
     - https://familie-ef-navno.dev.nav.no
+    - https://dev.nav.no/familie/alene-med-barn/
   env:
     - name: APP_VERSION
       value: '{{version}}'
