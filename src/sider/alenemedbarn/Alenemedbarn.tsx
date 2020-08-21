@@ -106,6 +106,7 @@ const Alenemedbarn = () => {
                                 side={sideID}
                                 avsnitt={artikkel?.avsnitt}
                                 filterStatus={filter}
+                                handleFilterChange={handleFilterChange}
                                 sideID={sideID}
                             />
                             )})}

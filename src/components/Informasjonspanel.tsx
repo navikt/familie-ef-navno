@@ -8,6 +8,8 @@ import KalkulatorBarnetilsyn from './KalkulatorBarnetilsyn';
 import Tabell from './Tabell';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import EtikettBase from 'nav-frontend-etiketter';
+import { Normaltekst } from 'nav-frontend-typografi';
+import checkboxData from '../utils/checkboxData';
 
 interface Props {
     tittel: string;
@@ -17,6 +19,7 @@ interface Props {
     avsnitt?: any;
     side?: number;
     filterStatus: boolean[];
+    handleFilterChange: Function;
     sideID: number;
 }
 
@@ -81,15 +84,14 @@ const serializers = {
 }
 
 const Informasjonspanel: React.FC<Props> = (props) => {
+    const filterStatusAlder = props.filterStatus.slice(0, 4);
+    const filterStatusSituasjon = props.filterStatus.slice(4, 11);
 
     const filterCheck = (avsnitt: any) => {
         if (avsnitt.filtrer_blir_staende) return true;
         if (props.filterStatus.every(filter => filter === false)) return true;
 
         if (props.sideID === 1) {
-            const filterStatusAlder = props.filterStatus.slice(0, 4);
-            const filterStatusSituasjon = props.filterStatus.slice(4, 11);
-
             if (avsnitt?.kategori === Kategori.Alder && filterStatusAlder.every(filter => filter === false)) return true;
             if (avsnitt?.kategori === Kategori.Situasjon && filterStatusSituasjon.every(filter => filter === false)) return true;
 
@@ -151,14 +153,155 @@ const Informasjonspanel: React.FC<Props> = (props) => {
         return false;
     }
 
+    const etiketterSide1Barn = () => {
+        if (filterStatusAlder.every(filter => filter === false)) return null;
+
+        const filterTekster = checkboxData.overgangsstonad[0].texts;
+
+        const resattFilter = props.filterStatus.map((verdi: boolean, index: number) => {
+            if (index < filterStatusAlder.length) {
+                return false;
+            } else {
+                return verdi;
+            }
+        });
+
+        return <div className="viser-informasjon-for">
+            <Normaltekst>Viser informasjon for</Normaltekst>
+            {filterTekster.map((filterTekst: string, index: number) => {
+                if (filterStatusAlder[index]) {return <div className="etikett-i-artikkel-wrapper"><EtikettBase
+                className="etikett-i-artikkel"
+                mini
+                type="info" 
+                key={index}>
+                    {filterTekst}
+            </EtikettBase></div>} else {
+                return null
+            };
+            })}
+            {filterStatusAlder.some(filter => filter === false) && <div className="link-knapp" onClick={() => props.handleFilterChange(resattFilter)}>Vis alle aldre</div>}
+        </div>
+    }
+
+    const etiketterSide1Situasjon = () => {
+        if (filterStatusSituasjon.every(filter => filter === false)) return null;
+
+        const filterTekster = checkboxData.overgangsstonad[1].texts;
+
+        const resattFilter = props.filterStatus.slice().reverse().map((verdi: boolean, index: number) => {
+            if (index < filterStatusSituasjon.length) {
+                return false;
+            } else {
+                return verdi;
+            }
+        }).reverse();
+
+        return <div className="viser-informasjon-for">
+            <Normaltekst>Viser informasjon for</Normaltekst>
+            {filterTekster.map((filterTekst: string, index: number) => {
+                if (filterStatusSituasjon[index]) {return <div className="etikett-i-artikkel-wrapper"><EtikettBase
+                className="etikett-i-artikkel"
+                mini
+                type="info" 
+                key={index}>
+                    {filterTekst}
+            </EtikettBase></div>} else {
+                return null
+            };
+            })}
+            {filterStatusSituasjon.some(filter => filter === false) && <div className="link-knapp" onClick={() => props.handleFilterChange(resattFilter)}>Vis alle situasjoner</div>}
+        </div>
+    }
+
+    const etiketterSide2 = () => {
+        const filterTekster = checkboxData.barnetilsynsstonad[0].texts;
+
+        const resattFilter = props.filterStatus.map(_ => false);
+
+        if (props.filterStatus.every(filter => filter === false)) return null;
+
+        return <div className="viser-informasjon-for">
+            <Normaltekst>Viser informasjon for</Normaltekst>
+            {filterTekster.map((filterTekst: string, index: number) => {
+                if (props.filterStatus[index]) {return <div className="etikett-i-artikkel-wrapper"><EtikettBase
+                className="etikett-i-artikkel"
+                mini
+                type="info" 
+                key={index}>
+                    {filterTekst}
+            </EtikettBase></div>} else {
+                return null
+            };
+            })}
+            {props.filterStatus.some(filter => filter === false) && <div className="link-knapp" onClick={() => props.handleFilterChange(resattFilter)}>Vis alle situasjoner</div>}
+        </div>
+    }
+
+    const etiketterSide4 = () => {
+        const filterTekster = checkboxData.tilleggsstønad[0].texts;
+
+        const resattFilter = props.filterStatus.map(_ => false);
+
+        if (props.filterStatus.every(filter => filter === false)) return null;
+
+        return <div className="viser-informasjon-for">
+            <Normaltekst>Viser informasjon for</Normaltekst>
+            {filterTekster.map((filterTekst: string, index: number) => {
+                if (props.filterStatus[index]) {return <div className="etikett-i-artikkel-wrapper"><EtikettBase
+                className="etikett-i-artikkel"
+                mini
+                type="info" 
+                key={index}>
+                    {filterTekst}
+            </EtikettBase></div>} else {
+                return null
+            };
+            })}
+            {props.filterStatus.some(filter => filter === false) && <div className="link-knapp" onClick={() => props.handleFilterChange(resattFilter)}>Vis alle situasjoner</div>}
+        </div>
+    }
+
+    const etiketterSide5 = () => {
+        const filterTekster = checkboxData.alenemedbarn.map((obj: any) => obj.texts).flat()
+
+        const resattFilter = props.filterStatus.map(_ => false);
+
+        if (props.filterStatus.every(filter => filter === false)) return null;
+
+        return <div className="viser-informasjon-for">
+            <Normaltekst>Viser informasjon for</Normaltekst>
+            {filterTekster.map((filterTekst: string, index: number) => {
+                if (props.filterStatus[index]) {return <div className="etikett-i-artikkel-wrapper"><EtikettBase
+                className="etikett-i-artikkel"
+                mini
+                type="info" 
+                key={index}>
+                    {filterTekst}
+            </EtikettBase></div>} else {
+                return null
+            };
+            })}
+            {props.filterStatus.some(filter => filter === false) && <div className="link-knapp" onClick={() => props.handleFilterChange(resattFilter)}>Vis alle situasjoner</div>}
+        </div>
+    }
+
     return (
         <Panel className="informasjonspanel" id={props.id}>
             <div className="informasjonspanel-ikon">
                 <img src={props.bilde} alt={props.alttekst} />
             </div>
             <h1>{props.tittel}</h1>
-            {props.avsnitt !== undefined && props.avsnitt.map((avsnitt: any, index: number) => (
-                filterCheck(avsnitt) &&
+            {props.avsnitt !== undefined && props.avsnitt.map((avsnitt: any, index: number) => {
+                return <>
+                {props.side === 1 && props.tittel === "Barnas alder" && index === 1 && etiketterSide1Barn()}
+                {props.side === 1 && props.tittel === "Arbeid, utdanning og andre aktiviteter" && index === 1 && etiketterSide1Situasjon()}
+
+                {props.side === 2 && props.tittel === "Når har du rett til stønad?" && index === 1 && etiketterSide2()}
+
+                {props.side === 4 && props.tittel === "Hva kan du få støtte til?" && index === 1 && etiketterSide4()}
+
+                {props.side === 5 && props.tittel && index === 0 && etiketterSide5()}
+                {(filterCheck(avsnitt)) && (
                     <div key={avsnitt._id} id={avsnitt._id}>
                         {avsnitt.avsnitt_innhold &&
                             <BlockContent
@@ -190,7 +333,7 @@ const Informasjonspanel: React.FC<Props> = (props) => {
                             </Ekspanderbartpanel>
                         }
                     </div>
-            ))}
+            )}</>})}
             {props.children}
         </Panel>
     );

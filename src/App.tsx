@@ -13,19 +13,19 @@ function App() {
     <div>
       <Router basename={'/familie/alene-med-barn'}>
         <Switch>
-          <Route path={'/overgangsstønad'}>
+          <Route path={'/overgangsstonad'}>
             <Overgangsstonad />
           </Route>
-          <Route path={'/barnetilsynsstønad'}>
+          <Route path={'/barnetilsyn'}>
             <Barnetilsynstonad />
           </Route>
-          <Route path={'/skolepengerstønad'}>
+          <Route path={'/skolepenger'}>
             <Skolepengerstønad />
           </Route>
-          <Route path={'/tilleggsstønad'}>
+          <Route path={'/tilleggsstonader'}>
             <Tilleggsstonad />
           </Route>
-          <Route path={'/alenemedbarn'}>
+          <Route path={'/hva-naa'}>
             <Alenemedbarn />
           </Route>
           <Route path={'/'}>

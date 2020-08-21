@@ -21,7 +21,7 @@ const Tilpasningsboks: React.FC<Props> = props => {
     
     useEffect(() => {
         if (props.checkboxData.length) {
-            setFilter(new Array(props.checkboxData.map((obj: any) => obj.texts.length)
+            setFilter(props.filterStatus.length ? props.filterStatus : new Array(props.checkboxData.map((obj: any) => obj.texts.length)
             .reduce((a: number, b: number) => a+b))
             .fill(false));
             setTexts(props.checkboxData.map((obj: any) => obj.texts).flat());
@@ -29,7 +29,7 @@ const Tilpasningsboks: React.FC<Props> = props => {
             .map(cumulativeSum)]);
         }
         // eslint-disable-next-line
-    }, []);
+    }, [props.filterStatus]);
 
     const handleButtonClick = () => {
         props.handleChange(filter);
@@ -63,12 +63,12 @@ const Tilpasningsboks: React.FC<Props> = props => {
                         </Normaltekst>
                         {texts.map((text: string, index: number) => (
                             props.filterStatus[index] ?
-                            <EtikettBase
+                            <div className="etikett-i-tilpasningsboks-wrapper"><EtikettBase
                             mini 
                             type="info" 
                             key={index}>
                                 {text}
-                            </EtikettBase> :
+                            </EtikettBase></div> :
                             null
                         ))}
                     </div> :
