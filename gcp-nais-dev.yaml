@@ -28,7 +28,7 @@ spec:
   ingresses:
     - https://familie-ef-navno.dev.nav.no
     - https://dev.nav.no/familie/alene-med-barn
-    - https://familie.dev.nav.no/familie/alene-med-barn
+    - https://familie2.dev.nav.no/familie/alene-med-barn
   env:
     - name: APP_VERSION
       value: '{{version}}'
