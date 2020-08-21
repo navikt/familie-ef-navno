@@ -26,7 +26,6 @@ spec:
   prometheus:
     enabled: false
   ingresses:
-    - https://www-q0.nav.no/familie/alene-med-barn
     - https://familie-ef-navno.dev.nav.no
     - https://dev.nav.no/familie/alene-med-barn
     - https://familie-ef.dev.nav.no/familie/alene-med-barn
