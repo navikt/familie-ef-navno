@@ -26,7 +26,7 @@ spec:
   prometheus:
     enabled: false
   ingresses:
-    - https://www.nav.no/familie/alene-med-barn
+    - https://familie-ef-navno.adeo.no
   accessPolicy:
     outbound:
       rules:
