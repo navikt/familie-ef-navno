@@ -88,8 +88,8 @@ const Landingsside = () => {
                         <Systemtittel className="stønad-tittel">Aktuelle stønader</Systemtittel>
                         <div className="stønadsbokser">
                             {side?.aktuelle_stonader?.map((stønad: any) => 
-                            <a className="boks-link" href={stønad.boks_lenke} target="_blank" rel="noopener noreferrer">
-                                <div className="boks" key={stønad._key}>
+                            <a key={stønad._key} className="boks-link" href={stønad.boks_lenke} target="_blank" rel="noopener noreferrer">
+                                <div className="boks">
                                     <Element className="boks-overskrift">{stønad.boks_overskrift}</Element>
                                     <div className="boks-innhold">
                                         {stønad.boks_innhold}
