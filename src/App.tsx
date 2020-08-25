@@ -8,7 +8,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Landingsside from './sider/landingsside/Landingsside';
 
 function App() {
-    
+
    return (
     <div>
       <Router basename={process.env.PUBLIC_URL}>

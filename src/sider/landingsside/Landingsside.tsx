@@ -32,7 +32,7 @@ const Landingsside = () => {
                 <div className="innhold-landingsside">
 
                     <div className="hovedbokser">
-                        <a className="boks-link" href={side?.hovedkort_1?.boks_lenke} target="_blank" rel="noopener noreferrer">
+                        <a className="boks-link" href={side?.hovedkort_1?.boks_lenke} rel="noopener noreferrer">
                         <div className="hovedboks">
                         <div className="hovedboks__header">
                             <div className="img-wrapper">
@@ -50,7 +50,7 @@ const Landingsside = () => {
                         </div>
                         </a>
 
-                        <a className="boks-link" href={side?.hovedkort_2?.boks_lenke} target="_blank" rel="noopener noreferrer">
+                        <a className="boks-link" href={side?.hovedkort_2?.boks_lenke} rel="noopener noreferrer">
                             <div className="hovedboks">
                             <div className="hovedboks__header">
                                 <div className="img-wrapper">
@@ -66,7 +66,7 @@ const Landingsside = () => {
                             </div>
                         </a>
 
-                        <a className="boks-link" href={side?.hovedkort_3?.boks_lenke} target="_blank" rel="noopener noreferrer">
+                        <a className="boks-link" href={side?.hovedkort_3?.boks_lenke} rel="noopener noreferrer">
                             <div className="hovedboks">
                             <div className="hovedboks__header">
                                 <div className="img-wrapper">
@@ -88,7 +88,7 @@ const Landingsside = () => {
                         <Systemtittel className="stønad-tittel">Aktuelle stønader</Systemtittel>
                         <div className="stønadsbokser">
                             {side?.aktuelle_stonader?.map((stønad: any) => 
-                            <a key={stønad._key} className="boks-link" href={stønad.boks_lenke} target="_blank" rel="noopener noreferrer">
+                            <a key={stønad._key} className="boks-link" href={stønad.boks_lenke} rel="noopener noreferrer">
                                 <div className="boks">
                                     <Element className="boks-overskrift">{stønad.boks_overskrift}</Element>
                                     <div className="boks-innhold">
