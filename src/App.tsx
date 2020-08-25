@@ -11,7 +11,7 @@ function App() {
     
    return (
     <div>
-      <Router basename={'/familie/alene-med-barn'}>
+      <Router basename={process.env.PUBLIC_URL}>
         <Switch>
           <Route path={'/overgangsstonad'}>
             <Overgangsstonad />
