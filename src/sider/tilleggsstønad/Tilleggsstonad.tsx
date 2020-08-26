@@ -68,7 +68,7 @@ const Barnetilsynstonad = () => {
                 </div>
                 <div className="breadcrumb">
                     <p className="breadcrumb-link">
-                        <a href="https://www.nav.no/no/person">Forside</a>  /  <a href="https://www.nav.no/no/person/familie/enslig-mor-eller-far">Alene med barn </a>
+                        <a href="https://www.nav.no/no/person">Forside</a>  /  <a href="https://www.nav.no/familie/alene-med-barn">Alene med barn </a>
                     </p>
                 </div>
                 <div className="sideinnhold">
