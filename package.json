@@ -22,6 +22,7 @@
     "craco-less": "^1.17.0",
     "less": "^3.11.3",
     "lodash.throttle": "^4.1.1",
+    "mustache-express": "^1.3.0",
     "nav-frontend-alertstriper": "^3.0.18",
     "nav-frontend-alertstriper-style": "^2.0.16",
     "nav-frontend-chevron-style": "^0.3.5",
