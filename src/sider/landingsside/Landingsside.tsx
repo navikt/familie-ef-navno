@@ -14,6 +14,7 @@ const Landingsside = () => {
         client
             .fetch(hentLandingssideQuery, { type: 'landingsside', side_id: 1 })
             .then((res: any) => {
+                console.log("test", res);
                 setSide(res);
             })
     }, []);
