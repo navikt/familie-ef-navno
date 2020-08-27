@@ -7,6 +7,7 @@ import barn from '../../assets/barn.svg';
 import sjekkliste from '../../assets/sjekkliste.svg';
 import tablet from '../../assets/tablet.svg';
 import { Link } from 'react-router-dom';
+import LenkeBoks from './LenkeBoks';
 
 const Landingsside = () => {
     const [side, setSide] = useState<any>({});
@@ -95,22 +96,11 @@ const Landingsside = () => {
                             {side?.aktuelle_stonader?.map((stønad: any) => {
                                 if (eksternLenke(stønad.boks_lenke)) {
                                     return (<a key={stønad._key} className="boks-link" href={stønad.boks_lenke} rel="noopener noreferrer">
-                                    <div className="boks">
-                                        <Element className="boks-overskrift">{stønad.boks_overskrift}</Element>
-                                        <div className="boks-innhold">
-                                            {stønad.boks_innhold}
-                                        </div>
-                                    </div>
+                                    <LenkeBoks overskrift={stønad.boks_overskrift} innhold={stønad.boks_innhold} />
                                 </a>)
                                 } else {
-                                    return (
-                                        <Link key={stønad._key} className="boks-link" to={stønad.boks_lenke} rel="noopener noreferrer">
-                                        <div className="boks">
-                                            <Element className="boks-overskrift">{stønad.boks_overskrift}</Element>
-                                            <div className="boks-innhold">
-                                                {stønad.boks_innhold}
-                                            </div>
-                                        </div>
+                                    return (<Link key={stønad._key} className="boks-link" to={stønad.boks_lenke} rel="noopener noreferrer">
+                                        <LenkeBoks overskrift={stønad.boks_overskrift} innhold={stønad.boks_innhold} />
                                     </Link>
                                     )
                                 }
