@@ -6,6 +6,8 @@ import kvinne from '../../assets/kvinne.svg';
 import barn from '../../assets/barn.svg';
 import sjekkliste from '../../assets/sjekkliste.svg';
 import tablet from '../../assets/tablet.svg';
+import { Link } from 'react-router-dom';
+import LenkeBoks from './LenkeBoks';
 
 const Landingsside = () => {
     const [side, setSide] = useState<any>({});
@@ -17,6 +19,10 @@ const Landingsside = () => {
                 setSide(res);
             })
     }, []);
+
+    const eksternLenke = (lenke: string) => {
+        return (lenke.includes("https://") || (lenke.includes("http://")));
+    }
 
     if (side.hovedkort_1) return (
         <div className="landingsside">
@@ -32,7 +38,7 @@ const Landingsside = () => {
                 <div className="innhold-landingsside">
 
                     <div className="hovedbokser">
-                        <a className="boks-link" href={side?.hovedkort_1?.boks_lenke} rel="noopener noreferrer">
+                        <Link className="boks-link" to={side?.hovedkort_1?.boks_lenke} rel="noopener noreferrer">
                         <div className="hovedboks">
                         <div className="hovedboks__header">
                             <div className="img-wrapper">
@@ -48,7 +54,7 @@ const Landingsside = () => {
                             </div>
                         </div>
                         </div>
-                        </a>
+                        </Link>
 
                         <a className="boks-link" href={side?.hovedkort_2?.boks_lenke} rel="noopener noreferrer">
                             <div className="hovedboks">
@@ -87,15 +93,18 @@ const Landingsside = () => {
                     <div className="aktuelle-stønader">
                         <Systemtittel className="stønad-tittel">Aktuelle stønader</Systemtittel>
                         <div className="stønadsbokser">
-                            {side?.aktuelle_stonader?.map((stønad: any) => 
-                            <a key={stønad._key} className="boks-link" href={stønad.boks_lenke} rel="noopener noreferrer">
-                                <div className="boks">
-                                    <Element className="boks-overskrift">{stønad.boks_overskrift}</Element>
-                                    <div className="boks-innhold">
-                                        {stønad.boks_innhold}
-                                    </div>
-                                </div>
-                            </a>)}
+                            {side?.aktuelle_stonader?.map((stønad: any) => {
+                                if (eksternLenke(stønad.boks_lenke)) {
+                                    return (<a key={stønad._key} className="boks-link" href={stønad.boks_lenke} rel="noopener noreferrer">
+                                    <LenkeBoks overskrift={stønad.boks_overskrift} innhold={stønad.boks_innhold} />
+                                </a>)
+                                } else {
+                                    return (<Link key={stønad._key} className="boks-link" to={stønad.boks_lenke} rel="noopener noreferrer">
+                                        <LenkeBoks overskrift={stønad.boks_overskrift} innhold={stønad.boks_innhold} />
+                                    </Link>
+                                    )
+                                }
+                            })}
                         </div>
                     </div>
                 </div>
