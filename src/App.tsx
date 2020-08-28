@@ -10,7 +10,7 @@ import Landingsside from './sider/landingsside/Landingsside';
 function App() {
 
    return (
-    <div>
+    <div className="navno-side">
       <Router basename={process.env.PUBLIC_URL}>
         <Switch>
           <Route path={'/overgangsstonad'}>
