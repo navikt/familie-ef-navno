@@ -7,6 +7,7 @@ import Tilpasningsboks from '../../components/Tilpasningsboks';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import checkboxData from '../../utils/checkboxData';
 import { Alert } from '../../components/Alert';
+import { lagAnkerLinkID } from '../../utils/utils';
 
 const Alenemedbarn = () => {
     const [side, setSide] = useState<any>({});
@@ -41,14 +42,6 @@ const Alenemedbarn = () => {
     const scrollTop = () => {
         window.scrollTo({top: 0, behavior: 'smooth'});
     };
-
-    const lagAnkerLinkID = (artikkel: any) => {
-        if (artikkel.liste_i_panel) {
-            return artikkel.tittel_i_panel.toLowerCase().replace(/ /g,"-");
-        } else {
-            return artikkel._id;
-        }
-    }
 
     if (side.artikler !== undefined) {
         return (
@@ -94,6 +87,8 @@ const Alenemedbarn = () => {
                             </div> :
                             null}
                             {side?.artikler?.map((artikkel: any) => {
+
+                                console.log("artikkel", artikkel)
 
                             const ankerLinkID = lagAnkerLinkID(artikkel);
 

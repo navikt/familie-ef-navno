@@ -7,6 +7,7 @@ import Tilpasningsboks from '../../components/Tilpasningsboks';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import checkboxData from '../../utils/checkboxData';
 import { Alert } from '../../components/Alert';
+import { lagAnkerLinkID } from '../../utils/utils';
 
 const Skolepengerstonad = () => {
     const [side, setSide] = useState<any>({});
@@ -53,10 +54,6 @@ const Skolepengerstonad = () => {
     const søkKnapp = {
         tekst: "Søk stønad til skolepenger",
         url: "https://www.nav.no/soknader/nb/person/familie/enslig-mor-eller-far#NAV150004"
-    }
-
-    const lagAnkerLinkID = (artikkel: any) => {
-        return artikkel.tittel_i_liste.toLowerCase().replace(/ /g,"-");
     }
 
     if (side.artikler !== undefined) {

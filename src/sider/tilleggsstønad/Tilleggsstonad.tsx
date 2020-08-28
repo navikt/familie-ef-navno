@@ -7,6 +7,7 @@ import Tilpasningsboks from '../../components/Tilpasningsboks';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import checkboxData from '../../utils/checkboxData';
 import { Alert } from '../../components/Alert';
+import { lagAnkerLinkID } from '../../utils/utils';
 
 const Barnetilsynstonad = () => {
     const [side, setSide] = useState<any>({});
@@ -51,10 +52,6 @@ const Barnetilsynstonad = () => {
     const søkKnapp = {
         tekst: "Søk tilleggsstønader",
         url: "https://www.nav.no/soknader/nb/person/familie/tilleggsstonader"
-    }
-
-    const lagAnkerLinkID = (artikkel: any) => {
-        return artikkel.tittel_i_liste.toLowerCase().replace(/ /g,"-");
     }
 
     if (side.artikler !== undefined) {
