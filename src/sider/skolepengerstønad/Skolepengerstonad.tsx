@@ -7,7 +7,7 @@ import Tilpasningsboks from '../../components/Tilpasningsboks';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import checkboxData from '../../utils/checkboxData';
 import { Alert } from '../../components/Alert';
-import { lagAnkerLinkID } from '../../utils/utils';
+import { lagArtikkelAnkerLinkID } from '../../utils/utils';
 
 const Skolepengerstonad = () => {
     const [side, setSide] = useState<any>({});
@@ -87,7 +87,7 @@ const Skolepengerstonad = () => {
                                 null}
                             <Temameny
                                 temaer={side.artikler.map((artikkel: any) => {
-                                    const ankerLinkID = lagAnkerLinkID(artikkel);
+                                    const ankerLinkID = lagArtikkelAnkerLinkID(artikkel);
                                     return ({ tittel: artikkel.tittel_i_liste, id: ankerLinkID })})
                                 }
                                 visSisteLenker={visSisteLenker}
@@ -103,7 +103,7 @@ const Skolepengerstonad = () => {
                             null}
                         {side?.artikler?.map((artikkel: any) => {
 
-                            const ankerLinkID = lagAnkerLinkID(artikkel);
+                            const ankerLinkID = lagArtikkelAnkerLinkID(artikkel);
 
                             return (<Informasjonspanel
                                 key={artikkel._id}
