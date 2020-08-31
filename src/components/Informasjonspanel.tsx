@@ -10,6 +10,7 @@ import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import EtikettBase from 'nav-frontend-etiketter';
 import { Normaltekst } from 'nav-frontend-typografi';
 import checkboxData from '../utils/checkboxData';
+import { formaterID } from '../utils/utils';
 
 interface Props {
     tittel: string;
@@ -292,6 +293,12 @@ const Informasjonspanel: React.FC<Props> = (props) => {
             </div>
             <h1>{props.tittel}</h1>
             {props.avsnitt !== undefined && props.avsnitt.map((avsnitt: any, index: number) => {
+                let avsnittID = avsnitt._id;
+
+                if (avsnitt.avsnitt_innhold && avsnitt.avsnitt_innhold[0].style === 'h3') {
+                    avsnittID = formaterID(avsnitt.avsnitt_innhold[0].children[0].text);
+                }
+
                 return <>
                 {props.side === 1 && props.tittel === "Barnas alder" && index === 1 && etiketterSide1Barn()}
                 {props.side === 1 && props.tittel === "Arbeid, utdanning og andre aktiviteter" && index === 1 && etiketterSide1Situasjon()}
@@ -302,7 +309,7 @@ const Informasjonspanel: React.FC<Props> = (props) => {
 
                 {props.side === 5 && props.tittel && index === 0 && etiketterSide5()}
                 {(filterCheck(avsnitt)) && (
-                    <div key={avsnitt._id} id={avsnitt._id}>
+                    <div key={avsnitt._id} id={avsnittID}>
                         {avsnitt.avsnitt_innhold &&
                             <BlockContent
                                 blocks={avsnitt.avsnitt_innhold}
@@ -325,7 +332,7 @@ const Informasjonspanel: React.FC<Props> = (props) => {
                             : null
                         }
                         {avsnitt.dokument &&
-                            <Ekspanderbartpanel tittel="Dette må du dokumentere">
+                            <Ekspanderbartpanel tittel="Dette må du dokumentere" id="dokumentasjon">
                                 <BlockContent
                                     blocks={avsnitt.dokument}
                                     serializers={serializers}

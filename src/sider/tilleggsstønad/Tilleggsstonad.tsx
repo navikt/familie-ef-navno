@@ -7,6 +7,7 @@ import Tilpasningsboks from '../../components/Tilpasningsboks';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import checkboxData from '../../utils/checkboxData';
 import { Alert } from '../../components/Alert';
+import { lagArtikkelAnkerLinkID } from '../../utils/utils';
 
 const Barnetilsynstonad = () => {
     const [side, setSide] = useState<any>({});
@@ -53,10 +54,6 @@ const Barnetilsynstonad = () => {
         url: "https://www.nav.no/soknader/nb/person/familie/tilleggsstonader"
     }
 
-    const lagAnkerLinkID = (artikkel: any) => {
-        return artikkel.tittel_i_liste.toLowerCase().replace(/ /g,"-");
-    }
-
     if (side.artikler !== undefined) {
         return (
             <div className="side">
@@ -88,7 +85,7 @@ const Barnetilsynstonad = () => {
                                 null}
                             <Temameny
                                 temaer={side.artikler.map((artikkel: any) => {
-                                    const ankerLinkID = lagAnkerLinkID(artikkel);
+                                    const ankerLinkID = lagArtikkelAnkerLinkID(artikkel);
                                     return ({ tittel: artikkel.tittel_i_liste, id: ankerLinkID })})
                                 }
                                 visSisteLenker={visSisteLenker}
@@ -104,7 +101,7 @@ const Barnetilsynstonad = () => {
                             null}
                         {side?.artikler?.map((artikkel: any) => {
 
-                        const ankerLinkID = lagAnkerLinkID(artikkel);
+                        const ankerLinkID = lagArtikkelAnkerLinkID(artikkel);
 
                         return (<Informasjonspanel
                             key={artikkel._id}

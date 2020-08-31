@@ -6,12 +6,14 @@ import Tilleggsstonad from './sider/tilleggsstønad/Tilleggsstonad';
 import Alenemedbarn from './sider/alenemedbarn/Alenemedbarn';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Landingsside from './sider/landingsside/Landingsside';
+import HashLinkObserver from "react-hash-link";
 
 function App() {
 
    return (
     <div className="navno-side">
       <Router basename={process.env.PUBLIC_URL}>
+        <HashLinkObserver/>
         <Switch>
           <Route path={'/overgangsstonad'}>
             <Overgangsstonad />

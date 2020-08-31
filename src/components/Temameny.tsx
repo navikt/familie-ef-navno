@@ -1,9 +1,9 @@
 import React from 'react';
 import Panel from 'nav-frontend-paneler';
 import { Undertittel } from 'nav-frontend-typografi';
-import { Link } from 'react-scroll';
 import ExternalLink from '../utils/symbols/ExternalLink';
 import { Hovedknapp } from 'nav-frontend-knapper';
+import { HashLink } from 'react-router-hash-link';
 
 interface Props {
   temaer: [{
@@ -24,14 +24,12 @@ const Temameny: React.FC<Props> = (props) => {
       {props.temaer.map((tema, index) => {
         return (
         <div key={index} className='temameny-lenker'>
-          <Link
-            hashSpy={true}
-            to={tema.id}
-            spy={true}
+          <HashLink
+            to={"#" + tema.id}
             smooth={true}
           >
             {tema.tittel}
-          </Link>
+          </HashLink>
         </div>
       )})
       }
