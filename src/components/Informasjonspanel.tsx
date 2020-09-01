@@ -1,6 +1,5 @@
 import React from 'react';
 import Panel from 'nav-frontend-paneler';
-import { Link } from 'react-scroll';
 import { BlockContent } from '../utils/sanity';
 import { Alert } from './Alert';
 import KalkulatorOvergangsstonad from './KalkulatorOvergangsstonad';
@@ -8,9 +7,10 @@ import KalkulatorBarnetilsyn from './KalkulatorBarnetilsyn';
 import Tabell from './Tabell';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import EtikettBase from 'nav-frontend-etiketter';
+import { HashLink } from 'react-router-hash-link';
 import { Normaltekst } from 'nav-frontend-typografi';
 import checkboxData from '../utils/checkboxData';
-import { formaterID } from '../utils/utils';
+import { lagAvsnittAnkerLinkID } from '../utils/utils';
 
 interface Props {
     tittel: string;
@@ -48,14 +48,17 @@ const serializers = {
     },
     marks: {
         internalLink: (props: any) => {
-            return <Link
-                to={props.mark?.reference?._ref}
-                spy={true}
+            const avsnitt = props.mark?.referert_avsnitt;
+
+            const avsnittID = lagAvsnittAnkerLinkID(avsnitt);
+
+            return <HashLink
+                to={'#' + avsnittID}
                 smooth={true}
                 className="lenke"
             >
                 {props.children}
-            </Link>
+            </HashLink>
         },
         link: (props: any) => {
             const { blank, href } = props.mark;
@@ -293,11 +296,7 @@ const Informasjonspanel: React.FC<Props> = (props) => {
             </div>
             <h1>{props.tittel}</h1>
             {props.avsnitt !== undefined && props.avsnitt.map((avsnitt: any, index: number) => {
-                let avsnittID = avsnitt._id;
-
-                if (avsnitt.avsnitt_innhold && avsnitt.avsnitt_innhold[0].style === 'h3') {
-                    avsnittID = formaterID(avsnitt.avsnitt_innhold[0].children[0].text);
-                }
+                const avsnittID = lagAvsnittAnkerLinkID(avsnitt);
 
                 return <>
                 {props.side === 1 && props.tittel === "Barnas alder" && index === 1 && etiketterSide1Barn()}

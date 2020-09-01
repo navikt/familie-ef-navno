@@ -1,7 +1,8 @@
 import React from 'react';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { BlockContent } from '../utils/sanity';
-import { Link } from 'react-scroll';
+import { HashLink } from 'react-router-hash-link';
+import { lagAvsnittAnkerLinkID } from '../utils/utils';
 
 interface Props {
     alertstripe?: {
@@ -17,13 +18,17 @@ interface Props {
 const serializers = {
     marks: {
         internalLink: (props: any) => {
-            return <Link
-                to={props.mark?.reference?._ref}
-                spy={true}
+            const avsnitt = props.mark?.referert_avsnitt;
+
+            const avsnittID = lagAvsnittAnkerLinkID(avsnitt);
+
+            return <HashLink
+                to={'#' + avsnittID}
                 smooth={true}
+                className="lenke"
             >
                 {props.children}
-            </Link>
+            </HashLink>
         },
         link: (props: any) => {
             const { blank, href } = props.mark;
