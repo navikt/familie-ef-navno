@@ -9,3 +9,13 @@ export const lagArtikkelAnkerLinkID = (artikkel: any) => {
         return artikkel._id;
     }
 }
+
+export const lagAvsnittAnkerLinkID = (avsnitt: any) => {
+    let avsnittID = avsnitt._id;
+
+    if (avsnitt.avsnitt_innhold && avsnitt.avsnitt_innhold[0].style === 'h3') {
+        avsnittID = formaterID(avsnitt.avsnitt_innhold[0].children[0].text);
+    }
+
+    return avsnittID;
+}
