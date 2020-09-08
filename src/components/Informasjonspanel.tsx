@@ -1,6 +1,5 @@
 import React from 'react';
 import Panel from 'nav-frontend-paneler';
-import { Link } from 'react-scroll';
 import { BlockContent } from '../utils/sanity';
 import { Alert } from './Alert';
 import KalkulatorOvergangsstonad from './KalkulatorOvergangsstonad';
@@ -8,8 +7,10 @@ import KalkulatorBarnetilsyn from './KalkulatorBarnetilsyn';
 import Tabell from './Tabell';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import EtikettBase from 'nav-frontend-etiketter';
+import { HashLink } from 'react-router-hash-link';
 import { Normaltekst } from 'nav-frontend-typografi';
 import checkboxData from '../utils/checkboxData';
+import { lagAvsnittAnkerLinkID } from '../utils/utils';
 
 interface Props {
     tittel: string;
@@ -47,14 +48,17 @@ const serializers = {
     },
     marks: {
         internalLink: (props: any) => {
-            return <Link
-                to={props.mark?.reference?._ref}
-                spy={true}
+            const avsnitt = props.mark?.referert_avsnitt;
+
+            const avsnittID = lagAvsnittAnkerLinkID(avsnitt);
+
+            return <HashLink
+                to={'#' + avsnittID}
                 smooth={true}
                 className="lenke"
             >
                 {props.children}
-            </Link>
+            </HashLink>
         },
         link: (props: any) => {
             const { blank, href } = props.mark;
@@ -292,6 +296,8 @@ const Informasjonspanel: React.FC<Props> = (props) => {
             </div>
             <h1>{props.tittel}</h1>
             {props.avsnitt !== undefined && props.avsnitt.map((avsnitt: any, index: number) => {
+                const avsnittID = lagAvsnittAnkerLinkID(avsnitt);
+
                 return <>
                 {props.side === 1 && props.tittel === "Barnas alder" && index === 1 && etiketterSide1Barn()}
                 {props.side === 1 && props.tittel === "Arbeid, utdanning og andre aktiviteter" && index === 1 && etiketterSide1Situasjon()}
@@ -302,7 +308,7 @@ const Informasjonspanel: React.FC<Props> = (props) => {
 
                 {props.side === 5 && props.tittel && index === 0 && etiketterSide5()}
                 {(filterCheck(avsnitt)) && (
-                    <div key={avsnitt._id} id={avsnitt._id}>
+                    <div key={avsnitt._id} id={avsnittID}>
                         {avsnitt.avsnitt_innhold &&
                             <BlockContent
                                 blocks={avsnitt.avsnitt_innhold}
@@ -325,7 +331,7 @@ const Informasjonspanel: React.FC<Props> = (props) => {
                             : null
                         }
                         {avsnitt.dokument &&
-                            <Ekspanderbartpanel tittel="Dette må du dokumentere">
+                            <Ekspanderbartpanel tittel="Dette må du dokumentere" id="dokumentasjon">
                                 <BlockContent
                                     blocks={avsnitt.dokument}
                                     serializers={serializers}

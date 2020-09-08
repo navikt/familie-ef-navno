@@ -7,6 +7,7 @@ import Tilpasningsboks from '../../components/Tilpasningsboks';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import checkboxData from '../../utils/checkboxData';
 import { Alert } from '../../components/Alert';
+import {lagArtikkelAnkerLinkID } from '../../utils/utils';
 
 const Alenemedbarn = () => {
     const [side, setSide] = useState<any>({});
@@ -42,14 +43,6 @@ const Alenemedbarn = () => {
         window.scrollTo({top: 0, behavior: 'smooth'});
     };
 
-    const lagAnkerLinkID = (artikkel: any) => {
-        if (artikkel.liste_i_panel) {
-            return artikkel.tittel_i_panel.toLowerCase().replace(/ /g,"-");
-        } else {
-            return artikkel._id;
-        }
-    }
-
     if (side.artikler !== undefined) {
         return (
             <div className="side">
@@ -80,7 +73,7 @@ const Alenemedbarn = () => {
                                 null}
                             <Temameny
                                 temaer={side.artikler.map((artikkel: any) => {
-                                    const ankerLinkID = lagAnkerLinkID(artikkel);
+                                    const ankerLinkID = lagArtikkelAnkerLinkID(artikkel);
                                     return ({ tittel: artikkel.tittel_i_liste, id: ankerLinkID })})
                                 }
                                 visSisteLenker={visSisteLenker}
@@ -95,7 +88,7 @@ const Alenemedbarn = () => {
                             null}
                             {side?.artikler?.map((artikkel: any) => {
 
-                            const ankerLinkID = lagAnkerLinkID(artikkel);
+                            const ankerLinkID = lagArtikkelAnkerLinkID(artikkel);
 
                             return (<Informasjonspanel
                                 key={artikkel._id}

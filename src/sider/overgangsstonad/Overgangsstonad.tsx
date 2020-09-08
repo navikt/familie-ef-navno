@@ -8,6 +8,7 @@ import NavFrontendSpinner from 'nav-frontend-spinner';
 import checkboxData from '../../utils/checkboxData';
 import { logEvent } from '../../utils/amplitude';
 import { Alert } from '../../components/Alert';
+import { lagArtikkelAnkerLinkID } from '../../utils/utils';
 
 const Overgangsstonad = () => {
     const [side, setSide] = useState<any>({});
@@ -66,10 +67,6 @@ const Overgangsstonad = () => {
         url: "https://www.nav.no/soknader/nb/person/familie/enslig-mor-eller-far#NAV150001"
     }
 
-    const lagAnkerLinkID = (artikkel: any) => {
-        return artikkel.tittel_i_liste.toLowerCase().replace(/ /g,"-");
-    }
-
     if (side.artikler !== undefined) {
         return (
             <div className="side">
@@ -101,7 +98,7 @@ const Overgangsstonad = () => {
                                 null}
                             <Temameny
                                 temaer={side.artikler.map((artikkel: any) => {
-                                    const ankerLinkID = lagAnkerLinkID(artikkel);
+                                    const ankerLinkID = lagArtikkelAnkerLinkID(artikkel);
                                     return ({ tittel: artikkel.tittel_i_liste, id: ankerLinkID })})
                                 }
                                 visSisteLenker={visSisteLenker}
@@ -117,7 +114,7 @@ const Overgangsstonad = () => {
                             null}
                         {side?.artikler?.map((artikkel: any) => {
 
-                            const ankerLinkID = lagAnkerLinkID(artikkel);
+                            const ankerLinkID = lagArtikkelAnkerLinkID(artikkel);
 
                             return (<Informasjonspanel
                                 key={artikkel._id}
