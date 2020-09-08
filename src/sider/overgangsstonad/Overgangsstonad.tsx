@@ -6,6 +6,7 @@ import Informasjonspanel from '../../components/Informasjonspanel';
 import Tilpasningsboks from '../../components/Tilpasningsboks';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import checkboxData from '../../utils/checkboxData';
+import { logEvent } from '../../utils/amplitude';
 import { Alert } from '../../components/Alert';
 
 const Overgangsstonad = () => {
@@ -20,6 +21,10 @@ const Overgangsstonad = () => {
     let vinduHoyde = window.innerHeight;
 
     let diff = sideMenuHeight && vinduHoyde - sideMenuHeight < 0 ? vinduHoyde - sideMenuHeight : 0;
+
+    useEffect(() => {
+        logEvent('sidevisning', {'side': 'test'})
+    }, []);
 
     useEffect(() => {
         setClassName(sideMenuHeight ? (sideMenuHeight >= vinduHoyde ? '' : 'sticky') : 'sticky');
