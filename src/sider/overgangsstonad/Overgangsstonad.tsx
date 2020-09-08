@@ -24,6 +24,7 @@ const Overgangsstonad = () => {
     let diff = sideMenuHeight && vinduHoyde - sideMenuHeight < 0 ? vinduHoyde - sideMenuHeight : 0;
 
     useEffect(() => {
+        console.log("Sidevisning overgangsstønad")
         logEvent('sidevisning', {'side': 'test'})
     }, []);
 
