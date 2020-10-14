@@ -71,6 +71,9 @@ const KalkulatorOvergangsstonad: React.FC<Props> = (props) => {
                 Beregnet overgangsstønad blir <strong>{sum} kr</strong> før skatt i måneden.
                 <br />
                 <br />
+                Husk at hvis du får andre stønader kan dette påvirke hvor mye du får i overgangsstønad.
+                <br />
+                <br />
                 Når vi har behandlet søknaden din om overgangsstønad,
                 vil du få vite hva du får utbetalt.
             </AlertStripe> 
