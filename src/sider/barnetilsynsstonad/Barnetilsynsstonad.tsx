@@ -51,7 +51,7 @@ const Barnetilsynstonad = () => {
 
     const søkKnapp = {
         tekst: "Søk stønad til barnetilsyn",
-        url: "https://www.nav.no/soknader/nb/person/familie/enslig-mor-eller-far#NAV150002"
+        url: "https://www.nav.no/familie/alene-med-barn/soknad/barnetilsyn"
     }
 
     if (side.artikler !== undefined) {

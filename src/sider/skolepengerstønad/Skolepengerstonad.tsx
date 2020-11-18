@@ -53,7 +53,7 @@ const Skolepengerstonad = () => {
 
     const søkKnapp = {
         tekst: "Søk stønad til skolepenger",
-        url: "https://www.nav.no/soknader/nb/person/familie/enslig-mor-eller-far#NAV150004"
+        url: "https://nav.no/familie/alene-med-barn/soknad/skolepenger"
     }
 
     if (side.artikler !== undefined) {

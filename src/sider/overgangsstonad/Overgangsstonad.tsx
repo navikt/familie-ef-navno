@@ -65,7 +65,7 @@ const Overgangsstonad = () => {
 
     const søkKnapp = {
         tekst: "Søk overgangsstønad",
-        url: "https://www.nav.no/soknader/nb/person/familie/enslig-mor-eller-far#NAV150001"
+        url: "https://www.nav.no/familie/alene-med-barn/soknad"
     }
 
     if (side.artikler !== undefined) {
