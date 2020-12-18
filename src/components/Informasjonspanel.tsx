@@ -294,7 +294,7 @@ const Informasjonspanel: React.FC<Props> = (props) => {
             <div className="informasjonspanel-ikon">
                 <img src={props.bilde} alt={props.alttekst} />
             </div>
-            <h1>{props.tittel}</h1>
+            <h2>{props.tittel}</h2>
             {props.avsnitt !== undefined && props.avsnitt.map((avsnitt: any, index: number) => {
                 const avsnittID = lagAvsnittAnkerLinkID(avsnitt);
 
