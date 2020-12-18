@@ -44,7 +44,7 @@ const Landingsside = () => {
                             </div>
 
                             <div className="hovedboks__innhold">
-                                <Element className="boks-overskrift">{side?.hovedkort_1?.boks_overskrift}</Element>
+                                <Element className="boks-overskrift" tag="h3">{side?.hovedkort_1?.boks_overskrift}</Element>
                                 <div className="hovedboks-tekst">
                                     {side?.hovedkort_1?.boks_innhold}
                                 </div>
@@ -60,7 +60,7 @@ const Landingsside = () => {
                                 </div>
                             </div>
                             <div className="hovedboks__innhold">
-                                <Element className="boks-overskrift">{side?.hovedkort_2?.boks_overskrift}</Element>
+                                <Element className="boks-overskrift" tag="h3">{side?.hovedkort_2?.boks_overskrift}</Element>
                                 <div className="hovedboks-tekst">
                                     {side?.hovedkort_2?.boks_innhold}
                                 </div>
@@ -76,7 +76,7 @@ const Landingsside = () => {
                                 </div>
                             </div>
                             <div className="hovedboks__innhold">
-                                <Element className="boks-overskrift">{side?.hovedkort_3?.boks_overskrift}</Element>
+                                <Element className="boks-overskrift" tag="h3">{side?.hovedkort_3?.boks_overskrift}</Element>
                                 <div className="hovedboks-tekst">
                                     {side?.hovedkort_3?.boks_innhold}
                                 </div>

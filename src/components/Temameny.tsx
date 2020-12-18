@@ -33,28 +33,25 @@ const Temameny: React.FC<Props> = (props) => {
         </div>
       )})
       }
-      {props.visSisteLenker ? 
-        <div className='temameny-lenker'>
+      {props.visSisteLenker ?
+       <React.Fragment>
           <a
           href={'https://lovdata.no/nav/folketrygdloven/kap15'}
           >
-            Hva sier loven? 
+            Hva sier loven?
+        <span>&nbsp;&nbsp;</span>
+        <ExternalLink />
           </a>
-          <span>&nbsp;&nbsp;</span>
-          <ExternalLink />
-        </div> :
-        null}
-      {props.visSisteLenker ?
-        <div className='temameny-lenker'>
-          <a 
+          <a
           href={'https://www.nav.no/no/nav-og-samfunn/kontakt-nav/klage-ris-og-ros/klagerettigheter'}
+          className="temameny-lenker"
           >
-            Klagerettigheter 
+            Klagerettigheter
+            <ExternalLink />
+            <span>&nbsp;&nbsp;</span>
           </a>
-          <span>&nbsp;&nbsp;</span>
-          <ExternalLink />
-        </div> :
-        null}
+       </React.Fragment>
+          : null}
       {props.søkKnapp && <LenkeKnapp className="tilpasningsknapp søk-stønad" tekst={props.søkKnapp.tekst} url={props.søkKnapp.url}/>}
     </Panel >
   );

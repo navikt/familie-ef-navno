@@ -72,9 +72,11 @@ const Alenemedbarn = () => {
                                 /> :
                                 null}
                             <Temameny
-                                temaer={side.artikler.map((artikkel: any) => {
-                                    const ankerLinkID = lagArtikkelAnkerLinkID(artikkel);
-                                    return ({ tittel: artikkel.tittel_i_liste, id: ankerLinkID })})
+                                temaer={side.artikler
+                                    .map((artikkel: any) => {
+                                        const ankerLinkID = lagArtikkelAnkerLinkID(artikkel);
+                                        return ({ tittel: artikkel.tittel_i_liste, id: ankerLinkID })})
+                                    .filter((v: {tittel: string, id: string}) => v.tittel)
                                 }
                                 visSisteLenker={visSisteLenker}
                             />
