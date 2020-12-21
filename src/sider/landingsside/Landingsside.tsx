@@ -23,15 +23,14 @@ const Landingsside = () => {
     if (side.hovedkort_1) return (
         <div className="landingsside">
             <div className="banner-landingsside">
-                <div className="banner-innhold">
+                <nav className="banner-innhold">
                     <h1>Alene med barn</h1>
                     <div className="ingress">
                         Når du er alene med barn, finnes det ulike støtteordninger du kan ha rett til.
                     </div>
-                </div>
+                </nav>
             </div>
-
-            <div className="innhold-landingsside">
+            <div role="main" className="innhold-landingsside">
 
                 <div className="hovedbokser">
                     <Link className="boks-link" to={side?.hovedkort_1?.boks_lenke} rel="noopener noreferrer">

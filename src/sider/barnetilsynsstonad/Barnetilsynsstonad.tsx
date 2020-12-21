@@ -63,12 +63,12 @@ const Barnetilsynstonad = () => {
                 <div className="banner">
                     <h1>Stønad til barnetilsyn for enslig mor eller far i arbeid</h1>
                 </div>
-                <div className="breadcrumb">
+                <nav className="breadcrumb">
                     <p className="breadcrumb-link">
                         <a href="https://www.nav.no/no/person">Forside</a>  /  <a href="https://www.nav.no/familie/alene-med-barn">Alene med barn </a>
                     </p>
-                </div>
-                <div className="sideinnhold">
+                </nav>
+                <div className="sideinnhold" role="main">
                     <div className="sideinfo">
                             <div 
                                 id={'sticky_barnetilsynsstonad'} 

@@ -52,12 +52,12 @@ const Alenemedbarn = () => {
                 <div className="banner">
                     <h1>Alene med barn - hva nå?</h1>
                 </div>
-                <div className="breadcrumb">
+                <nav className="breadcrumb">
                     <p className="breadcrumb-link">
                         <a href="https://www.nav.no/no/person">Forside</a>  /  <a href="https://www.nav.no/familie/alene-med-barn">Alene med barn </a>
                     </p>
-                </div>
-                <div className="sideinnhold">
+                </nav>
+                <div className="sideinnhold" role="main">
                     <div className="sideinfo">
                         <div 
                             className={sideOpen ? '' : 'sticky'} 
