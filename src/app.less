@@ -20,22 +20,24 @@ body {
     .panel{
         border-radius: 0px;
     }
+    .temameny-lenker, .hovedinfo, .breadcrumb-link {
+        a:not(.knapp) {
+            color: @navBla;
+            text-decoration: underline;
+            line-height: 26px;
+        }
 
-    a:not(.knapp) {
-        color: @navBla;
-        text-decoration: underline;
-        line-height: 26px;
-    }
+        a:not(.knapp):hover {
+            text-decoration: none;
+            cursor: pointer;
+        }
 
-    a:not(.knapp):hover {
-          text-decoration: none;
-          cursor: pointer;
-    }
-
-    a:not(.knapp):active, a:not(.knapp--hoved):focus {
-          color: #ffffff;
-          background-color: @fokusFarge;
-          text-decoration: none;
+        a:not(.knapp):active, a:not(.knapp):focus {
+            color: #ffffff;
+            background-color: @fokusFarge;
+            text-decoration: none;
+            outline: none;
+        }
     }
 
     p{
