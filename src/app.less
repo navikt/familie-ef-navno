@@ -1,5 +1,5 @@
 body {
-    background-color: #E5E5E5;
+    background-color: #EFEFEF;
     margin: 0;
     font-family: 'Source Sans Pro';
     max-width: 100%;
@@ -13,30 +13,33 @@ body {
 }
 
 .navno-side {
+    .mb-1rem {
+        margin-bottom: 1rem;
+    }
+
     .panel{
         border-radius: 0px;
     }
     
-    a {
-        color: @navBla; 
-        text-decoration: underline;
-        line-height: 26px;
-    }
+   .temameny-lenker, .hovedinfo {
 
-    .knapp--hoved {
-        color: white;
-    }
-    
-    a :hover{
-        text-decoration: none;
-        cursor: pointer;
-    }
-    
-    :active :focus{
-        color: #ffffff;
-        background-color: @fokusFarge;
-        text-decoration: none;
-    }
+       a {
+           color: @navBla;
+           text-decoration: underline;
+           line-height: 26px;
+       }
+
+       a :hover {
+           text-decoration: none;
+           cursor: pointer;
+       }
+
+       :active :focus {
+           color: #ffffff;
+           background-color: @fokusFarge;
+           text-decoration: none;
+       }
+   }
     
     p{
         font-size: 18px;
@@ -50,32 +53,41 @@ body {
         line-height: 117%;
         text-align: center;
     }
-    
-    h3{
-        font-style: normal;
-        font-weight: 600;
-        font-size: 24px;
-        line-height: 117%;  
-        margin-top: 60px;
+    .hovedinfo {
+
+        h3 {
+            font-style: normal;
+            font-weight: 600;
+            font-size: 24px;
+            line-height: 117%;
+            margin-top: 60px;
+        }
+
+        .knapp--hoved {
+            color: white;
+        }
     }
-    
+
     h6{
         font-style: normal;
         font-weight: 600;
         font-size: 18px;
         line-height: 22px;
-        margin-bottom: 8px; 
+        margin-bottom: 8px;
     }
-    
+
     li{
         font-size: 18px;
         line-height: 144%;
         margin: 10px 0;
     }
-    
+
     @media screen and (max-width: 850px){
         li{
             word-wrap: break-word;
         }
     }
+
+
+
 }

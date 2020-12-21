@@ -6,33 +6,19 @@ import Tilleggsstonad from './sider/tilleggsstønad/Tilleggsstonad';
 import Alenemedbarn from './sider/alenemedbarn/Alenemedbarn';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Landingsside from './sider/landingsside/Landingsside';
-import HashLinkObserver from "react-hash-link";
 
 function App() {
 
    return (
     <div className="navno-side">
       <Router basename={process.env.PUBLIC_URL}>
-        <HashLinkObserver/>
         <Switch>
-          <Route path={'/overgangsstonad'}>
-            <Overgangsstonad />
-          </Route>
-          <Route path={'/barnetilsyn'}>
-            <Barnetilsynstonad />
-          </Route>
-          <Route path={'/skolepenger'}>
-            <Skolepengerstønad />
-          </Route>
-          <Route path={'/tilleggsstonader'}>
-            <Tilleggsstonad />
-          </Route>
-          <Route path={'/hva-naa'}>
-            <Alenemedbarn />
-          </Route>
-          <Route path={'/'}>
-            <Landingsside />
-          </Route>
+          <Route path="/overgangsstonad" component={Overgangsstonad}/>
+          <Route path="/barnetilsyn" component={Barnetilsynstonad}/>
+          <Route path="/skolepenger" component={Skolepengerstønad}/>
+          <Route path="/tilleggsstonader" component={Tilleggsstonad}/>
+          <Route path="/hva-naa" component={Alenemedbarn}/>
+          <Route path="/" component={Landingsside}/>
         </Switch>
       </Router>
     </div>

@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
-import { Input, Label, Select } from 'nav-frontend-skjema';
-import { Knapp } from 'nav-frontend-knapper';
-import AlertStripe from 'nav-frontend-alertstriper';
-import { Element } from 'nav-frontend-typografi';
+import React, {useState} from 'react';
+import {Input, Select} from 'nav-frontend-skjema';
+import {Knapp} from 'nav-frontend-knapper';
 
 const options = [
     { value: 1, name: 1 },
@@ -21,7 +19,7 @@ const KalkulatorBarnetilsyn = () => {
     const [sum, setSum] = useState<number>(0);
     const [antBarn, setAntBarn] = useState<number>();
     const [utgifterBarnepass, setUtgifterBarnepass] = useState<number>();
-    const [kontaktstotte, setKontantstotte] = useState<number>(0);
+    const [kontaktstotte, setKontantstotte] = useState<number>();
     const [feil, setFeil] = useState<boolean | string>(false);
     const [feilAntBarn, setFeilAntBarn] = useState<boolean | string>(false);
 
@@ -31,32 +29,29 @@ const KalkulatorBarnetilsyn = () => {
         if (utgifterBarnepass && antBarn) {
             setFeil(false);
             setFeilAntBarn(false);
-            let stotte = Math.round((utgifterBarnepass - kontaktstotte) * 0.64);
+            let stotte = Math.round((utgifterBarnepass - (kontaktstotte || 0)) * 0.64);
             if (antBarn === 1 && stotte >= 4053) {
                 setSum(4053);
-            }
-            else if (antBarn === 2 && stotte >= 5289) {
+            } else if (antBarn === 2 && stotte >= 5289) {
                 setSum(5289);
-            }
-            else if (antBarn >= 3 && stotte >= 5993) {
+            } else if (antBarn >= 3 && stotte >= 5993) {
                 setSum(5993);
-            }
-            else {
+            } else {
                 setSum(stotte > 0 ? stotte : 0);
             }
             setVisResultat(true);
             return;
         }
 
-        if(utgifterBarnepass === 0){
+        if (utgifterBarnepass === 0) {
             setSum(0);
             setVisResultat(true);
             return;
         }
 
         !utgifterBarnepass ? setFeil("Fyll inn utgifter for barnepass") : setFeil(false);
-        utgifterBarnepass === 0 ? setSum(0) : 
-        !antBarn ? setFeilAntBarn("Velg antall barn") : setFeilAntBarn(false);
+        utgifterBarnepass === 0 ? setSum(0) :
+            !antBarn ? setFeilAntBarn("Velg antall barn") : setFeilAntBarn(false);
         setVisResultat(false);
     };
 
@@ -78,45 +73,41 @@ const KalkulatorBarnetilsyn = () => {
                     <option value={o.value} key={index}>{o.name}</option>
                 ))}
             </Select>
-            <div className="input-med-label">
-                <Element className="input-label" >Utgifter barnepass, ikke inkludert kostpenger</Element>
-                <div className="input-kroner">
-                    <Input
-                        id="barnetilsyn-kalkulator-input1"
-                        bredde="S"
-                        value={utgifterBarnepass}
-                        inputMode="numeric"
-                        pattern="[0-9]*"
-                        onChange={(event: any) => !isNaN(event.target.value) ? setUtgifterBarnepass(parseInt(event.target.value)) : null}
-                        feil={feil}
-                    />
-                    <Label htmlFor="overgangsstonad-kalkulator-input1">kroner</Label>
-                </div>
+            <div className="input-kroner">
+                <Input
+                    label="Utgifter barnepass, ikke inkludert kostpenger"
+                    id="barnetilsyn-kalkulator-input1"
+                    bredde="S"
+                    value={utgifterBarnepass}
+                    inputMode="numeric"
+                    placeholder="kr"
+                    pattern="[0-9]*"
+                    onChange={(event: any) => !isNaN(event.target.value) ? setUtgifterBarnepass(parseInt(event.target.value)) : null}
+                    feil={feil}
+                />
             </div>
-            <div className="input-med-label">
-                <Element className="input-label" >Kontantstøtte per måned (hvis du får)</Element>
-                <div className="input-kroner">
-                    <Input
-                        id="barnetilsyn-kalkulator-input2"
-                        bredde="S"
-                        value={kontaktstotte}
-                        inputMode="numeric"
-                        pattern="[0-9]*"
-                        onChange={(event: any) => !isNaN(event.target.value) ? setKontantstotte(event.target.value) : null}
-                    />
-                    <Label htmlFor="overgangsstonad-kalkulator-input1">kroner</Label>
-                </div>
+            <div className="input-kroner">
+                <Input
+                    label="Kontantstøtte per måned (hvis du får)"
+                    id="barnetilsyn-kalkulator-input2"
+                    bredde="S"
+                    placeholder="kr"
+                    value={kontaktstotte}
+                    inputMode="numeric"
+                    pattern="[0-9]*"
+                    onChange={(event: any) => !isNaN(event.target.value) ? setKontantstotte(event.target.value) : null}
+                />
             </div>
             <Knapp className="kalkulator-knapp" onClick={beregn}>Beregn stønad til barnetilsyn</Knapp>
-            {visResultat ?
-                <AlertStripe type="info" className="alertstripe-utenIkon alertstripe-avsnitt">
-                    Du får ca <strong>{sum} kr</strong> i stønad til barnetilsyn per måned.
-                    <br />
-                    <br />
-                    Når vi har behandlet søknaden din om stønad til barnetilsyn,
-                    vil du få vite hva du får utbetalt.
-            </AlertStripe>
-                : null}
+            {visResultat &&
+            <div className="alertstripe alertstripe--info">
+                <div className="typo-normal alertstripe-avsnitt">
+                    <span className="mb-1rem"> Du får ca <strong>{sum} kr</strong> i stønad til barnetilsyn per måned.</span>
+                    <span>Når vi har behandlet søknaden din om stønad til barnetilsyn,
+                        vil du få vite hva du får utbetalt.</span>
+                </div>
+            </div>
+            }
         </div>
     );
 }

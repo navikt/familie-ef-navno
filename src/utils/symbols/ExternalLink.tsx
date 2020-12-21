@@ -2,7 +2,8 @@ import React from 'react';
 
 const ExternalLink = () => {
     return (
-        <svg 
+        <svg
+            focusable="false"
             width="16" 
             height="16" 
             viewBox="0 0 16 16" 

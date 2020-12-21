@@ -40,9 +40,13 @@
     }
     
     .breadcrumb-link{
-        color: @navBla; 
+        color:@navBla;
         font-size: 16px;
         line-height: 137%;
+
+        a {
+            color: @navBla;
+        }
     }
     
     .sideinfo {
@@ -83,18 +87,17 @@
         background-color: @fokusFarge;
         text-decoration: none;
     }
-    
-    .alertstripe-utenIkon span{
-        display: none;
-    }
-    
+
     .alertstripe-avsnitt{
-        max-width: 415px;
+        display: flex;
+        max-width: 37.5rem;
+        flex-direction: column;
+        margin: 0 auto;
     }
     
     @media screen and (max-width: 850px) {
         .sideinnhold{
-            display: bloc
+            display: block;
         }
 
         .sideAlertStripe{

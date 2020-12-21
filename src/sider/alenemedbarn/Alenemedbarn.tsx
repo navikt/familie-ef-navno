@@ -52,12 +52,12 @@ const Alenemedbarn = () => {
                 <div className="banner">
                     <h1>Alene med barn - hva nå?</h1>
                 </div>
-                <div className="breadcrumb">
+                <nav className="breadcrumb">
                     <p className="breadcrumb-link">
                         <a href="https://www.nav.no/no/person">Forside</a>  /  <a href="https://www.nav.no/familie/alene-med-barn">Alene med barn </a>
                     </p>
-                </div>
-                <div className="sideinnhold">
+                </nav>
+                <div className="sideinnhold" role="main">
                     <div className="sideinfo">
                         <div 
                             className={sideOpen ? '' : 'sticky'} 
@@ -72,9 +72,11 @@ const Alenemedbarn = () => {
                                 /> :
                                 null}
                             <Temameny
-                                temaer={side.artikler.map((artikkel: any) => {
-                                    const ankerLinkID = lagArtikkelAnkerLinkID(artikkel);
-                                    return ({ tittel: artikkel.tittel_i_liste, id: ankerLinkID })})
+                                temaer={side.artikler
+                                    .map((artikkel: any) => {
+                                        const ankerLinkID = lagArtikkelAnkerLinkID(artikkel);
+                                        return ({ tittel: artikkel.tittel_i_liste, id: ankerLinkID })})
+                                    .filter((v: {tittel: string, id: string}) => v.tittel)
                                 }
                                 visSisteLenker={visSisteLenker}
                             />
