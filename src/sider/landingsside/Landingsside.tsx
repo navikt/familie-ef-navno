@@ -23,12 +23,12 @@ const Landingsside = () => {
     if (side.hovedkort_1) return (
         <div className="landingsside">
             <div className="banner-landingsside">
-                <nav className="banner-innhold">
+                <div className="banner-innhold">
                     <h1>Alene med barn</h1>
                     <div className="ingress">
                         Når du er alene med barn, finnes det ulike støtteordninger du kan ha rett til.
                     </div>
-                </nav>
+                </div>
             </div>
             <div role="main" className="innhold-landingsside">
 
