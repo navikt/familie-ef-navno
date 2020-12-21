@@ -20,32 +20,31 @@ body {
     .panel{
         border-radius: 0px;
     }
-    
-   .temameny-lenker, .hovedinfo {
+    .temameny-lenker, .hovedinfo, .breadcrumb-link {
+        a:not(.knapp) {
+            color: @navBla;
+            text-decoration: underline;
+            line-height: 26px;
+        }
 
-       a {
-           color: @navBla;
-           text-decoration: underline;
-           line-height: 26px;
-       }
+        a:not(.knapp):hover {
+            text-decoration: none;
+            cursor: pointer;
+        }
 
-       a :hover {
-           text-decoration: none;
-           cursor: pointer;
-       }
+        a:not(.knapp):active, a:not(.knapp):focus {
+            color: #ffffff;
+            background-color: @fokusFarge;
+            text-decoration: none;
+            outline: none;
+        }
+    }
 
-       :active :focus {
-           color: #ffffff;
-           background-color: @fokusFarge;
-           text-decoration: none;
-       }
-   }
-    
     p{
         font-size: 18px;
         line-height: 144%;
     }
-    
+
     h1{
         font-style: normal;
         font-weight: bold;
@@ -61,10 +60,6 @@ body {
             font-size: 24px;
             line-height: 117%;
             margin-top: 60px;
-        }
-
-        .knapp--hoved {
-            color: white;
         }
     }
 
