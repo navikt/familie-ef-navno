@@ -36,6 +36,7 @@ const Temameny: React.FC<Props> = (props) => {
       {props.visSisteLenker ?
        <React.Fragment>
           <a
+          className="temameny-lenker"
           href={'https://lovdata.no/nav/folketrygdloven/kap15'}
           >
             Hva sier loven?
@@ -48,7 +49,6 @@ const Temameny: React.FC<Props> = (props) => {
           >
             Klagerettigheter
             <ExternalLink />
-            <span>&nbsp;&nbsp;</span>
           </a>
        </React.Fragment>
           : null}
