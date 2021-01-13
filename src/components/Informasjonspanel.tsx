@@ -319,7 +319,7 @@ const Informasjonspanel: React.FC<Props> = (props) => {
                             <Tabell rows={avsnitt?.tabelldata?.rows} />
                         }
                         {avsnitt.knapp?.tekst !== undefined &&
-                            <a href={avsnitt.knapp.lenke} target="_blank" rel="noopener noreferrer" className={avsnitt.knapp.bla ? "lenkeknapp knapp knapp--hoved" : "lenkeknapp knapp"}>{avsnitt.knapp.tekst}</a>
+                            <a href={avsnitt.knapp.lenke} className={avsnitt.knapp.bla ? "lenkeknapp knapp knapp--hoved" : "lenkeknapp knapp"}>{avsnitt.knapp.tekst}</a>
                         }
                         {avsnitt.alertstripe !== undefined &&
                             <Alert alertstripe={avsnitt.alertstripe} topp={false} />
