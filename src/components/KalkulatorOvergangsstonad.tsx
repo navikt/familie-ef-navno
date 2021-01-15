@@ -69,9 +69,6 @@ const KalkulatorOvergangsstonad: React.FC<Props> = (props) => {
                     Husk at hvis du får andre stønader kan dette påvirke hvor mye du får i overgangsstønad.
                     Når vi har behandlet søknaden din om overgangsstønad,
                     vil du få vite hva du får utbetalt.
-                    <span className="mb-1rem"> Du får ca <strong>{sum} kr</strong> i stønad til barnetilsyn per måned.</span>
-                    <span>Når vi har behandlet søknaden din om stønad til barnetilsyn,
-                        vil du få vite hva du får utbetalt.</span>
                 </div>
             </div>}
         </div>
