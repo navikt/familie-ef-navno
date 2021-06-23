@@ -12,11 +12,11 @@ function App() {
           <Route path="/overgangsstonad" component={Overgangsstonad}/>
           <Route path="/barnetilsyn" component={Barnetilsynstonad}/>
           <Route path="/skolepenger" component={() => { 
-              window.location.replace('https://www.nav.no/familie/alene-med-barn/skolepenger'); 
+              window.location.replace('https://www.nav.no/skolepenger-enslig'); 
               return null;
           }}/>
           <Route path="/tilleggsstonader" component={() => { 
-              window.location.replace('https://www.nav.no/familie/alene-med-barn/tilleggsstonader'); 
+              window.location.replace('https://www.nav.no/tilleggsstonader-enslig'); 
               return null;
           }}/>
           <Route path="/hva-naa" component={() => { 
