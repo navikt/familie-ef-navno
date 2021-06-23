@@ -78,9 +78,6 @@ const Overgangsstonad = () => {
                     <h1>Overgangsstønad til enslig mor eller far</h1>
                 </div>
                 <nav className="breadcrumb">
-                    <p className="breadcrumb-link">
-                        <a href="https://www.nav.no/no/person">Forside</a>  /  <a href="https://www.nav.no/familie/alene-med-barn">Alene med barn </a>
-                    </p>
                 </nav>
                 <div className="sideinnhold" role="main">
                     <div className="sideinfo">
