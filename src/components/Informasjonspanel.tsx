@@ -11,6 +11,7 @@ import { HashLink } from 'react-router-hash-link';
 import { Normaltekst } from 'nav-frontend-typografi';
 import checkboxData from '../utils/checkboxData';
 import { lagAvsnittAnkerLinkID } from '../utils/utils';
+import MicroCard from "../navikt-components/card/MicroCard";
 
 interface Props {
     tittel: string;
@@ -338,7 +339,16 @@ const Informasjonspanel: React.FC<Props> = (props) => {
                                 />
                             </Ekspanderbartpanel>
                         }
+                        {props.tittel === "Kort om stønad til barnetilsyn" && <>
+                        <h3>Stønad til barnetilsyn er aktuelt for deg som</h3>
+                        <MicroCard href="https://www.nav.no/alene-med-barn">Er helt eller delvis alene med barn</MicroCard>
+                        </>}
+                        {props.tittel === "Kort om overgangsstønad" && <>
+                        <h3>Stønad til overgangsstønad er aktuelt for deg som</h3>
+                        <MicroCard href="https://www.nav.no/alene-med-barn">Er helt eller delvis alene med barn</MicroCard>
+                        </>}
                     </div>
+                    
             )}</>})}
             {props.children}
         </Panel>
