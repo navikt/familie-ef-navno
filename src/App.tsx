@@ -1,11 +1,7 @@
 import React from 'react';
 import Overgangsstonad from './sider/overgangsstonad/Overgangsstonad';
 import Barnetilsynstonad from './sider/barnetilsynsstonad/Barnetilsynsstonad';
-import Skolepengerstønad from './sider/skolepengerstønad/Skolepengerstonad';
-import Tilleggsstonad from './sider/tilleggsstønad/Tilleggsstonad';
-import Alenemedbarn from './sider/alenemedbarn/Alenemedbarn';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Landingsside from './sider/landingsside/Landingsside';
 
 function App() {
 
@@ -15,10 +11,22 @@ function App() {
         <Switch>
           <Route path="/overgangsstonad" component={Overgangsstonad}/>
           <Route path="/barnetilsyn" component={Barnetilsynstonad}/>
-          <Route path="/skolepenger" component={Skolepengerstønad}/>
-          <Route path="/tilleggsstonader" component={Tilleggsstonad}/>
-          <Route path="/hva-naa" component={Alenemedbarn}/>
-          <Route path="/" component={Landingsside}/>
+          <Route path="/skolepenger" component={() => { 
+              window.location.replace('https://www.nav.no/familie/alene-med-barn/skolepenger'); 
+              return null;
+          }}/>
+          <Route path="/tilleggsstonader" component={() => { 
+              window.location.replace('https://www.nav.no/familie/alene-med-barn/tilleggsstonader'); 
+              return null;
+          }}/>
+          <Route path="/hva-naa" component={() => { 
+              window.location.replace('https://www.nav.no/alene-med-barn'); 
+              return null;
+          }}/>
+          <Route exact path="/" component={() => { 
+              window.location.replace('https://www.nav.no/alene-med-barn'); 
+              return null;
+          }}/>
         </Switch>
       </Router>
     </div>
