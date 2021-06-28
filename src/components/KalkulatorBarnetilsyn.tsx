@@ -30,12 +30,12 @@ const KalkulatorBarnetilsyn = () => {
             setFeil(false);
             setFeilAntBarn(false);
             let stotte = Math.round((utgifterBarnepass - (kontaktstotte || 0)) * 0.64);
-            if (antBarn === 1 && stotte >= 4053) {
-                setSum(4053);
-            } else if (antBarn === 2 && stotte >= 5289) {
-                setSum(5289);
-            } else if (antBarn >= 3 && stotte >= 5993) {
-                setSum(5993);
+            if (antBarn === 1 && stotte >= 4195) {
+                setSum(4195);
+            } else if (antBarn === 2 && stotte >= 5474) {
+                setSum(5474);
+            } else if (antBarn >= 3 && stotte >= 6203) {
+                setSum(6203);
             } else {
                 setSum(stotte > 0 ? stotte : 0);
             }

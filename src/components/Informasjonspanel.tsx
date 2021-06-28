@@ -331,13 +331,15 @@ const Informasjonspanel: React.FC<Props> = (props) => {
                                     : null
                             : null
                         }
-                        {avsnitt.dokument &&
-                            <Ekspanderbartpanel tittel="Dette må du dokumentere" id="dokumentasjon">
+                        {avsnitt.dokument && 
+                        <div className="ekspanderbart-panel">
+                            <Ekspanderbartpanel tittel={props.tittel === "Hvem kan få?" ? "Hva er avtale om delt bosted?": "Dette må du dokumentere"} id="dokumentasjon">
                                 <BlockContent
                                     blocks={avsnitt.dokument}
                                     serializers={serializers}
                                 />
                             </Ekspanderbartpanel>
+                            </div>
                         }
                         {props.tittel === "Kort om stønad til barnetilsyn" && <>
                         <h3>Stønad til barnetilsyn er aktuelt for deg som</h3>
