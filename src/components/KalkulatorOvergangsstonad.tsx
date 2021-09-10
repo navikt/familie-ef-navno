@@ -26,8 +26,13 @@ const KalkulatorOvergangsstonad: React.FC<Props> = (props) => {
         let uredusertOS = Math.round((grunnbelop * 2.25) / 12);
         let halvtGrunnbelop = grunnbelop / 2;
 
-        if (inntekt && inntekt) {
+        if (inntekt) {
             let arsinntekt = Math.floor(inntekt * 12 / 1000) * 1000;
+
+            if (arsinntekt > 48750) {
+                return 0;
+            }
+
             setFeil(false);
             if (arsinntekt <= halvtGrunnbelop) {
                 setSum(uredusertOS);
