@@ -1,6 +1,4 @@
 import React from 'react';
-import Overgangsstonad from './sider/overgangsstonad/Overgangsstonad';
-import Barnetilsynstonad from './sider/barnetilsynsstonad/Barnetilsynsstonad';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 function App() {
@@ -9,8 +7,14 @@ function App() {
     <div className="navno-side">
       <Router basename={process.env.PUBLIC_URL}>
         <Switch>
-          <Route path="/overgangsstonad" component={Overgangsstonad}/>
-          <Route path="/barnetilsyn" component={Barnetilsynstonad}/>
+          <Route path="/overgangsstonad" component={() => { 
+              window.location.replace('https://www.nav.no/overgangsstonad-enslig'); 
+              return null;
+          }}/>
+          <Route path="/barnetilsyn" component={() => { 
+              window.location.replace('https://www.nav.no/barnetilsyn-enslig'); 
+              return null;
+          }}/>
           <Route path="/skolepenger" component={() => { 
               window.location.replace('https://www.nav.no/skolepenger-enslig'); 
               return null;
