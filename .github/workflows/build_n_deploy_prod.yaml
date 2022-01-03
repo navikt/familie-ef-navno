@@ -32,10 +32,10 @@ jobs:
       - uses: nais/deploy/actions/deploy@v1
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: dev-sbs
-          RESOURCE: .build/nais-dev.yaml
+          CLUSTER: dev-gcp
+          RESOURCE: .build/gcp-nais-dev.yaml
       - uses: nais/deploy/actions/deploy@v1
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: prod-sbs
-          RESOURCE: .build/nais-prod.yaml
+          CLUSTER: prod-gcp
+          RESOURCE: .build/gcp-nais-prod.yaml
