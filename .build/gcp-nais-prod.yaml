@@ -26,7 +26,7 @@ spec:
   prometheus:
     enabled: false
   ingresses:
-    - https://familie-ef-navno.adeo.no
+    - https://www.nav.no/familie/alene-med-barn
   accessPolicy:
     outbound:
       rules:
@@ -41,7 +41,7 @@ spec:
 
   resources:
     limits:
-      cpu: 2000m
-      memory: 1024Mi
-    requests:
+      cpu: 1000m
       memory: 512Mi
+    requests:
+      memory: 256Mi
