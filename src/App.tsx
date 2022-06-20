@@ -24,7 +24,7 @@ function App() {
               return null;
           }}/>
           <Route path="/tilleggsstonader" component={() => { 
-              logEvent('besøk', {'redirect': 'barnetilsyn'})
+              logEvent('besøk', {'redirect': 'tilleggsstonader'})
               window.location.replace('https://www.nav.no/tilleggsstonader-enslig'); 
               return null;
           }}/>
