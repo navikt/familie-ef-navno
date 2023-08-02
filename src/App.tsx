@@ -5,7 +5,6 @@ import { logEvent } from "./amplitude";
 function App() {
 
    return (
-    <div className="navno-side">
       <Router basename={process.env.PUBLIC_URL}>
         <Switch>
           <Route path="/overgangsstonad" component={() => { 
@@ -40,7 +39,6 @@ function App() {
           }}/>
         </Switch>
       </Router>
-    </div>
   );
 }
 
