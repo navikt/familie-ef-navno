@@ -12,9 +12,9 @@ app.get('/status', (req, res) => {
     res.status(200).end();
 });
 
-router.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname, 'build/', 'index.html'));
-});
+app.use(/^(?!.*\/(internal|static)\/).*$/, (req, res) => {
+    res.sendFile(path.join(__dirname, 'build/', 'index.html'))
+})
 
 app.use("/familie/alene-med-barn/", router);
 
