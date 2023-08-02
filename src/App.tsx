@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { logEvent } from "./utils/amplitude";
+import { logEvent } from "./amplitude";
 
 function App() {
 
