@@ -20,9 +20,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "serve": "NODE_ENV=production node server.js",
-    "serve:dev": "NODE_ENV=local node server.js"
+    "serve": "NODE_ENV=production node server.js"
   },
   "eslintConfig": {
     "extends": "react-app"
