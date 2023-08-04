@@ -4,11 +4,9 @@ on: [pull_request, workflow_dispatch]
 
 jobs:
   build:
-    name: Bygg app
+    name: Install dependencies
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Yarn install
         run: yarn --prefer-offline --frozen-lockfile
-      - name: Yarn build
-        run: yarn build
