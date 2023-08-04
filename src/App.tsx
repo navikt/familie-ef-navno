@@ -1,45 +1,32 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {createBrowserRouter, createRoutesFromElements, Outlet, Route, RouterProvider} from 'react-router-dom';
 import { logEvent } from "./amplitude";
 
 function App() {
+    const basePath = process.env.PUBLIC_URL + "/";
 
-   return (
-      <Router basename={process.env.PUBLIC_URL}>
-        <Switch>
-          <Route path="/overgangsstonad" component={() => { 
-              logEvent('besøk', {'redirect': 'overgangsstonad'})
-              window.location.replace('https://www.nav.no/overgangsstonad-enslig'); 
-              return null;
-          }}/>
-          <Route path="/barnetilsyn" component={() => { 
-              logEvent('besøk', {'redirect': 'barnetilsyn'})
-              window.location.replace('https://www.nav.no/barnetilsyn-enslig'); 
-              return null;
-          }}/>
-          <Route path="/skolepenger" component={() => { 
-              logEvent('besøk', {'redirect': 'skolepenger'})
-              window.location.replace('https://www.nav.no/skolepenger-enslig'); 
-              return null;
-          }}/>
-          <Route path="/tilleggsstonader" component={() => { 
-              logEvent('besøk', {'redirect': 'tilleggsstonader'})
-              window.location.replace('https://www.nav.no/tilleggsstonader-enslig'); 
-              return null;
-          }}/>
-          <Route path="/hva-naa" component={() => { 
-              logEvent('besøk', {'redirect': 'hva-naa'})
-              window.location.replace('https://www.nav.no/alene-med-barn'); 
-              return null;
-          }}/>
-          <Route exact path="/" component={() => { 
-              logEvent('besøk', {'redirect': 'alene-med-barn'})
-              window.location.replace('https://www.nav.no/alene-med-barn'); 
-              return null;
-          }}/>
-        </Switch>
-      </Router>
-  );
+    const router = createBrowserRouter(
+        createRoutesFromElements(
+            <Route path={basePath} element={<AppInnhold />}>
+                <Route path="overgangsstonad" element={<Redirect eventName={'overgangsstonad'} url={'overgangsstonad-enslig'} />}/>
+                <Route path="barnetilsyn" element={<Redirect eventName={'barnetilsyn'} url={'barnetilsyn-enslig'} />}/>
+                <Route path="skolepenger" element={<Redirect eventName={'skolepenger'} url={'skolepenger-enslig'} />}/>
+                <Route path="tilleggsstonader" element={<Redirect eventName={'tilleggsstonader'} url={'tilleggsstonader-enslig'} />}/>
+                <Route path="hva-naa" element={<Redirect eventName={'hva-naa'} url={'alene-med-barn'} />}/>
+                <Route path="" element={<Redirect eventName={'alene-med-barn'} url={'alene-med-barn'} />}/>
+            </Route>));
+
+    return <RouterProvider router={router} />;
 }
+
+function AppInnhold() {
+    return <Outlet />
+}
+
+const Redirect: React.FC<{ eventName: string; url: string; }> = ({ eventName, url}) => {
+    logEvent('besøk', {'redirect': eventName});
+    window.location.replace('https://www.nav.no/' + url);
+    return <></>;
+};
 
 export default App;
