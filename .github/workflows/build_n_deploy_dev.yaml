@@ -7,14 +7,12 @@ env:
 
 jobs:
   build:
-    name: Build and push Docker container
+    name: Install dependencies and push Docker container
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Yarn install
         run: yarn --prefer-ofline --frozen-lockfile
-      - name: Yarn build
-        run: yarn build
       - name: Build and publish Docker image
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -4,19 +4,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@types/amplitude-js": "^8.16.2",
-    "@types/react": "^18.2.18",
-    "@types/react-dom": "^18.2.7",
-    "amplitude-js": "^8.21.9",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.14.2",
-    "react-scripts": "^5.0.1",
-    "typescript": "^5.1.6"
+    "express": "^4.18.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
     "serve": "NODE_ENV=production node server.js"
   },
   "eslintConfig": {
