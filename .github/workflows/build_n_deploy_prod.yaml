@@ -3,7 +3,7 @@ name: Build, push, and deploy app to prod
 on:
   push:
     branches:
-      - 'master'
+      - 'main'
 
 env:
   IMAGE: ghcr.io/navikt/familie-ef-navno:${{ github.sha }}
