@@ -8,6 +8,11 @@ on:
 env:
   IMAGE: ghcr.io/navikt/familie-ef-navno:${{ github.sha }}
 
+permissions:
+  packages: write
+  id-token: write
+  contents: read
+
 jobs:
   build:
     name: Install dependencies and push Docker container
