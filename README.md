@@ -12,9 +12,10 @@ Appen bygges via github actions og gir beskjed til nais deploy om å deploye app
 ## Henvendelser
 
 ### For eksterne
-Spørsmål knyttet til koden eller prosjektet kan rettes til:
-
-* Viktor Grøndalen Solbeerg, `viktor.grondalen.solberg@nav.no`
+Spørsmål knyttet til koden eller prosjektet kan stilles som issues her på GitHub.
 
 ### For NAV-ansatte
 Interne henvendelser kan sendes via Slack i kanalen #team-familie.
+
+## Kode generert av GitHub Copilot
+Dette repoet bruker GitHub Copilot til å generere kode.
