@@ -17,7 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Yarn install
-        run: yarn --prefer-ofline --frozen-lockfile
+        run: yarn --prefer-offline --frozen-lockfile
       - name: Push docker image to GAR and sign image
         uses: nais/docker-build-push@v0
         id: docker-build-push
