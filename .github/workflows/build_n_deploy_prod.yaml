@@ -6,7 +6,6 @@ on:
       - 'main'
 
 permissions:
-  packages: write
   id-token: write
   contents: read
 

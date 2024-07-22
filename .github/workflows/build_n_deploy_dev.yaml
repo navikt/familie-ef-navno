@@ -3,7 +3,6 @@ name: Build, push, and deploy app to dev
 on: [workflow_dispatch]
 
 permissions:
-  packages: write
   id-token: write
   contents: read
 
