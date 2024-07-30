@@ -14,7 +14,7 @@ jobs:
     name: Install dependencies and push Docker container
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Yarn install
         run: yarn --prefer-offline --frozen-lockfile
       - name: Push docker image to GAR and sign image
@@ -31,13 +31,13 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: nais/deploy/actions/deploy@v1
+      - uses: actions/checkout@v4
+      - uses: nais/deploy/actions/deploy@v2
         env:
           CLUSTER: dev-gcp
           RESOURCE: .build/gcp-nais-dev.yaml
           IMAGE: ${{ needs.build.outputs.image }}
-      - uses: nais/deploy/actions/deploy@v1
+      - uses: nais/deploy/actions/deploy@v2
         env:
           CLUSTER: prod-gcp
           RESOURCE: .build/gcp-nais-prod.yaml
