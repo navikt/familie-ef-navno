@@ -5,11 +5,7 @@ on:
     branches:
       - 'main'
 
-env:
-  IMAGE: ghcr.io/navikt/familie-ef-navno:${{ github.sha }}
-
 permissions:
-  packages: write
   id-token: write
   contents: read
 
@@ -20,27 +16,29 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Yarn install
-        run: yarn --prefer-ofline --frozen-lockfile
-      - name: Build and publish Docker image
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          docker build . -t ${IMAGE}
-          docker login ghcr.io -u ${GITHUB_REPOSITORY} -p ${GITHUB_TOKEN}
-          docker push ${IMAGE}
+        run: yarn --prefer-offline --frozen-lockfile
+      - name: Push docker image to GAR and sign image
+        uses: nais/docker-build-push@v0
+        id: docker-build-push
+        with:
+          team: teamfamilie
+          identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
+          project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
+    outputs:
+      image: ${{ steps.docker-build-push.outputs.image }}
   deploy:
-    name: Deploy to NAIS
+    name: Deploy to GCP
     needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
       - uses: nais/deploy/actions/deploy@v1
         env:
-          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: dev-gcp
           RESOURCE: .build/gcp-nais-dev.yaml
+          IMAGE: ${{ needs.build.outputs.image }}
       - uses: nais/deploy/actions/deploy@v1
         env:
-          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: prod-gcp
           RESOURCE: .build/gcp-nais-prod.yaml
+          IMAGE: ${{ needs.build.outputs.image }}
