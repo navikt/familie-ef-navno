@@ -25,18 +25,11 @@ spec:
     enabled: false
   ingresses:
     - https://www.nav.no/familie/alene-med-barn
-  accessPolicy:
-    outbound:
-      rules:
-        - application: familie-ef-navno
-      external:
-        - host: appres.nav.no
   env:
     - name: APP_VERSION
       value: '{{version}}'
     - name: APPRES_CMS_URL
       value: https://appres.nav.no
-
   resources:
     limits:
       memory: 256Mi

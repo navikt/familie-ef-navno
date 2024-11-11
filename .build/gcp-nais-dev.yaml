@@ -30,7 +30,6 @@ spec:
       value: '{{version}}'
     - name: APPRES_CMS_URL
       value: https://appres-q0.nav.no
-
   resources:
     limits:
       memory: 256Mi
