@@ -1,27 +1,12 @@
 {
   "homepage": "/familie/alene-med-barn",
   "name": "familie-ef-navno",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "express": "^4.21.2"
+    "express": "^5.1.0"
   },
   "scripts": {
     "serve": "NODE_ENV=production node server.js"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
   }
 }
