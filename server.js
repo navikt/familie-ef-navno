@@ -6,7 +6,7 @@ const port = 8080;
 // Sec-Fetch-Site dekker det samme (hvor forespørselen kom fra) selv når referer mangler:
 // "none" = direkte navigasjon (skrevet inn URL, bokmerke, lenke i e-post/PDF/QR-kode)
 // "cross-site"/"same-site"/"same-origin" = kom fra en lenke på et annet/samme nettsted
-const utledOpprinnelse = (request) => {Ar
+const utledOpprinnelse = (request) => {
     const headers = request.headers || {};
     return `referer=${headers.referer ?? 'ingen'} sec-fetch-site=${headers['sec-fetch-site'] ?? 'ingen'}`;
 };
